@@ -55,6 +55,8 @@ public class Message {
 	private boolean delete_chat_photo;
 	
 	private boolean group_chat_created;
+	
+	private boolean supergroup_chat_created;
 
 
 	/**
@@ -449,6 +451,26 @@ public class Message {
 	public void setGroupChatCreated(boolean group_chat_created)
 	{
 		this.group_chat_created = group_chat_created;
+	}
+	
+	
+	/**
+	 * Optional. Informs that the group has been created
+	 * @return
+	 */
+	public boolean getSuperGroupChatCreated()
+	{
+		return supergroup_chat_created;
+	}
+	
+	/**
+	 * Optional. Set that the superGroup has been created or not 
+	 * @param delete_chat_photo
+	 * @return
+	 */
+	public void setSuperGroupChatCreated(boolean supergroup_chat_created)
+	{
+		this.supergroup_chat_created = supergroup_chat_created;
 	}
 	
 	/**
