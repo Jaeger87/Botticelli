@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public abstract class AbstractToSend implements Request{
 
-	private int chat_id;
+	private long chat_id;
 	private String channelusername;
 	
 	public AbstractToSend(int chat_id)
@@ -26,7 +26,7 @@ public abstract class AbstractToSend implements Request{
 	 * Unique identifier for the message recipient — User or GroupChat id
 	 * @return
 	 */
-	public int getChatID()
+	public long getChatID()
 	{
 		return chat_id;
 	}
@@ -42,7 +42,7 @@ public abstract class AbstractToSend implements Request{
 		if(channelusername != null)
 			map.put("chat_id", channelusername);
 		else
-		    map.put("chat_id", new Integer(chat_id));
+		    map.put("chat_id", new Long(chat_id));
 		return map;
 	}
 }

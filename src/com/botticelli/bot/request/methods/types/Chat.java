@@ -7,13 +7,13 @@ package com.botticelli.bot.request.methods.types;
  */
 public abstract class Chat {
 
-	private int id;
+	private long id;
 	private String type;
 	/**
 	 * Unique identifier for this Chat
 	 * @return
 	 */
-	public int getId()
+	public long getId()
 	{
 		return id;
 	}
@@ -39,7 +39,7 @@ public abstract class Chat {
 	 * Set the Id chat
 	 * @param id
 	 */
-	public void setID(int id)
+	public void setID(long id)
 	{
 		this.id = id;
 	}

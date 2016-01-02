@@ -13,7 +13,7 @@ public class GroupChat extends Chat{
 		
 	}
 	
-	protected GroupChat(String title, int id)
+	protected GroupChat(String title, long id)
 	{
 		super.setID(id);
 		this.title = title;

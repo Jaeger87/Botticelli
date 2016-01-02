@@ -57,8 +57,12 @@ public class Message {
 	private boolean group_chat_created;
 	
 	private boolean supergroup_chat_created;
+	
+	private boolean channel_chat_created;
 
-
+	private long migrate_to_chat_id;
+	
+	private long migrate_from_chat_id;
 	/**
 	 * Unique message identifier
 	 * @return
@@ -455,7 +459,7 @@ public class Message {
 	
 	
 	/**
-	 * Optional. Informs that the group has been created
+	 * Optional. Informs that the super group has been created
 	 * @return
 	 */
 	public boolean getSuperGroupChatCreated()
@@ -464,7 +468,7 @@ public class Message {
 	}
 	
 	/**
-	 * Optional. Set that the superGroup has been created or not 
+	 * Optional. Set that the super group has been created or not 
 	 * @param delete_chat_photo
 	 * @return
 	 */
@@ -472,6 +476,26 @@ public class Message {
 	{
 		this.supergroup_chat_created = supergroup_chat_created;
 	}
+	
+	/**
+	 * Optional. Informs that the chanel chat has been created
+	 * @return
+	 */
+	public boolean getChanelChatCreated()
+	{
+		return channel_chat_created;
+	}
+	
+	/**
+	 * Optional. Set that the chanel chat has been created or not 
+	 * @param delete_chat_photo
+	 * @return
+	 */
+	public void setChanelChatCreated(boolean channel_chat_created)
+	{
+		this.channel_chat_created = channel_chat_created;
+	}
+	
 	
 	/**
 	 * Conversation the message belongs to — user in case of a private message,
@@ -494,4 +518,41 @@ public class Message {
 	{
 		this.chat = (User)chat;
 	}
+	
+	/**
+	 * Set the specified identifier for the supergroup, not exceeding 1e13 by absolute value
+	 * @param chat_id
+	 */
+	public void setMigrateToChatId(long chat_id)
+	{
+		migrate_to_chat_id = chat_id;
+	}
+	
+	/**
+	 * The group has been migrated to a supergroup with the specified identifier, not exceeding 1e13 by absolute value
+	 * @return
+	 */
+	public long getMigrateToChatId()
+	{
+		return migrate_to_chat_id;
+	}
+	
+	/**
+	 * Set the specified identifier for the group before the migration to the supergroup, not exceeding 1e13 by absolute value
+	 * @param chat_id
+	 */
+	public void setMigrateFromChatId(long chat_id)
+	{
+		migrate_from_chat_id = chat_id;
+	}
+	
+	/**
+	 * The supergroup has been migrated from a group with the specified identifier, not exceeding 1e13 by absolute value
+	 * @return
+	 */
+	public long getMigratefromChatId()
+	{
+		return migrate_from_chat_id;
+	}
+	
 }
