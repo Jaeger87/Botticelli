@@ -11,6 +11,8 @@ public class Update {
 	
 	private Message message;
 	
+	private InlineQuery inline_query;
+	
 	/**
 	 * The update‘s unique identifier. 
 	 * Update identifiers start from a certain positive number and increase sequentially. 
@@ -31,5 +33,23 @@ public class Update {
 	public Message getMessage()
 	{
 		return message;
+	}
+	
+	/**
+	 * Optional. New incoming inline query
+	 * @return
+	 */
+	public InlineQuery getInlineQuery()
+	{
+		return inline_query;
+	}
+	
+	/**
+	 * Check if the update contains a message, remember any update contains a message OR an inline query.
+	 * @return
+	 */
+	public boolean isMessageUpdate()
+	{
+		return message != null;
 	}
 }

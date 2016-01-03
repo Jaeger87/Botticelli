@@ -85,6 +85,7 @@ public class MessageReceiver {
 				for (Update u : updates) 
 				{
 					ur.setOffset(u.getUpdateID() + 1);
+					
 					HandleMessageThread hmt = new HandleMessageThread(bot,
 							u.getMessage());
 					pool.submit(hmt);

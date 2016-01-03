@@ -22,6 +22,7 @@ import com.botticelli.bot.request.methods.VideoFileToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
+import com.botticelli.bot.request.methods.types.InlineQuery;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
@@ -443,5 +444,10 @@ public abstract class Bot {
      * @param m
      */
     public abstract void groupChatCreatedMessage(Message m);
+    /**
+     * 
+     * @param q
+     */
+    public abstract void inLineQuery(InlineQuery q);
 	
 }
