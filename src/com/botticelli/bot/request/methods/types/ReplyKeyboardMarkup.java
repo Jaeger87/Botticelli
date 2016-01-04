@@ -18,9 +18,9 @@ public class ReplyKeyboardMarkup extends ReplyKeyboard{
 	private boolean one_time_keyboard;
 	
 	
-	public ReplyKeyboardMarkup() 
+	public ReplyKeyboardMarkup(List<List<String>> keyboard) 
 	{
-
+		this.keyboard = keyboard;
 	}
 	
 

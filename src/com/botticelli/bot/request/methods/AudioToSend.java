@@ -8,7 +8,7 @@ public abstract class AudioToSend extends AudioVoiceToSend{
 	private String performer;
 	private String title;
 	
-	public AudioToSend(int chat_id) 
+	public AudioToSend(long chat_id) 
 	{
 		super(chat_id);
 	}

@@ -11,7 +11,7 @@ public class VoiceReferenceToSend extends AudioVoiceToSend{
 
 	private String voice;
 	
-	public VoiceReferenceToSend(int chat_id, String voice) 
+	public VoiceReferenceToSend(long chat_id, String voice) 
 	{
 		super(chat_id);
 		this.voice = voice;

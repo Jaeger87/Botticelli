@@ -11,7 +11,7 @@ public class StickerFileToSend extends AbstractReplyManageToSend implements File
 
 	private File sticker;
 	
-	public StickerFileToSend(int chat_id, File sticker) 
+	public StickerFileToSend(long chat_id, File sticker) 
 	{
 		super(chat_id);
 		this.sticker = sticker;

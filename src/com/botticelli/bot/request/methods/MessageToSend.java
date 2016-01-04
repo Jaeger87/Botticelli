@@ -12,7 +12,7 @@ public class MessageToSend extends AbstractReplyManageToSend {
 	private boolean disable_web_page_preview;
 
 
-	public MessageToSend(int chat_id, String text) 
+	public MessageToSend(long chat_id, String text) 
 	{
 		super(chat_id);
 		if (text == null)

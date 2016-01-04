@@ -13,7 +13,7 @@ public class VideoFileToSend extends AbstractReplyManageToSend implements FileRe
 
 	private File video;
 	
-	public VideoFileToSend(int chat_id, File video) 
+	public VideoFileToSend(long chat_id, File video) 
 	{
 		super(chat_id);
 		this.video = video;

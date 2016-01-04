@@ -12,7 +12,7 @@ public class LocationToSend extends AbstractReplyManageToSend{
 	private float latitude;
 	private float longitude;
 	
-	public LocationToSend(int chat_id, float latitude, float longitude) 
+	public LocationToSend(long chat_id, float latitude, float longitude) 
 	{
 		super(chat_id);
 		this.latitude = latitude;

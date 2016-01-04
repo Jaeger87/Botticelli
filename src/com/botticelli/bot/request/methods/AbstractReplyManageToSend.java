@@ -13,7 +13,7 @@ public abstract class AbstractReplyManageToSend extends AbstractToSend{
 	private Integer reply_to_message_id;
 	private ReplyKeyboard reply_markup;
 	
-	public AbstractReplyManageToSend(int chat_id) 
+	public AbstractReplyManageToSend(long chat_id) 
 	{
 		super(chat_id);
 	}

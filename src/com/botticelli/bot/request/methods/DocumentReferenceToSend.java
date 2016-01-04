@@ -11,7 +11,7 @@ public class DocumentReferenceToSend extends AbstractReplyManageToSend{
 
 	private String document;
 	
-	public DocumentReferenceToSend(int chat_id, String document) {
+	public DocumentReferenceToSend(long chat_id, String document) {
 		super(chat_id);
 		this.document = document;
 	}

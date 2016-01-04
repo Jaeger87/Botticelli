@@ -11,7 +11,7 @@ public class PhotoReferenceToSend extends PhotoToSend
 {
 	private String photo;
 	
-	public PhotoReferenceToSend(int chat_id, String photo) 
+	public PhotoReferenceToSend(long chat_id, String photo) 
 	{
 		super(chat_id);
 		this.photo = photo;

@@ -12,7 +12,7 @@ public class ChatActionToSend extends AbstractToSend{
 
 	private ActionToSend action;
 	
-	public ChatActionToSend(int chat_id, ActionToSend action) 
+	public ChatActionToSend(long chat_id, ActionToSend action) 
 	{
 		super(chat_id);
 		this.action = action;

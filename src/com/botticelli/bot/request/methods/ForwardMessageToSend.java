@@ -12,7 +12,7 @@ public class ForwardMessageToSend extends AbstractToSend{
 	
 	private int message_id;
 	
-	public ForwardMessageToSend(int chat_id, int from_chat_id, int message_id) 
+	public ForwardMessageToSend(long chat_id, int from_chat_id, int message_id) 
 	{
 		super(chat_id);
 		this.from_chat_id = from_chat_id;

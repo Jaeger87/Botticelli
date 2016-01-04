@@ -11,7 +11,7 @@ public class VideoReferenceToSend extends AbstractReplyManageToSend{
 
 	private String video;
 	
-	public VideoReferenceToSend(int chat_id, String video) 
+	public VideoReferenceToSend(long chat_id, String video) 
 	{
 		super(chat_id);
 		this.video = video;

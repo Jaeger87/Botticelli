@@ -12,7 +12,7 @@ public abstract class AbstractToSend implements Request{
 	private long chat_id;
 	private String channelusername;
 	
-	public AbstractToSend(int chat_id)
+	public AbstractToSend(long chat_id)
 	{
 		this.chat_id = chat_id;
 	}

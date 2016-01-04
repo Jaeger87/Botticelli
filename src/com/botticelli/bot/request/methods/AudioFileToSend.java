@@ -11,7 +11,7 @@ public class AudioFileToSend extends AudioToSend implements FileRequest{
 
 	private File audio;
 	
-	public AudioFileToSend(int chat_id, File audio) {
+	public AudioFileToSend(long chat_id, File audio) {
 		super(chat_id);
 		this.audio = audio;
 	}

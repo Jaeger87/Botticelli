@@ -6,7 +6,7 @@ public abstract class PhotoToSend extends AbstractReplyManageToSend{
 
 	private String caption;
 	
-	public PhotoToSend(int chat_id) 
+	public PhotoToSend(long chat_id) 
 	{
 		super(chat_id);
 	}

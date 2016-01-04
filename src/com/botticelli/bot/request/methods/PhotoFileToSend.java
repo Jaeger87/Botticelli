@@ -12,7 +12,7 @@ public class PhotoFileToSend extends PhotoToSend implements FileRequest{
 
 	private File photo;
 	
-	public PhotoFileToSend(int chat_id, File photo) 
+	public PhotoFileToSend(long chat_id, File photo) 
 	{
 		super(chat_id);
 		this.photo = photo;

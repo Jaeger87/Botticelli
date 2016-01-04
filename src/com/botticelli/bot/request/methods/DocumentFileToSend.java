@@ -12,7 +12,7 @@ public class DocumentFileToSend extends AbstractReplyManageToSend implements Fil
 
 	private File document;
 	
-	public DocumentFileToSend(int chat_id, File document) {
+	public DocumentFileToSend(long chat_id, File document) {
 		super(chat_id);
 		this.document = document;
 	}

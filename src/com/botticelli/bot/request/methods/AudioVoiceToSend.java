@@ -11,7 +11,7 @@ public abstract class AudioVoiceToSend extends AbstractReplyManageToSend{
 
 	private Integer duration;
 	
-	public AudioVoiceToSend(int chat_id) 
+	public AudioVoiceToSend(long chat_id) 
 	{
 		super(chat_id);
 

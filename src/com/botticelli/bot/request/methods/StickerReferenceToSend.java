@@ -11,7 +11,7 @@ public class StickerReferenceToSend extends AbstractReplyManageToSend{
 	
 	private String sticker;
 	
-	public StickerReferenceToSend(int chat_id, String sticker) 
+	public StickerReferenceToSend(long chat_id, String sticker) 
 	{
 		super(chat_id);
 		this.sticker = sticker;
