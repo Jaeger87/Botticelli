@@ -1,6 +1,8 @@
 package com.botticelli.bot.request.methods;
 
 import java.util.Map;
+
+import com.botticelli.bot.request.methods.types.ParseMode;
 /**
  * This object clusters all the data need for the method sendMessage
  * @author Andrea Rosati (@Jaeger87)
@@ -10,7 +12,7 @@ public class MessageToSend extends AbstractReplyManageToSend {
 
 	private String text;
 	private boolean disable_web_page_preview;
-
+	private ParseMode parse_mode;
 
 	public MessageToSend(long chat_id, String text) 
 	{
@@ -58,10 +60,21 @@ public class MessageToSend extends AbstractReplyManageToSend {
 		return disable_web_page_preview;
 	}
 	
+	public void setParseMode(ParseMode parse_mode)
+	{
+		this.parse_mode = parse_mode;
+	}
+	
+	public ParseMode getParseMode()
+	{
+		return parse_mode;
+	}
+	
 	public Map<String, Object> getValuesMap()
 	{
 		Map<String, Object> map = super.getValuesMap();
 		map.put("text", text);
+		map.put("parse_mode", parse_mode);
 		return map;
 	}
 	
@@ -70,5 +83,7 @@ public class MessageToSend extends AbstractReplyManageToSend {
 	{	
 		return QueryStringBuilder.createToQueryString(getValuesMap());
 	}
+	
+	
 
 }

@@ -1,5 +1,10 @@
 package com.botticelli.bot.request.methods.types;
 
+/**
+ * 
+ * @author @author Andrea Rosati (@Jaeger87)
+ *
+ */
 public class InlineQuery
 {
 	private String id;
