@@ -59,7 +59,7 @@ public class MessageReceiver {
 	private void setup(Bot bot, int millis, int threads) throws IllegalArgumentException
 	{
 		if(millis < 0)
-			throw new IllegalArgumentException("Time can't rewind");
+			throw new IllegalArgumentException("Time can't rewind...");
 		if(bot == null)
 			throw new IllegalArgumentException("bot was null...");
 		if(threads < 1)
@@ -85,10 +85,10 @@ public class MessageReceiver {
 				for (Update u : updates) 
 				{
 					ur.setOffset(u.getUpdateID() + 1);
-					
-					HandleMessageThread hmt = new HandleMessageThread(bot,
-							u.getMessage());
-					pool.submit(hmt);
+		
+					HandleMessageThread hmt = threadFactory(u);
+					if(hmt != null)
+					    pool.submit(hmt);
 				}
 			
 			try 
@@ -102,6 +102,17 @@ public class MessageReceiver {
 				
 			}
 		}
+	}
+	
+	private HandleMessageThread threadFactory(Update u)
+	{
+		if(u.isMessageUpdate())
+			return new HandleMessageThread(bot,u.getMessage());
+		if(u.isInlineQueryUpdate())
+			return new HandleMessageThread(bot,u.getInlineQuery());
+		if(u.isCheckInlineResultUpdate())
+			return new HandleMessageThread(bot,u.getChosenInlineResult());
+		return null;
 	}
 }
 

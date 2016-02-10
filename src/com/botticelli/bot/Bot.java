@@ -22,6 +22,7 @@ import com.botticelli.bot.request.methods.VideoFileToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
+import com.botticelli.bot.request.methods.types.ChosenInlineResult;
 import com.botticelli.bot.request.methods.types.InlineQuery;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.Update;
@@ -445,9 +446,13 @@ public abstract class Bot {
      */
     public abstract void groupChatCreatedMessage(Message m);
     /**
-     * 
+     * This method will be called when the update was an inline query
      * @param q
      */
     public abstract void inLineQuery(InlineQuery q);
-	
+	/**
+	 * This method will be called when the update was a chose inline result
+	 * @param c
+	 */
+    public abstract void chose_inline_result(ChosenInlineResult c);
 }

@@ -13,6 +13,8 @@ public class Update {
 	
 	private InlineQuery inline_query;
 	
+	private ChosenInlineResult chosen_inline_result;
+	
 	/**
 	 * The update‘s unique identifier. 
 	 * Update identifiers start from a certain positive number and increase sequentially. 
@@ -45,11 +47,38 @@ public class Update {
 	}
 	
 	/**
-	 * Check if the update contains a message, remember any update contains a message OR an inline query.
+	 * Check if the update contains a message, remember any update contains a message OR an inline query OR a chosen inline result.
 	 * @return
 	 */
 	public boolean isMessageUpdate()
 	{
 		return message != null;
+	}
+	
+	/**
+	 * Check if the update contains a chosen inline result, remember any update contains a message OR an inline query OR a chosen inline result.
+	 * @return
+	 */
+	public boolean isCheckInlineResultUpdate()
+	{
+		return chosen_inline_result != null;
+	}
+	
+	/**
+	 * Check if the update contains an inline query, remember any update contains a message OR an inline query OR a chosen inline result.
+	 * @return
+	 */
+	public boolean isInlineQueryUpdate()
+	{
+		return inline_query != null;
+	}
+	
+	/**
+	 * Optional. The result of an inline query that was chosen by a user and sent to their chat partner.
+	 * @return
+	 */
+	public ChosenInlineResult getChosenInlineResult()
+	{
+		return chosen_inline_result;
 	}
 }
