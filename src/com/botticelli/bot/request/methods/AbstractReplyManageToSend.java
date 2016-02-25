@@ -12,6 +12,7 @@ public abstract class AbstractReplyManageToSend extends AbstractToSend{
 
 	private Integer reply_to_message_id;
 	private ReplyKeyboard reply_markup;
+	private boolean disable_notification;
 	
 	public AbstractReplyManageToSend(long chat_id) 
 	{
@@ -61,11 +62,22 @@ public abstract class AbstractReplyManageToSend extends AbstractToSend{
 		return reply_markup;
 	}
 	
+	public void disableNotification()
+	{
+		disable_notification = true;
+	}
+	
+	public void enableNotification()
+	{
+		disable_notification = false;
+	}
+	
 	public Map<String, Object> getValuesMap()
 	{
 		Map <String, Object> map = super.getValuesMap();
 		map.put("reply_to_message_id", reply_to_message_id);
 		map.put("reply_markup", reply_markup);
+		map.put("disable_notification", disable_notification);
 		return map;
 	}
 }
