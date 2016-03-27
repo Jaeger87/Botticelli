@@ -10,6 +10,7 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
+import com.botticelli.bot.request.methods.GetFile;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
@@ -23,6 +24,7 @@ import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.ChosenInlineResult;
+import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.InlineQuery;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.Update;
@@ -203,6 +205,13 @@ public abstract class Bot {
 	}
 	
 
+	/**
+	 * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message.
+	 * For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Audio or Document). 
+	 * On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+	 * @param vfs
+	 * @return
+	 */
 	public final Message sendVoiceFile(VoiceFileToSend vfs)
 	{
 		if(vfs == null)
@@ -210,6 +219,14 @@ public abstract class Bot {
 		return rm.sendVoiceFile(vfs);
 	}
 	
+	
+	/**
+	 * Use this method to send audio files by reference, if you want Telegram clients to display the file as a playable voice message. 
+	 * For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Audio or Document). 
+	 * On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+	 * @param vrs
+	 * @return
+	 */
 	public final Message sendVoicebyReference(VoiceReferenceToSend vrs)
 	{
 		if(vrs == null)
@@ -275,6 +292,14 @@ public abstract class Bot {
 			return null;
 		return rm.getUserProfilePhotos(upr);
 	}
+	
+	public final DownlodableFile getFile(GetFile gf)
+	{
+		if(gf == null)
+			return null;
+		return rm.getFile(gf);
+	}
+	
 	
 	/**
 	 * This method read the message values and pass the message on to the appropriate method.

@@ -1,10 +1,10 @@
 package com.botticelli.bot.request.methods.types;
 
-public class ResultFile extends File{
+public class ResultFile extends DownlodableFile{
 
-	private File result;
+	private DownlodableFile result;
 	
-	public File getResult()
+	public DownlodableFile getResult()
 	{
 		return result;
 	}

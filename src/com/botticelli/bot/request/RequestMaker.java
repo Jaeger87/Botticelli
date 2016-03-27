@@ -46,7 +46,7 @@ import com.botticelli.bot.request.methods.VideoFileToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
-import com.botticelli.bot.request.methods.types.File;
+import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.ResultFile;
 import com.botticelli.bot.request.methods.types.ResultMessage;
@@ -386,7 +386,7 @@ public class RequestMaker
 		return new UserProfilePhotos();
 	}
 
-	public File getFile(GetFile gf)
+	public DownlodableFile getFile(GetFile gf)
 	{
 		String json = makeRequest(urlGetFile, gf);
 		ResultFile rfile = new ResultFile();
@@ -544,11 +544,8 @@ public class RequestMaker
 			{
 				httpclient.close();
 			}
-
 			catch (IOException e1)
-
 			{
-				// e1.printStackTrace();
 				errorLogger.log(Level.SEVERE, req.getClass().getName(), e1);
 				json = "";
 			}
