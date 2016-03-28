@@ -23,5 +23,6 @@
         <copy file="<your source path>/Botticelli/lib/httpmime-4.5.jar" todir="<your destination path>/Botticelli_lib"/>
         <copy file="<your source path>/Botticelli/lib/jna-4.1.0.jar" todir="<your destination path>/Botticelli_lib"/>
         <copy file="<your source path>/Botticelli/lib/jna-platform-4.1.0.jar" todir="<your destination path>/Botticelli_lib"/>
+    	<copy file="<your source path>/Botticelli/lib/commons-io-2.4.jar" todir="<your destination path>/Botticelli_lib"/>
     </target>
 </project>

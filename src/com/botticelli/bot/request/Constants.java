@@ -3,6 +3,7 @@ package com.botticelli.bot.request;
 public class Constants {
 
 	public static final String APIURL = "https://api.telegram.org/bot";
+	public static final String APIFILEURL = "https://api.telegram.org/file/bot";
 	public static final String GETME = "/getMe";
 	public static final String SENDMESSAGE = "/sendMessage";
 	public static final String FORWARDMESSAGE = "/forwardMessage";

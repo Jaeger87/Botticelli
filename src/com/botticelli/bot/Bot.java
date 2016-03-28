@@ -1,5 +1,6 @@
 package com.botticelli.bot;
 
+import java.io.File;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,6 +28,7 @@ import com.botticelli.bot.request.methods.types.ChosenInlineResult;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.InlineQuery;
 import com.botticelli.bot.request.methods.types.Message;
+import com.botticelli.bot.request.methods.types.TelegramFile;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
 
@@ -300,6 +302,21 @@ public abstract class Bot {
 		return rm.getFile(gf);
 	}
 	
+	public File downloadFileFromTelegramServer(DownlodableFile df, String filename)
+	{
+		if(df == null)
+			return null;
+		if(filename == null)
+			filename = df.getFilePath();
+		return rm.downloadFileFromTelegramServer(df, filename);
+	}
+	
+	public File downloadFileFromTelegramServer(TelegramFile tf, String filename)
+	{
+		if(tf == null)
+			return null;
+		return downloadFileFromTelegramServer(getFile(new GetFile(tf.getFileID())), filename);
+	}
 	
 	/**
 	 * This method read the message values and pass the message on to the appropriate method.

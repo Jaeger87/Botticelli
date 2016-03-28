@@ -1,8 +1,11 @@
 package com.botticelli.bot.request;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -72,6 +76,7 @@ public class RequestMaker
 	private String urlSendChatAction;
 	private String urlGetUserProfilePhotos;
 	private String urlGetFile;
+	private String urlDownloadFile;
 	private final static Logger errorLogger = Logger.getLogger("errors");
 
 	private Gson gson;
@@ -93,6 +98,7 @@ public class RequestMaker
 		urlSendChatAction = Constants.APIURL + token + Constants.SENDCHATACTION;
 		urlGetUserProfilePhotos = Constants.APIURL + token + Constants.GETUSERPROFILEPHOTOS;
 		urlGetFile = Constants.APIURL + token + Constants.GETFILE;
+		urlDownloadFile = Constants.APIFILEURL + token + '/';
 	}
 
 	/**
@@ -403,6 +409,25 @@ public class RequestMaker
 		return null;
 	}
 
+	
+	public File downloadFileFromTelegramServer(DownlodableFile df, String filename)
+	{
+		
+		try {
+			URL u = new URL(urlDownloadFile + df.getFilePath());
+			File f = new File(filename);
+			FileUtils.copyURLToFile(u, f);
+			return f;
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	private String makeRequestFile(String url, FileRequest fr)
 	{
 		String json = "";
