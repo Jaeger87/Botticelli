@@ -28,7 +28,7 @@ public class MessageReceiver {
 	
 	private int millis;
 	private ExecutorService pool;
-	
+	private boolean stop = false;
 	/**
 	 * 
 	 * @param bot  Your bot.
@@ -78,7 +78,7 @@ public class MessageReceiver {
 	 */
 	public void start() 
 	{
-		while(true)
+		while(!stop)
 		{
 			List<Update> updates = bot.getUpdates(ur);
 			if(updates != null)
@@ -102,6 +102,8 @@ public class MessageReceiver {
 				
 			}
 		}
+		
+		stop = false;
 	}
 	
 	private HandleMessageThread threadFactory(Update u)
@@ -113,6 +115,14 @@ public class MessageReceiver {
 		if(u.isCheckInlineResultUpdate())
 			return new HandleMessageThread(bot,u.getChosenInlineResult());
 		return null;
+	}
+	
+	/**
+	 * This method stop the bot execution
+	 */
+	public void stopExecution()
+	{
+		stop = true;
 	}
 }
 
