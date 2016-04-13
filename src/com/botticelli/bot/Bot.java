@@ -376,15 +376,15 @@ public abstract class Bot {
 			return;
 		}
 		
-		if(message.getNewChatParticipant() != null)
+		if(message.getNewChatMember() != null)
 		{
-			newChatParticipantMessage(message);
+			newChatMemberMessage(message);
 			return;
 		}
 		
-		if(message.getLeftChatPartecipant() != null)
+		if(message.getLeftChatMember() != null)
 		{
-			leftChatParticipantMessage(message);
+			leftChatMemberMessage(message);
 			return;
 		}
 		
@@ -458,15 +458,15 @@ public abstract class Bot {
      */
     public abstract void locationMessage(Message m);
     /**
-     * This method will be called when a new participant join the Chat.
+     * This method will be called when a new member join the Chat.
      * @param m
      */
-    public abstract void newChatParticipantMessage(Message m);
+    public abstract void newChatMemberMessage(Message m);
     /**
-     * This method will be called when a participant left the chat
+     * This method will be called when a member left the chat
      * @param m
      */
-    public abstract void leftChatParticipantMessage(Message m);
+    public abstract void leftChatMemberMessage(Message m);
     /**
      * This method will be called when the chat title is changed
      * @param m

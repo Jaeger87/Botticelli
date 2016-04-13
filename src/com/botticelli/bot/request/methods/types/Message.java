@@ -44,9 +44,9 @@ public class Message {
 	
 	private Location location;
 	
-	private User new_chat_participant;
+	private User new_chat_member;
 	
-	private User left_chat_participant;
+	private User left_chat_member;
 	
 	private String new_chat_title;
 	
@@ -355,9 +355,9 @@ public class Message {
 	 * (this member may be bot itself)
 	 * @return
 	 */
-	public User getNewChatParticipant()
+	public User getNewChatMember()
 	{
-		return new_chat_participant;
+		return new_chat_member;
 	}
 	
 	/**
@@ -365,9 +365,9 @@ public class Message {
 	 * (this member may be bot itself)
 	 * @param new_chat_participant
 	 */
-	public void setNewChatParticipant(User new_chat_participant)
+	public void setNewChatMember(User new_chat_member)
 	{
-		this.new_chat_participant = new_chat_participant;
+		this.new_chat_member = new_chat_member;
 	}
 	
 	/**
@@ -375,9 +375,9 @@ public class Message {
 	 * (this member may be bot itself)
 	 * @return
 	 */
-	public User getLeftChatPartecipant()
+	public User getLeftChatMember()
 	{
-		return left_chat_participant;
+		return left_chat_member;
 	}
 	
 	/**
@@ -385,9 +385,9 @@ public class Message {
 	 * (this member may be bot itself)
 	 * @param new_chat_participant
 	 */
-	public void setLeftChatParticipant(User left_chat_participant)
+	public void setLeftChatMember(User left_chat_member)
 	{
-		this.left_chat_participant = left_chat_participant;
+		this.left_chat_member = left_chat_member;
 	}
 	
 	/**
