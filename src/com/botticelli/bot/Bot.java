@@ -376,6 +376,12 @@ public abstract class Bot {
 			return;
 		}
 		
+		if(message.getVenue() != null)
+		{
+			venueMessage(message);
+			return;
+		}
+		
 		if(message.getNewChatMember() != null)
 		{
 			newChatMemberMessage(message);
@@ -457,6 +463,11 @@ public abstract class Bot {
      * @param m
      */
     public abstract void locationMessage(Message m);
+    /**
+     * This method will be called when bot received a venue
+     * @param m
+     */
+    public abstract void venueMessage(Message m);
     /**
      * This method will be called when a new member join the Chat.
      * @param m

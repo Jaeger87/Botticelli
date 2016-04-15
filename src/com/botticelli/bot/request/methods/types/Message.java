@@ -26,6 +26,8 @@ public class Message {
 	
 	private String text;
 	
+	private List<MessageEntity> entities;
+	
 	private Audio audio;
 	
 	private Document document;
@@ -43,6 +45,8 @@ public class Message {
 	private Contact contact;
 	
 	private Location location;
+	
+	private Venue venue;
 	
 	private User new_chat_member;
 	
@@ -63,6 +67,9 @@ public class Message {
 	private long migrate_to_chat_id;
 	
 	private long migrate_from_chat_id;
+	
+	private Message pinned_message;
+	
 	/**
 	 * Unique message identifier
 	 * @return
@@ -350,6 +357,7 @@ public class Message {
 		this.location = location;
 	}
 	
+	
 	/**
 	 * Optional. A new member was added to the group, information about them 
 	 * (this member may be bot itself)
@@ -553,6 +561,58 @@ public class Message {
 	public long getMigratefromChatId()
 	{
 		return migrate_from_chat_id;
+	}
+
+	/**
+	 * Optional. Message is a venue, information about the venue
+	 * @return
+	 */
+	public Venue getVenue() {
+		return venue;
+	}
+
+	/**
+	 * Set the venue
+	 * @param venue
+	 */
+	public void setVenue(Venue venue) {
+		this.venue = venue;
+	}
+
+	/**
+	 * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
+	 * @return
+	 */
+	public List<MessageEntity> getEntities() 
+	{
+		return entities;
+	}
+
+	/**
+	 * Set special entities like usernames, URLs, bot commands, etc. that appear in the text
+	 * @param entities
+	 */
+	public void setEntities(List<MessageEntity> entities) {
+		this.entities = entities;
+	}
+
+	/**
+	 * Optional. Specified message was pinned. Note that the Message object in this field will not contain further reply_to_message 
+	 * fields even if it is itself a reply.
+	 * @return
+	 */
+	public Message getPinned_message() 
+	{
+		return pinned_message;
+	}
+
+	/**
+	 * Set the pinned message
+	 * @param pinned_message
+	 */
+	public void setPinned_message(Message pinned_message) 
+	{
+		this.pinned_message = pinned_message;
 	}
 	
 }
