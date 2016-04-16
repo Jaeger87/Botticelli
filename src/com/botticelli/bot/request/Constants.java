@@ -19,6 +19,8 @@ public class Constants {
 	public static final String GETUPDATES ="/getUpdates";
 	public static final String SETWEBHOOK ="/setWebhook";
 	public static final String GETFILE ="/getFile";
+	public static final String SENDVENUE ="/sendVenue";
+	public static final String SENDCONTACT ="/sendContact";
 	public static final String URLENCODEDCONTENTTYPE = "application/x-www-form-urlencoded";
 	public static final String URLDATACONTENTTYPE = "multipart/form-data";
 	public static final int SOCKETTIMEOUT = 5000;

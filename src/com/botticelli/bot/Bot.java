@@ -8,6 +8,7 @@ import com.botticelli.bot.request.RequestMaker;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
+import com.botticelli.bot.request.methods.ContactToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
@@ -20,6 +21,7 @@ import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
 import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
+import com.botticelli.bot.request.methods.VenueToSend;
 import com.botticelli.bot.request.methods.VideoFileToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
@@ -221,7 +223,6 @@ public abstract class Bot {
 		return rm.sendVoiceFile(vfs);
 	}
 	
-	
 	/**
 	 * Use this method to send audio files by reference, if you want Telegram clients to display the file as a playable voice message. 
 	 * For this to work, your audio must be in an .ogg file encoded with OPUS (other formats may be sent as Audio or Document). 
@@ -234,6 +235,25 @@ public abstract class Bot {
 		if(vrs == null)
 			return null;
 		return rm.sendVoicebyReference(vrs);
+	}
+	
+	/**
+	 * 
+	 * @param vts
+	 * @return
+	 */
+	public final Message sendVenue(VenueToSend vts)
+	{
+		if(vts == null)
+			return null;
+		return rm.sendVenue(vts);
+	}
+	
+	public final Message sendContact(ContactToSend cts)
+	{
+		if(cts == null)
+			return null;
+		return rm.sendContact(cts);
 	}
 	
 	/**
@@ -294,15 +314,24 @@ public abstract class Bot {
 			return null;
 		return rm.getUserProfilePhotos(upr);
 	}
-	
+	/**
+	 * 
+	 * @param gf
+	 * @return
+	 */
 	public final DownlodableFile getFile(GetFile gf)
 	{
 		if(gf == null)
 			return null;
 		return rm.getFile(gf);
 	}
-	
-	public File downloadFileFromTelegramServer(DownlodableFile df, String filename)
+	/**
+	 * 
+	 * @param df
+	 * @param filename
+	 * @return
+	 */
+	public final File downloadFileFromTelegramServer(DownlodableFile df, String filename)
 	{
 		if(df == null)
 			return null;
@@ -310,13 +339,20 @@ public abstract class Bot {
 			filename = df.getFilePath();
 		return rm.downloadFileFromTelegramServer(df, filename);
 	}
-	
-	public File downloadFileFromTelegramServer(TelegramFile tf, String filename)
+	/**
+	 * 
+	 * @param tf
+	 * @param filename
+	 * @return
+	 */
+	public final File downloadFileFromTelegramServer(TelegramFile tf, String filename)
 	{
 		if(tf == null)
 			return null;
 		return downloadFileFromTelegramServer(getFile(new GetFile(tf.getFileID())), filename);
 	}
+	
+	
 	
 	/**
 	 * This method read the message values and pass the message on to the appropriate method.

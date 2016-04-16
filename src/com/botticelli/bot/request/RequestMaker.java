@@ -32,6 +32,7 @@ import org.apache.http.message.BasicNameValuePair;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
+import com.botticelli.bot.request.methods.ContactToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.FileRequest;
@@ -46,6 +47,7 @@ import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
 import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
+import com.botticelli.bot.request.methods.VenueToSend;
 import com.botticelli.bot.request.methods.VideoFileToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
@@ -72,6 +74,8 @@ public class RequestMaker
 	private String urlSendSticker;
 	private String urlSendVideo;
 	private String urlSendVoice;
+	private String urlSendVenue;
+	private String urlSendContact;
 	private String urlSendLocation;
 	private String urlSendChatAction;
 	private String urlGetUserProfilePhotos;
@@ -97,6 +101,8 @@ public class RequestMaker
 		urlSendLocation = Constants.APIURL + token + Constants.SENDLOCATION;
 		urlSendChatAction = Constants.APIURL + token + Constants.SENDCHATACTION;
 		urlGetUserProfilePhotos = Constants.APIURL + token + Constants.GETUSERPROFILEPHOTOS;
+		urlSendVenue = Constants.APIURL + token + Constants.SENDVENUE;
+		urlSendContact = Constants.APIURL + token + Constants.SENDCONTACT;
 		urlGetFile = Constants.APIURL + token + Constants.GETFILE;
 		urlDownloadFile = Constants.APIFILEURL + token + '/';
 	}
@@ -337,6 +343,30 @@ public class RequestMaker
 		return buildMessage(json);
 	}
 
+	/**
+	 * Use this method to send venue. On success, the sent Message is
+	 * returned, else return null.
+	 * @param vts
+	 * @return
+	 */
+	public Message sendVenue(VenueToSend vts)
+	{
+		String json = makeRequest(urlSendVenue, vts);
+		return buildMessage(json);
+	}
+	
+	/**
+	 * Use this method to send a contact. On success, the sent Message is
+	 * returned, else return null.
+	 * @param vts
+	 * @return
+	 */
+	public Message sendContact(ContactToSend cts)
+	{
+		String json = makeRequest(urlSendContact, cts);
+		return buildMessage(json);
+	}
+	
 	/**
 	 * Use this method to send point on the map. On success, the sent Message is
 	 * returned, else return null.
