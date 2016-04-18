@@ -3,7 +3,7 @@ package com.botticelli.bot.request.methods.types;
 public class InlineQueryResultGif extends InlineQueryResult
 {
 
-	public final static String type = "gif";
+	public final String type = "gif";
 	
 	private String gif_url;
 	

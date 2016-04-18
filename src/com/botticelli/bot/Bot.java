@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.botticelli.bot.request.RequestMaker;
+import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
@@ -13,6 +14,7 @@ import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GetFile;
+import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
@@ -249,6 +251,11 @@ public abstract class Bot {
 		return rm.sendVenue(vts);
 	}
 	
+	/**
+	 * 
+	 * @param cts
+	 * @return
+	 */
 	public final Message sendContact(ContactToSend cts)
 	{
 		if(cts == null)
@@ -302,6 +309,28 @@ public abstract class Bot {
 		rm.sendChatAction(cts);
 	}
 
+	/**
+	 * 
+	 * @param kmr
+	 * @return
+	 */
+	public final boolean kickChatMember(KickChatMemberRequest kmr)
+	{
+		if(kmr == null)
+			return false;
+		return rm.kickChatMember(kmr);
+	}
+	/**
+	 * 
+	 * @param aiq
+	 * @return
+	 */
+	public final boolean answerInlineQuery(AnswerInlineQueryRequest aiq)
+	{
+		if(aiq == null)
+			return false;
+		return rm.answerInlineQuery(aiq);
+	}
 	/**
 	 * Use this method to get a list of profile pictures for a user. 
 	 * Returns a UserProfilePhotos object.

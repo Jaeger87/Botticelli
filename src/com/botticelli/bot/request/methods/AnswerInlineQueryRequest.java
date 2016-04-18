@@ -7,7 +7,7 @@ import java.util.Map;
 import com.botticelli.bot.request.methods.types.InlineQueryResult;
 import com.google.gson.Gson;
 
-public class AnswerInlineQuery implements Request
+public class AnswerInlineQueryRequest implements Request
 {
 	private String inline_query_id;
 	
@@ -19,7 +19,11 @@ public class AnswerInlineQuery implements Request
 	
 	private String next_offset;
 	
-	public AnswerInlineQuery(String inline_query_id, List<InlineQueryResult> results)
+	private String switch_pm_text;
+	
+	
+	
+	public AnswerInlineQueryRequest(String inline_query_id, List<InlineQueryResult> results)
 	{
 		this.inline_query_id = inline_query_id;
 		this.results = results;
@@ -37,6 +41,10 @@ public class AnswerInlineQuery implements Request
 		this.cache_time = cache_time;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isPersonal()
 	{
 		return is_personal;
@@ -46,12 +54,18 @@ public class AnswerInlineQuery implements Request
 	{
 		is_personal = true;
 	}
-	
+	/**
+	 * 
+	 */
 	public void setIsPersonalOff()
 	{
 		is_personal = false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNextOffset()
 	{
 		return next_offset;
@@ -75,7 +89,26 @@ public class AnswerInlineQuery implements Request
 		map.put("cache_time", cache_time);
 		map.put("is_personal", is_personal);
 		map.put("next_offset", next_offset);
+		map.put("switch_pm_text", switch_pm_text);
 		return map;
+	}
+
+	/**
+	 * 
+	 * @param switch_pm_text
+	 */
+	public void setSwitch_pm_text(String switch_pm_text) 
+	{
+		this.switch_pm_text = switch_pm_text;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getSwitch_pm_text() 
+	{
+		return switch_pm_text;
 	}
 
 }

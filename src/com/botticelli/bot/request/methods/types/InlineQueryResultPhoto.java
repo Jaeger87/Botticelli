@@ -3,7 +3,7 @@ package com.botticelli.bot.request.methods.types;
 public class InlineQueryResultPhoto extends InlineQueryResultWithDescription
 {
 
-	public final static String type = "photo";
+	public final String type = "photo";
 	
 	private String photo_url;
 	

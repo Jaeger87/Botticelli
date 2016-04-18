@@ -3,7 +3,7 @@ package com.botticelli.bot.request.methods.types;
 public class InlineQueryResultArticle extends InlineQueryResultWithDescription
 {
 
-	public final static String type = "article";
+	public final String type = "article";
 	
 	private String url;
 	

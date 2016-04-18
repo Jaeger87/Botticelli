@@ -3,7 +3,7 @@ package com.botticelli.bot.request.methods.types;
 public class InlineQueryResultVideo extends InlineQueryResultWithDescription
 {
 
-	public final static String type = "video";
+	public final String type = "video";
 	
 	private String video_url;
 	

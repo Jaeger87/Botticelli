@@ -3,7 +3,7 @@ package com.botticelli.bot.request.methods.types;
 public class InlineQueryResultMpeg4Gif extends InlineQueryResult
 {
 
-	public final static String type = "mpeg4_gif";
+	public final String type = "mpeg4_gif";
 	
 	private String mpeg4_url;
 	

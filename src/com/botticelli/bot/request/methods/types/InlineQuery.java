@@ -46,4 +46,5 @@ public class InlineQuery extends AbstractInline
 	{
 		this.offset = offset;
 	}
+	
 }

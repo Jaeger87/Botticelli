@@ -29,6 +29,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
@@ -38,6 +39,7 @@ import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.FileRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GetFile;
+import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
@@ -45,6 +47,7 @@ import com.botticelli.bot.request.methods.PhotoReferenceToSend;
 import com.botticelli.bot.request.methods.Request;
 import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
+import com.botticelli.bot.request.methods.UnbanChatMemberRequest;
 import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
@@ -54,10 +57,12 @@ import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.Message;
+import com.botticelli.bot.request.methods.types.Result;
 import com.botticelli.bot.request.methods.types.ResultFile;
 import com.botticelli.bot.request.methods.types.ResultMessage;
 import com.botticelli.bot.request.methods.types.ResultUpdate;
 import com.botticelli.bot.request.methods.types.ResultUserProfilePhoto;
+import com.botticelli.bot.request.methods.types.ResultWithDescription;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
 import com.google.gson.Gson;
@@ -76,11 +81,15 @@ public class RequestMaker
 	private String urlSendVoice;
 	private String urlSendVenue;
 	private String urlSendContact;
+	private String urlAnswerInlineQuery;
+	private String urlKickChatMember;
+	private String urlUnbanChatMember;
 	private String urlSendLocation;
 	private String urlSendChatAction;
 	private String urlGetUserProfilePhotos;
 	private String urlGetFile;
 	private String urlDownloadFile;
+	
 	private final static Logger errorLogger = Logger.getLogger("errors");
 
 	private Gson gson;
@@ -103,6 +112,9 @@ public class RequestMaker
 		urlGetUserProfilePhotos = Constants.APIURL + token + Constants.GETUSERPROFILEPHOTOS;
 		urlSendVenue = Constants.APIURL + token + Constants.SENDVENUE;
 		urlSendContact = Constants.APIURL + token + Constants.SENDCONTACT;
+		urlKickChatMember = Constants.APIURL + token + Constants.KICKCHATMEMBER;
+		urlUnbanChatMember = Constants.APIURL + token + Constants.UNBANCHATMEMBER;
+		urlAnswerInlineQuery = Constants.APIURL + token + Constants.ANSWERINLINEQUERY;
 		urlGetFile = Constants.APIURL + token + Constants.GETFILE;
 		urlDownloadFile = Constants.APIFILEURL + token + '/';
 	}
@@ -399,6 +411,35 @@ public class RequestMaker
 	}
 
 	/**
+	 * 
+	 * @param kmr
+	 * @return
+	 */
+	public boolean kickChatMember(KickChatMemberRequest kmr)
+	{
+		return buildResult(makeRequest(urlKickChatMember, kmr)).getOk();
+	}
+	
+	/**
+	 * 
+	 * @param umr
+	 * @return
+	 */
+	public boolean unbanChatMember(UnbanChatMemberRequest umr)
+	{
+		return buildResult(makeRequest(urlUnbanChatMember, umr)).getOk();
+	}
+	
+	/**
+	 * 
+	 * @param aiq
+	 * @return
+	 */
+	public boolean answerInlineQuery(AnswerInlineQueryRequest aiq)
+	{
+        return buildResult(makeRequest(urlAnswerInlineQuery, aiq)).getOk();
+	}
+	/**
 	 * Use this method to get a list of profile pictures for a user. Returns a
 	 * UserProfilePhotos object.
 	 * 
@@ -439,6 +480,22 @@ public class RequestMaker
 		return null;
 	}
 
+	private ResultWithDescription buildResult(String json)
+	{
+		ResultWithDescription ok = new ResultWithDescription();
+		try
+		{
+			ok = gson.fromJson(json, Result.class);
+		}
+		
+		catch(JsonSyntaxException e)
+		{
+			errorLogger.log(Level.SEVERE, json, e);
+		}
+		if(ok == null)
+			return new ResultWithDescription();
+		return ok;
+	}
 	
 	public File downloadFileFromTelegramServer(DownlodableFile df, String filename)
 	{
