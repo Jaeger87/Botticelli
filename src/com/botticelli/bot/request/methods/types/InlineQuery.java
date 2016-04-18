@@ -12,6 +12,9 @@ public class InlineQuery extends AbstractInline
 	
 	private String offset;
 	
+	
+	
+
 	/**
 	 * Unique identifier for this query
 	 * @return
@@ -46,5 +49,6 @@ public class InlineQuery extends AbstractInline
 	{
 		this.offset = offset;
 	}
+	
 	
 }

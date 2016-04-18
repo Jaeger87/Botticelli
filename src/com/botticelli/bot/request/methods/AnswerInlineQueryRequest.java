@@ -21,8 +21,10 @@ public class AnswerInlineQueryRequest implements Request
 	
 	private String switch_pm_text;
 	
+	private String switch_pm_parameter;
 	
 	
+
 	public AnswerInlineQueryRequest(String inline_query_id, List<InlineQueryResult> results)
 	{
 		this.inline_query_id = inline_query_id;
@@ -90,6 +92,7 @@ public class AnswerInlineQueryRequest implements Request
 		map.put("is_personal", is_personal);
 		map.put("next_offset", next_offset);
 		map.put("switch_pm_text", switch_pm_text);
+		map.put("switch_pm_parameter", switch_pm_parameter);
 		return map;
 	}
 
@@ -109,6 +112,24 @@ public class AnswerInlineQueryRequest implements Request
 	public String getSwitch_pm_text() 
 	{
 		return switch_pm_text;
+	}
+	
+	/**
+	 * 
+	 * @param switch_pm_parameter
+	 */
+	public void setSwitch_pm_parameter(String switch_pm_parameter) 
+	{
+		this.switch_pm_parameter = switch_pm_parameter;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getSwitch_pm_parameter() 
+	{
+		return switch_pm_parameter;
 	}
 
 }

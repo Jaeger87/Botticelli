@@ -14,6 +14,8 @@ public abstract class InlineQueryResult
 	
 	private String thumb_url;
 	
+	private InputMessageContent input_message_content;
+	
 	public InlineQueryResult(String id)
 	{
 		this.id = id;
@@ -78,5 +80,21 @@ public abstract class InlineQueryResult
 	{
 		this.thumb_url = thumb_url;;
 	}
+
+	public InputMessageContent getInput_message_content() 
+	{
+		return input_message_content;
+	}
+
+	/**
+	 * 
+	 * @param input_message_content
+	 */
+	public void setInput_message_content(InputMessageContent input_message_content) 
+	{
+		this.input_message_content = input_message_content;
+	}
+	
+	
 	
 }

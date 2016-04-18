@@ -10,7 +10,7 @@ public abstract class AbstractInline
 
 	private User from;
 	private String query;
-	
+	private Location location;
 	/**
 	 * Sender
 	 * @return
@@ -46,4 +46,24 @@ public abstract class AbstractInline
 	{
 		this.query = query;
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Location getLocation() 
+	{
+		return location;
+	}
+
+	/**
+	 * 
+	 * @param location
+	 */
+	public void setLocation(Location location) 
+	{
+		this.location = location;
+	}
+	
+	
 }
