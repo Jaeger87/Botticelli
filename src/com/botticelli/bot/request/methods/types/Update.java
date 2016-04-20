@@ -15,6 +15,10 @@ public class Update {
 	
 	private ChosenInlineResult chosen_inline_result;
 	
+	private CallbackQuery callback_query; 
+	
+
+
 	/**
 	 * The update‘s unique identifier. 
 	 * Update identifiers start from a certain positive number and increase sequentially. 
@@ -80,5 +84,19 @@ public class Update {
 	public ChosenInlineResult getChosenInlineResult()
 	{
 		return chosen_inline_result;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public CallbackQuery getCallback_query() 
+	{
+		return callback_query;
+	}
+	
+	public boolean isCallbackUpdate()
+	{
+		return callback_query != null;
 	}
 }

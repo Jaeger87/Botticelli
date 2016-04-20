@@ -28,6 +28,7 @@ import com.botticelli.bot.request.methods.VideoFileToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
+import com.botticelli.bot.request.methods.types.CallbackQuery;
 import com.botticelli.bot.request.methods.types.ChosenInlineResult;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.InlineQuery;
@@ -564,13 +565,18 @@ public abstract class Bot {
      */
     public abstract void groupChatCreatedMessage(Message m);
     /**
-     * This method will be called when the update was an inline query
+     * This method will be called when the update is an inline query
      * @param q
      */
     public abstract void inLineQuery(InlineQuery q);
 	/**
-	 * This method will be called when the update was a chose inline result
+	 * This method will be called when the update is a chose inline result
 	 * @param c
 	 */
     public abstract void chose_inline_result(ChosenInlineResult c);
+    /**
+     * This method will be called when the update is a CallbackQuery
+     * @param cq
+     */
+    public abstract void callback_query(CallbackQuery cq);
 }

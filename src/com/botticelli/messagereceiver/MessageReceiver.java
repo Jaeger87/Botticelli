@@ -86,11 +86,10 @@ public class MessageReceiver {
 				{
 					ur.setOffset(u.getUpdateID() + 1);
 		
-					HandleMessageThread hmt = threadFactory(u);
+					HandleMessageThread hmt = new HandleMessageThread(bot, u);
 					if(hmt != null)
 					    pool.submit(hmt);
 				}
-			
 			try 
 			{
 				TimeUnit.MILLISECONDS.sleep(millis);
@@ -99,22 +98,9 @@ public class MessageReceiver {
 			{
 				Bot.getErrorLogger().log(Level.SEVERE, "sleep error", e);
 				e.printStackTrace();
-				
 			}
 		}
-		
 		stop = false;
-	}
-	
-	private HandleMessageThread threadFactory(Update u)
-	{
-		if(u.isMessageUpdate())
-			return new HandleMessageThread(bot,u.getMessage());
-		if(u.isInlineQueryUpdate())
-			return new HandleMessageThread(bot,u.getInlineQuery());
-		if(u.isCheckInlineResultUpdate())
-			return new HandleMessageThread(bot,u.getChosenInlineResult());
-		return null;
 	}
 	
 	/**
