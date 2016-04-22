@@ -10,6 +10,4 @@ public class InlineKeyboardMarkup {
 	{
 		this.inline_keyboard = inline_keyboard;
 	}
-
-	
 }

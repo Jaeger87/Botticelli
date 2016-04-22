@@ -37,6 +37,9 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ContactToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
+import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
+import com.botticelli.bot.request.methods.EditMessageReplyMarkupRequest;
+import com.botticelli.bot.request.methods.EditMessageTextRequest;
 import com.botticelli.bot.request.methods.FileRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GetFile;
@@ -57,6 +60,7 @@ import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
+import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.Result;
 import com.botticelli.bot.request.methods.types.ResultFile;
@@ -86,6 +90,9 @@ public class RequestMaker
 	private String urlAnswerCallbackQuery;
 	private String urlKickChatMember;
 	private String urlUnbanChatMember;
+	private String urlEditMessageText;
+	private String urlEditMessageCaption;
+	private String urlEditMessageReplyMarkup;
 	private String urlSendLocation;
 	private String urlSendChatAction;
 	private String urlGetUserProfilePhotos;
@@ -98,7 +105,7 @@ public class RequestMaker
 
 	public RequestMaker(String token)
 	{
-		gson = new Gson();
+		gson = GsonOwner.getInstance().getGson();
 
 		urlGetUpdates = Constants.APIURL + token + Constants.GETUPDATES;
 		urlSendMessage = Constants.APIURL + token + Constants.SENDMESSAGE;
@@ -116,6 +123,9 @@ public class RequestMaker
 		urlSendContact = Constants.APIURL + token + Constants.SENDCONTACT;
 		urlKickChatMember = Constants.APIURL + token + Constants.KICKCHATMEMBER;
 		urlUnbanChatMember = Constants.APIURL + token + Constants.UNBANCHATMEMBER;
+		urlEditMessageText = Constants.APIURL + token + Constants.EDITMESSAGETEXT;
+		urlEditMessageCaption = Constants.APIURL + token + Constants.EDITMESSAGECAPTION;
+		urlEditMessageReplyMarkup = Constants.APIURL + token + Constants.EDITMESSAGEREPLYMARKUP;
 		urlAnswerInlineQuery = Constants.APIURL + token + Constants.ANSWERINLINEQUERY;
 		urlAnswerCallbackQuery = Constants.APIURL + token + Constants.ANSWERCALLBACKQUERY;
 		urlGetFile = Constants.APIURL + token + Constants.GETFILE;
@@ -431,6 +441,36 @@ public class RequestMaker
 	public boolean unbanChatMember(UnbanChatMemberRequest umr)
 	{
 		return buildResult(makeRequest(urlUnbanChatMember, umr)).getOk();
+	}
+	/**
+	 * 
+	 * @param emt
+	 * @return
+	 */
+	public Message editMessageText(EditMessageTextRequest emt)
+	{
+		String json = makeRequest(urlEditMessageText, emt);
+		return buildMessage(json);
+	}
+	/**
+	 * 
+	 * @param emc
+	 * @return
+	 */
+	public Message editMessageCaption(EditMessageCaptionRequest emc)
+	{
+		String json = makeRequest(urlEditMessageCaption, emc);
+		return buildMessage(json);
+	}
+	/**
+	 * 
+	 * @param emr
+	 * @return
+	 */
+	public Message editMessageReplyMarkup(EditMessageReplyMarkupRequest emr)
+	{
+		String json = makeRequest(urlEditMessageReplyMarkup, emr);
+		return buildMessage(json);
 	}
 	
 	/**

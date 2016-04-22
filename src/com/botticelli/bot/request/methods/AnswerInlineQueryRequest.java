@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.InlineQueryResult;
 import com.google.gson.Gson;
 
@@ -84,10 +85,9 @@ public class AnswerInlineQueryRequest implements Request
 		HashMap <String, Object> map = new HashMap<String, Object>();
 		if(results == null)
 			return map;
-		Gson gson = new Gson();
 		
 		map.put("inline_query_id", inline_query_id);
-		map.put("results", gson.toJson(results));
+		map.put("results", GsonOwner.getInstance().getGson().toJson(results));
 		map.put("cache_time", cache_time);
 		map.put("is_personal", is_personal);
 		map.put("next_offset", next_offset);

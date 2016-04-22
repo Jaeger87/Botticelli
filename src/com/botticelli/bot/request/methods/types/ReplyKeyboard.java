@@ -46,7 +46,6 @@ public abstract class ReplyKeyboard {
 	@Override
 	public String toString()
 	{
-		Gson gson = new Gson();
-		return gson.toJson(this);
+		return GsonOwner.getInstance().getGson().toJson(this);
 	}
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.botticelli.bot.request.methods.types.InlineKeyboardMarkup;
 import com.google.gson.Gson;
 
-public class EditMessageReplyMarkup implements Request {
+public class EditMessageReplyMarkupRequest implements Request {
 
 	private long chat_id;
 	private String channelusername;
@@ -15,19 +15,19 @@ public class EditMessageReplyMarkup implements Request {
 	private String inline_message_id;
 	private InlineKeyboardMarkup reply_markup;
 
-	public EditMessageReplyMarkup(long chat_id, int message_id) 
+	public EditMessageReplyMarkupRequest(long chat_id, int message_id) 
 	{
 		this.chat_id = chat_id;
 		this.message_id = message_id;
 	}
 
-	public EditMessageReplyMarkup(String channelusername, int message_id) 
+	public EditMessageReplyMarkupRequest(String channelusername, int message_id) 
 	{
 		this.channelusername = channelusername;
 		this.message_id = message_id;
 	}
 
-	public EditMessageReplyMarkup(String inline_message_id) 
+	public EditMessageReplyMarkupRequest(String inline_message_id) 
 	{
 		this.inline_message_id = inline_message_id;
 		wasBuiltWithMessage_id = true;

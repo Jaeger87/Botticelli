@@ -13,6 +13,9 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ContactToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
+import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
+import com.botticelli.bot.request.methods.EditMessageReplyMarkupRequest;
+import com.botticelli.bot.request.methods.EditMessageTextRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GetFile;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
@@ -344,6 +347,33 @@ public abstract class Bot {
 		if(acq == null)
 			return false;
 		return rm.answerCallbackQuery(acq);
+	}
+	
+	/**
+	 * 
+	 * @param emt
+	 * @return
+	 */
+	public final Message editMessageText(EditMessageTextRequest emt)
+	{
+		if(emt == null)
+			return null;
+		return rm.editMessageText(emt);
+	}
+	
+	public final Message editMessageCaption(EditMessageCaptionRequest emc)
+	{
+		if(emc == null)
+			return null;
+		return rm.editMessageCaption(emc);
+	}
+	
+	
+	public final Message editMessageReplyMarkup(EditMessageReplyMarkupRequest emr)
+	{
+		if(emr == null)
+			return null;
+		return rm.editMessageReplyMarkup(emr);
 	}
 	
 	/**

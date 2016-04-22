@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.botticelli.bot.request.methods.types.ParseMode;
 
-public class EditMessageTextRequest extends EditMessageReplyMarkup{
+public class EditMessageTextRequest extends EditMessageReplyMarkupRequest{
 
 	
 
