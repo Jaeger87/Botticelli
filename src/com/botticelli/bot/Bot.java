@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.botticelli.bot.request.RequestMaker;
+import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
@@ -332,6 +333,19 @@ public abstract class Bot {
 			return false;
 		return rm.answerInlineQuery(aiq);
 	}
+	
+	/**
+	 * 
+	 * @param aiq
+	 * @return
+	 */
+	public final boolean answerCallbackQuery(AnswerCallbackQueryToSend acq)
+	{
+		if(acq == null)
+			return false;
+		return rm.answerCallbackQuery(acq);
+	}
+	
 	/**
 	 * Use this method to get a list of profile pictures for a user. 
 	 * Returns a UserProfilePhotos object.

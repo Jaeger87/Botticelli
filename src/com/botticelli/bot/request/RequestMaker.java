@@ -29,6 +29,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
@@ -82,6 +83,7 @@ public class RequestMaker
 	private String urlSendVenue;
 	private String urlSendContact;
 	private String urlAnswerInlineQuery;
+	private String urlAnswerCallbackQuery;
 	private String urlKickChatMember;
 	private String urlUnbanChatMember;
 	private String urlSendLocation;
@@ -115,6 +117,7 @@ public class RequestMaker
 		urlKickChatMember = Constants.APIURL + token + Constants.KICKCHATMEMBER;
 		urlUnbanChatMember = Constants.APIURL + token + Constants.UNBANCHATMEMBER;
 		urlAnswerInlineQuery = Constants.APIURL + token + Constants.ANSWERINLINEQUERY;
+		urlAnswerCallbackQuery = Constants.APIURL + token + Constants.ANSWERCALLBACKQUERY;
 		urlGetFile = Constants.APIURL + token + Constants.GETFILE;
 		urlDownloadFile = Constants.APIFILEURL + token + '/';
 	}
@@ -439,6 +442,17 @@ public class RequestMaker
 	{
         return buildResult(makeRequest(urlAnswerInlineQuery, aiq)).getOk();
 	}
+	
+	/**
+	 * 
+	 * @param acq
+	 * @return
+	 */
+	public boolean answerCallbackQuery(AnswerCallbackQueryToSend acq)
+	{
+        return buildResult(makeRequest(urlAnswerCallbackQuery, acq)).getOk();
+	}
+	
 	/**
 	 * Use this method to get a list of profile pictures for a user. Returns a
 	 * UserProfilePhotos object.

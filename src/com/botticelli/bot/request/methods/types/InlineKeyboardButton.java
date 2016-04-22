@@ -7,12 +7,74 @@ public class InlineKeyboardButton {
 	private String callback_data;
 	private String switch_inline_query;
 	
-	public InlineKeyboardButton(String text, String url) 
+	public InlineKeyboardButton(String text) 
 	{
 		this.text = text;
+	}
+
+	public String getText() 
+	{
+		return text;
+	}
+
+	public String getUrl() 
+	{
+		return url;
+	}
+
+	public void setUrl(String url) 
+	{
+		nullAll();
 		this.url = url;
 	}
 
+	public String getCallback_data() 
+	{
+		return callback_data;
+	}
+
+	public void setCallback_data(String callback_data) 
+	{
+		nullAll();
+		this.callback_data = callback_data;
+	}
+
+	public String getSwitch_inline_query() 
+	{
+		return switch_inline_query;
+	}
+
+	public void setSwitch_inline_query(String switch_inline_query) 
+	{
+		nullAll();
+		this.switch_inline_query = switch_inline_query;
+	}
+
+	private void nullAll()
+	{
+		url = null;
+		callback_data = null;
+		switch_inline_query = null;
+	}
 	
+	public static InlineKeyboardButton inlineKeyboardButtonBuilderURL(String text, String url)
+	{
+		InlineKeyboardButton ikb = new InlineKeyboardButton(text);
+		ikb.url = url;
+		return ikb;
+	}
 	
+	public static InlineKeyboardButton inlineKeyboardButtonBuilderCallback(String text, String callback_data)
+	{
+		InlineKeyboardButton ikb = new InlineKeyboardButton(text);
+		ikb.callback_data = callback_data;
+		return ikb;
+	}
+	
+	public static InlineKeyboardButton inlineKeyboardButtonBuilderSwitch(String text, String switch_inline_query)
+	{
+		InlineKeyboardButton ikb = new InlineKeyboardButton(text);
+		ikb.switch_inline_query = switch_inline_query;
+		return ikb;
+	}
 }

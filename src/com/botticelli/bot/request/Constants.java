@@ -24,6 +24,7 @@ public class Constants {
 	public static final String KICKCHATMEMBER ="/kickChatMember";
 	public static final String UNBANCHATMEMBER ="/unbanChatMember";
 	public static final String ANSWERINLINEQUERY ="/answerInlineQuery";
+	public static final String ANSWERCALLBACKQUERY ="/answerCallbackQuery";
 	public static final String URLENCODEDCONTENTTYPE = "application/x-www-form-urlencoded";
 	public static final String URLDATACONTENTTYPE = "multipart/form-data";
 	public static final int SOCKETTIMEOUT = 5000;
