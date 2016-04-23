@@ -9,6 +9,8 @@ public class InlineQueryResultArticle extends InlineQueryResultWithDescription
 	
 	private boolean hide_url;
 	
+	private String thumb_url;
+	
 	private int thumb_width;
 	
 	private int thumb_height;
@@ -64,4 +66,18 @@ public class InlineQueryResultArticle extends InlineQueryResultWithDescription
 	{
 		this.thumb_height = thumb_height;
 	}
+
+
+	public String getThumb_url() 
+	{
+		return thumb_url;
+	}
+
+
+	public void setThumb_url(String thumb_url) 
+	{
+		this.thumb_url = thumb_url;
+	}
+	
+	
 }

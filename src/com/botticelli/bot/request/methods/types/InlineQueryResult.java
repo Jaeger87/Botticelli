@@ -12,7 +12,7 @@ public abstract class InlineQueryResult
 	
 	private boolean disable_web_page_preview;
 	
-	private String thumb_url;
+
 	
 	private InputMessageContent input_message_content;
 	
@@ -78,16 +78,6 @@ public abstract class InlineQueryResult
 	public void setDisableWebPagePreview(boolean disable_web_page_preview)
 	{
 		this.disable_web_page_preview = disable_web_page_preview;
-	}
-	
-	public String getThumbUrl()
-	{
-		return thumb_url;
-	}
-	
-	public void setThumbUrl(String thumb_url)
-	{
-		this.thumb_url = thumb_url;;
 	}
 
 	public InputMessageContent getInput_message_content() 
