@@ -1,7 +1,5 @@
 package com.botticelli.bot.request.methods.types;
 
-import com.google.gson.Gson;
-
 public abstract class ReplyKeyboard {
 	
 	private boolean selective;

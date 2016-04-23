@@ -16,10 +16,19 @@ public abstract class InlineQueryResult
 	
 	private InputMessageContent input_message_content;
 	
+	private InlineKeyboardMarkup reply_markup;
+	
 	public InlineQueryResult(String id)
 	{
 		this.id = id;
 	}
+	
+	public InlineQueryResult(String id, String title)
+	{
+		this.id = id;
+		this.title = title;
+	}
+	
 	
 	public String getId()
 	{
@@ -93,6 +102,14 @@ public abstract class InlineQueryResult
 	public void setInput_message_content(InputMessageContent input_message_content) 
 	{
 		this.input_message_content = input_message_content;
+	}
+
+	public InlineKeyboardMarkup getReply_markup() {
+		return reply_markup;
+	}
+
+	public void setReply_markup(InlineKeyboardMarkup reply_markup) {
+		this.reply_markup = reply_markup;
 	}
 	
 	

@@ -10,4 +10,10 @@ public class InlineKeyboardMarkup {
 	{
 		this.inline_keyboard = inline_keyboard;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return GsonOwner.getInstance().getGson().toJson(this);
+	}
 }

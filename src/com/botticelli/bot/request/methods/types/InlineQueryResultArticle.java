@@ -15,8 +15,7 @@ public class InlineQueryResultArticle extends InlineQueryResultWithDescription
 	
 	public InlineQueryResultArticle(String id, String title, String message_text)
 	{
-		super(id);
-		setTitle(title);
+		super(id, title);
 		setMessageText(message_text);
 	}
 

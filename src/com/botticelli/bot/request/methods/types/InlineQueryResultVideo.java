@@ -15,14 +15,26 @@ public class InlineQueryResultVideo extends InlineQueryResultWithDescription
 	
 	private int video_duration;
 	
-	public InlineQueryResultVideo(String id)
+	private String thumb_url;
+	
+	public InlineQueryResultVideo(String id, String title, String video_url, String mime_type, String thumb_url)
 	{
-		super(id);
+		super(id, title);
+		this.video_url = video_url;
+		this.mime_type = mime_type;
+		this.thumb_url = thumb_url;
 	}
 
 	public String getVideoUrl()
 	{
 		return video_url;
+	}
+
+	
+	
+	public String getThumb_url() 
+	{
+		return thumb_url;
 	}
 
 	public void setVideoUrl(String video_url)

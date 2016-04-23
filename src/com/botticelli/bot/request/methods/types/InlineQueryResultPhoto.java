@@ -7,17 +7,19 @@ public class InlineQueryResultPhoto extends InlineQueryResultWithDescription
 	
 	private String photo_url;
 	
-	private String mime_type;
-	
 	private int photo_width;
 	
 	private int photo_height;
 	
 	private String caption;
 	
-	public InlineQueryResultPhoto(String id)
+	private String thumb_url;
+	
+	public InlineQueryResultPhoto(String id, String photo_url, String thumb_url)
 	{
 		super(id);
+		this.photo_url = photo_url;
+		this.thumb_url = thumb_url;
 	}
 	
 	public String getPhotoUrl()
@@ -25,19 +27,9 @@ public class InlineQueryResultPhoto extends InlineQueryResultWithDescription
 		return photo_url;
 	}
 	
-	public void setPhotoUrl(String photo_url)
+	public String getThumb_url() 
 	{
-		this.photo_url = photo_url;
-	}
-
-	public String getMimeType()
-	{
-		return mime_type;
-	}
-
-	public void setMimeType(String mime_type)
-	{
-		this.mime_type = mime_type;
+		return thumb_url;
 	}
 
 	public int getPhotoWidth()

@@ -13,19 +13,18 @@ public class InlineQueryResultGif extends InlineQueryResult
 	
 	private String caption;
 	
-	public InlineQueryResultGif(String id)
+	private String thumb_url;
+	
+	public InlineQueryResultGif(String id, String gif_url, String thumb_url)
 	{
 		super(id);
+		this.gif_url = gif_url;
+		this.thumb_url = thumb_url;
 	}
 
 	public String getGifUrl()
 	{
 		return gif_url;
-	}
-
-	public void setGifUrl(String gif_url)
-	{
-		this.gif_url = gif_url;
 	}
 
 	public int getGifWidth()
@@ -56,6 +55,11 @@ public class InlineQueryResultGif extends InlineQueryResult
 	public void setCaption(String caption)
 	{
 		this.caption = caption;
+	}
+
+	public String getThumb_url() 
+	{
+		return thumb_url;
 	}
 
 	

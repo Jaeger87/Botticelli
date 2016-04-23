@@ -13,9 +13,13 @@ public class InlineQueryResultMpeg4Gif extends InlineQueryResult
 	
 	private String caption;
 	
-	public InlineQueryResultMpeg4Gif(String id)
+	private String thumb_url;
+	
+	public InlineQueryResultMpeg4Gif(String id, String mpeg4_url, String thumb_url)
 	{
 		super(id);
+		this.mpeg4_url = mpeg4_url;
+		this.thumb_url = thumb_url;
 	}
 
 	public String getMpeg4Url()
@@ -23,9 +27,9 @@ public class InlineQueryResultMpeg4Gif extends InlineQueryResult
 		return mpeg4_url;
 	}
 
-	public void setMpeg4Url(String mpeg4_url)
+	public String getThumb_url() 
 	{
-		this.mpeg4_url = mpeg4_url;
+		return thumb_url;
 	}
 
 	public int getMpeg4Width()

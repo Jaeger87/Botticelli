@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.botticelli.bot.request.methods.types.InlineKeyboardMarkup;
-import com.google.gson.Gson;
 
 public class EditMessageReplyMarkupRequest implements Request {
 
@@ -57,8 +56,7 @@ public class EditMessageReplyMarkupRequest implements Request {
 				map.put("chat_id", new Long(chat_id));
 		}
 		map.put("inline_message_id", inline_message_id);
-		Gson gson = new Gson();
-		map.put("reply_markup", gson.toJson(reply_markup));
+		map.put("reply_markup", reply_markup);
 		return map;
 	}
 
