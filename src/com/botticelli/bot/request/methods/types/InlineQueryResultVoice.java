@@ -2,7 +2,7 @@ package com.botticelli.bot.request.methods.types;
 
 public class InlineQueryResultVoice extends InlineQueryResult{
 
-	public final String type = "type"; 
+	public final String type = "voice"; 
 	private String voice_url;
 	private int voice_duration;
 	
