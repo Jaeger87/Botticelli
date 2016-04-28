@@ -539,7 +539,7 @@ public class RequestMaker
 		ResultWithDescription ok = new ResultWithDescription();
 		try
 		{
-			ok = gson.fromJson(json, Result.class);
+			ok = gson.fromJson(json, ResultWithDescription.class);
 		}
 		
 		catch(JsonSyntaxException e)
