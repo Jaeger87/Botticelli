@@ -60,7 +60,7 @@ public class EditMessageTextRequest extends EditMessageReplyMarkupRequest{
 	@Override
 	public Map<String, Object> getValuesMap() 
 	{
-		Map <String, Object> map = new HashMap<String, Object>();
+		Map <String, Object> map = super.getValuesMap();
 		
 		map.put("text", text);
 		map.put("parse_mode", parse_mode);
