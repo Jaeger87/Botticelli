@@ -1,6 +1,5 @@
 package com.botticelli.bot.request.methods;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.botticelli.bot.request.methods.types.ParseMode;

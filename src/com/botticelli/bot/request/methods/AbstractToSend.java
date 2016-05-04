@@ -11,6 +11,7 @@ public abstract class AbstractToSend implements Request{
 
 	private long chat_id;
 	private String channelusername;
+	public final static String at = "@";
 	
 	public AbstractToSend(long chat_id)
 	{
@@ -19,6 +20,8 @@ public abstract class AbstractToSend implements Request{
 	
 	public AbstractToSend(String channelusername)
 	{
+		if(!channelusername.startsWith(at))
+			channelusername = at + channelusername;
 		this.channelusername = channelusername;
 	}
 	

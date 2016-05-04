@@ -13,7 +13,7 @@ public class EditMessageReplyMarkupRequest implements Request {
 	private boolean wasBuiltWithMessage_id;
 	private String inline_message_id;
 	private InlineKeyboardMarkup reply_markup;
-
+	
 	public EditMessageReplyMarkupRequest(long chat_id, int message_id) 
 	{
 		this.chat_id = chat_id;
@@ -22,6 +22,8 @@ public class EditMessageReplyMarkupRequest implements Request {
 
 	public EditMessageReplyMarkupRequest(String channelusername, int message_id) 
 	{
+		if(!channelusername.startsWith(AbstractToSend.at))
+			channelusername = AbstractToSend.at + channelusername;
 		this.channelusername = channelusername;
 		this.message_id = message_id;
 	}
