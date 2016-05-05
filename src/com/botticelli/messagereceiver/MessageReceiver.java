@@ -72,6 +72,12 @@ public class MessageReceiver {
 		ur.setTimeout(3);
 	}
 	
+	
+	public void ignoreOldMessages()
+	{
+		this.ur.setOffset(-1);
+	}
+	
 	/**
 	 * In this method there is a while (true) loop cycle on which every amount of milliseconds
 	 * updates are downloaded and worked.
