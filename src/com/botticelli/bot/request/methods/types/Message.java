@@ -20,6 +20,8 @@ public class Message {
 	
 	private User forward_from;
 	
+	private Chat forward_from_chat;
+	
 	private int forward_date;
 	
 	private Message reply_to_message;
@@ -140,7 +142,16 @@ public class Message {
 		this.forward_from = forward_from;
 	}
 	
-	
+	public Chat getForward_from_chat() 
+	{
+		return forward_from_chat;
+	}
+
+	public void setForward_from_chat(Chat forward_from_chat) 
+	{
+		this.forward_from_chat = forward_from_chat;
+	}
+
 	/**
 	 * Optional. For forwarded messages, date the original message was sent in Unix time
 	 * @return

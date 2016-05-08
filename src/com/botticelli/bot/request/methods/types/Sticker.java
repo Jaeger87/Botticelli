@@ -7,7 +7,8 @@ package com.botticelli.bot.request.methods.types;
 public class Sticker extends PhotoSize{
 	
 	private PhotoSize thumb;
-
+	private String emoji;
+	
 	/**
 	 * Optional. Sticker thumbnail in .webp or .jpg format
 	 * @return
@@ -24,4 +25,16 @@ public class Sticker extends PhotoSize{
 	{
 		this.thumb = thumb;
 	}
+
+	public String getEmoji() 
+	{
+		return emoji;
+	}
+
+	public void setEmoji(String emoji) 
+	{
+		this.emoji = emoji;
+	}
+	
+	
 }
