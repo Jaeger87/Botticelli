@@ -2,6 +2,7 @@ package com.botticelli.bot.request.methods;
 
 import java.util.Map;
 
+import com.botticelli.bot.request.methods.types.Keyboard;
 import com.botticelli.bot.request.methods.types.ReplyKeyboard;
 /**
  * Represent a common request with parameters to manage if your message is a reply to an other message
@@ -11,7 +12,7 @@ import com.botticelli.bot.request.methods.types.ReplyKeyboard;
 public abstract class AbstractReplyManageToSend extends AbstractToSend{
 
 	private Integer reply_to_message_id;
-	private ReplyKeyboard reply_markup;
+	private Keyboard reply_markup;
 	private boolean disable_notification;
 	
 	public AbstractReplyManageToSend(long chat_id) 
@@ -38,7 +39,7 @@ public abstract class AbstractReplyManageToSend extends AbstractToSend{
 	 * instructions to hide keyboard or to force a reply from the user.
 	 * @param reply_markup
 	 */
-	public void setReplyMarkup(ReplyKeyboard reply_markup)
+	public void setReplyMarkup(Keyboard reply_markup)
 	{
 		this.reply_markup = reply_markup;
 	}
@@ -57,7 +58,7 @@ public abstract class AbstractReplyManageToSend extends AbstractToSend{
 	 * instructions to hide keyboard or to force a reply from the user.
 	 * @return
 	 */
-	public ReplyKeyboard getReplyMarkup()
+	public Keyboard getReplyMarkup()
 	{
 		return reply_markup;
 	}

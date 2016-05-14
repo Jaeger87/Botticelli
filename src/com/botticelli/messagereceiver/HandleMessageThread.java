@@ -29,7 +29,7 @@ public class HandleMessageThread implements Runnable
 		if(update.isCheckInlineResultUpdate())
 			bot.chose_inline_result(update.getChosenInlineResult());
 		if(update.isCallbackUpdate())
-			update.getCallback_query();
+			bot.callback_query(update.getCallback_query());
 	}
 
 }

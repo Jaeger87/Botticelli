@@ -1,6 +1,6 @@
 package com.botticelli.bot.request.methods.types;
 
-public abstract class ReplyKeyboard {
+public abstract class ReplyKeyboard implements Keyboard{
 	
 	private boolean selective;
 

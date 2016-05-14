@@ -2,7 +2,7 @@ package com.botticelli.bot.request.methods.types;
 
 import java.util.List;
 
-public class InlineKeyboardMarkup {
+public class InlineKeyboardMarkup implements Keyboard{
 	
 	private List<List<InlineKeyboardButton>> inline_keyboard;
 	
