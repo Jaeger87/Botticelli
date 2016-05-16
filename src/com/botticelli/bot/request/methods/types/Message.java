@@ -20,7 +20,7 @@ public class Message {
 	
 	private User forward_from;
 	
-	private Chat forward_from_chat;
+	private User forward_from_chat;
 	
 	private int forward_date;
 	
@@ -147,7 +147,7 @@ public class Message {
 		return forward_from_chat;
 	}
 
-	public void setForward_from_chat(Chat forward_from_chat) 
+	public void setForward_from_chat(User forward_from_chat) 
 	{
 		this.forward_from_chat = forward_from_chat;
 	}
