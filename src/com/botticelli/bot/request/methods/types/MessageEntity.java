@@ -2,17 +2,17 @@ package com.botticelli.bot.request.methods.types;
 
 public class MessageEntity {
 	
-	private String type;
+	private MessageEntityType type;
 	private int offset;
 	private int length;
 	private String url;
 	
 	/**
-	 * Get the type of the entity. One of mention (@username), hashtag, bot_command, url, email, bold (bold text),
-	 * italic (italic text), code (monowidth string), pre (monowidth block), text_link (for clickable text URLs)
+	 *  Type of the entity. Can be mention (@username), hashtag, bot_command, url, email, bold (bold text), italic (italic text), 
+	 *  code (monowidth string), pre (monowidth block), text_link (for clickable text URLs), text_mention (for users without usernames)
 	 * @return
 	 */
-	public String getType() 
+	public MessageEntityType getType() 
 	{
 		return type;
 	}
@@ -21,7 +21,7 @@ public class MessageEntity {
 	 * Set the type of the entity
 	 * @param type
 	 */
-	public void setType(String type) 
+	public void setType(MessageEntityType type) 
 	{
 		this.type = type;
 	}
@@ -30,7 +30,8 @@ public class MessageEntity {
 	 * Get the offset in UTF-16 code units to the start of the entity
 	 * @return
 	 */
-	public int getOffset() {
+	public int getOffset() 
+	{
 		return offset;
 	}
 	

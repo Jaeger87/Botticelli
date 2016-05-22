@@ -62,7 +62,6 @@ import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
-import com.botticelli.bot.request.methods.types.Result;
 import com.botticelli.bot.request.methods.types.ResultFile;
 import com.botticelli.bot.request.methods.types.ResultMessage;
 import com.botticelli.bot.request.methods.types.ResultUpdate;
