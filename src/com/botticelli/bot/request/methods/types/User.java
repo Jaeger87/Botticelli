@@ -5,16 +5,38 @@ package com.botticelli.bot.request.methods.types;
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public class User extends Chat{
+public class User{
 
+	private long id;
+	
 	private String first_name;
 	
 	private String last_name;
 	
 	private String username;
 	
-	private String title; //Da spiegare
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public long getId() 
+	{
+		return id;
+	}
+
+
+	/**
+	 * 
+	 * @param id
+	 */
+	public void setId(long id) 
+	{
+		this.id = id;
+	}
+
+
 	/**
 	 * User‘s or bot’s first name
 	 * @return
@@ -74,14 +96,10 @@ public class User extends Chat{
 	}
 	
 	
-	@Override
+	@Deprecated
 	public boolean isGroupChat() 
 	{
 		return false;
 	}
 	
-	protected String getTitle()
-	{
-		return title;
-	}
 }

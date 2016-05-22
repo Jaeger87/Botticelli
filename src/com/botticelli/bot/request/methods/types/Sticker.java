@@ -26,11 +26,19 @@ public class Sticker extends PhotoSize{
 		this.thumb = thumb;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getEmoji() 
 	{
 		return emoji;
 	}
 
+	/**
+	 * 
+	 * @param emoji
+	 */
 	public void setEmoji(String emoji) 
 	{
 		this.emoji = emoji;

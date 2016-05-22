@@ -19,6 +19,11 @@ public class Constants {
 	public static final String GETUPDATES ="/getUpdates";
 	public static final String SETWEBHOOK ="/setWebhook";
 	public static final String GETFILE ="/getFile";
+	public static final String GETCHAT ="/getChat";
+	public static final String GETCHATADMINISTRATORS ="/getChatAdministrators"; 
+	public static final String GETCHATMEMBERSCOUNT ="/getChatMembersCount";
+	public static final String GETCHATMEMBER ="/getChatMember";
+	public static final String LEAVECHAT ="/leaveChat";
 	public static final String SENDVENUE ="/sendVenue";
 	public static final String SENDCONTACT ="/sendContact";
 	public static final String KICKCHATMEMBER ="/kickChatMember";

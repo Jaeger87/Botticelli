@@ -11,6 +11,8 @@ public class Update {
 	
 	private Message message;
 	
+	private Message edited_message;
+	
 	private InlineQuery inline_query;
 	
 	private ChosenInlineResult chosen_inline_result;
@@ -59,6 +61,16 @@ public class Update {
 		return message != null;
 	}
 	
+	public boolean isEditedMessageUpdate()
+	{
+		return edited_message != null;
+	}
+	
+	public Message getEdited_message() 
+	{
+		return edited_message;
+	}
+
 	/**
 	 * Check if the update contains a chosen inline result, remember any update contains a message OR an inline query OR a chosen inline result.
 	 * @return

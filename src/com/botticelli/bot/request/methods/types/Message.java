@@ -16,11 +16,13 @@ public class Message {
 	
 	private int date;
 	
-	private User chat;
+	private int edit_date;
+	
+	private Chat chat;
 	
 	private User forward_from;
 	
-	private User forward_from_chat;
+	private Chat forward_from_chat;
 	
 	private int forward_date;
 	
@@ -122,8 +124,26 @@ public class Message {
 	public void setDate(int date)
 	{
 		this.date = date;
-	}
+	}	
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getEdit_date() 
+	{
+		return edit_date;
+	}
+
+	/**
+	 * 
+	 * @param edit_date
+	 */
+	public void setEdit_date(int edit_date) 
+	{
+		this.edit_date = edit_date;
+	}
+
 	/**
 	 * Optional. For forwarded messages, sender of the original message
 	 * @return
@@ -147,7 +167,7 @@ public class Message {
 		return forward_from_chat;
 	}
 
-	public void setForward_from_chat(User forward_from_chat) 
+	public void setForward_from_chat(Chat forward_from_chat) 
 	{
 		this.forward_from_chat = forward_from_chat;
 	}
@@ -523,10 +543,7 @@ public class Message {
 	 */
 	public Chat getChat()
 	{
-		if(chat.getTitle() == null)
-			return (Chat)chat;
-		GroupChat gc = new GroupChat(chat.getTitle(), chat.getId());
-		return (Chat)gc;
+		return chat;
 	}
 	
 	/**
@@ -535,7 +552,7 @@ public class Message {
 	 */
 	public void setChat(Chat chat)
 	{
-		this.chat = (User)chat;
+		this.chat = chat;
 	}
 	
 	/**
@@ -603,7 +620,8 @@ public class Message {
 	 * Set special entities like usernames, URLs, bot commands, etc. that appear in the text
 	 * @param entities
 	 */
-	public void setEntities(List<MessageEntity> entities) {
+	public void setEntities(List<MessageEntity> entities) 
+	{
 		this.entities = entities;
 	}
 

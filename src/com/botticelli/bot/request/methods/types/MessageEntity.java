@@ -6,6 +6,7 @@ public class MessageEntity {
 	private int offset;
 	private int length;
 	private String url;
+	private User user;
 	
 	/**
 	 *  Type of the entity. Can be mention (@username), hashtag, bot_command, url, email, bold (bold text), italic (italic text), 
@@ -78,6 +79,24 @@ public class MessageEntity {
 	public void setUrl(String url) 
 	{
 		this.url = url;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public User getUser() 
+	{
+		return user;
+	}
+
+	/**
+	 * 
+	 * @param user
+	 */
+	public void setUser(User user) 
+	{
+		this.user = user;
 	}
 	
 	

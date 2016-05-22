@@ -34,6 +34,7 @@ import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
+import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
@@ -59,9 +60,11 @@ import com.botticelli.bot.request.methods.VideoFileToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
+import com.botticelli.bot.request.methods.types.Chat;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
+import com.botticelli.bot.request.methods.types.ResultChat;
 import com.botticelli.bot.request.methods.types.ResultFile;
 import com.botticelli.bot.request.methods.types.ResultMessage;
 import com.botticelli.bot.request.methods.types.ResultUpdate;
@@ -87,6 +90,11 @@ public class RequestMaker
 	private String urlSendContact;
 	private String urlAnswerInlineQuery;
 	private String urlAnswerCallbackQuery;
+	private String urlLeaveChat;;
+	private String urlGetChat;
+	private String urlGetChatAdministrators;
+	private String urlGetMembersCount;
+	private String urlGetMember;
 	private String urlKickChatMember;
 	private String urlUnbanChatMember;
 	private String urlEditMessageText;
@@ -120,6 +128,11 @@ public class RequestMaker
 		urlGetUserProfilePhotos = Constants.APIURL + token + Constants.GETUSERPROFILEPHOTOS;
 		urlSendVenue = Constants.APIURL + token + Constants.SENDVENUE;
 		urlSendContact = Constants.APIURL + token + Constants.SENDCONTACT;
+		urlLeaveChat = Constants.APIURL + token + Constants.LEAVECHAT;
+		urlGetChat = Constants.APIURL + token + Constants.GETCHAT;
+		urlGetChatAdministrators = Constants.APIURL + token + Constants.GETCHATADMINISTRATORS;
+		urlGetMembersCount = Constants.APIURL + token + Constants.GETCHATMEMBERSCOUNT;
+		urlGetMember = Constants.APIURL + token + Constants.GETCHATMEMBER;
 		urlKickChatMember = Constants.APIURL + token + Constants.KICKCHATMEMBER;
 		urlUnbanChatMember = Constants.APIURL + token + Constants.UNBANCHATMEMBER;
 		urlEditMessageText = Constants.APIURL + token + Constants.EDITMESSAGETEXT;
@@ -434,6 +447,22 @@ public class RequestMaker
 	
 	/**
 	 * 
+	 * @param kmr
+	 * @return
+	 */
+	public boolean leaveChat(ChatRequests crs)
+	{
+		return buildResult(makeRequest(urlLeaveChat, crs)).getOk();
+	}
+	
+	
+	public Chat getChat(ChatRequests crs)
+	{
+		return buildResultChat(makeRequest(urlGetChat, crs)).getResult();
+	}
+	
+	/**
+	 * 
 	 * @param umr
 	 * @return
 	 */
@@ -533,6 +562,25 @@ public class RequestMaker
 		return null;
 	}
 
+	
+	private ResultChat buildResultChat(String json)
+	{
+		ResultChat result = new ResultChat();
+		try
+		{
+			result = gson.fromJson(json, ResultChat.class);
+		}
+		
+		catch(JsonSyntaxException e)
+		{
+			errorLogger.log(Level.SEVERE, json, e);
+		}
+		if(result == null)
+			return new ResultChat();
+		return result;
+		
+	}
+	
 	private ResultWithDescription buildResult(String json)
 	{
 		ResultWithDescription ok = new ResultWithDescription();

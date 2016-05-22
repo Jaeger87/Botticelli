@@ -5,18 +5,12 @@ package com.botticelli.bot.request.methods.types;
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public abstract class Chat {
+public class Chat extends User{
 
-	private long id;
+	
 	private String type;
-	/**
-	 * Unique identifier for this Chat
-	 * @return
-	 */
-	public long getId()
-	{
-		return id;
-	}
+	private String title;
+
 	
 	/**
 	 * Type of chat, can be either “private”, “group”, “supergroup” or “channel”
@@ -36,13 +30,23 @@ public abstract class Chat {
 		this.type = type;
 	}
 	/**
-	 * Set the Id chat
-	 * @param id
+	 * 
+	 * @return
 	 */
-	public void setID(long id)
+	public String getTitle() 
 	{
-		this.id = id;
+		return title;
+	}
+
+	/**
+	 * 
+	 * @param title
+	 */
+	public void setTitle(String title) 
+	{
+		this.title = title;
 	}
 	
-	public abstract boolean isGroupChat();
+	
+
 }
