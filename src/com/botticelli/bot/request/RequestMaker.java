@@ -472,6 +472,11 @@ public class RequestMaker
 		return buildResultChat(makeRequest(urlGetChat, crs)).getResult();
 	}
 	
+	public int getMembersCount(ChatRequests crs)
+	{
+		return buildResultGeneric(makeRequest(urlGetMembersCount, crs), intResult, Integer.class).getResult();
+	}
+	
 	/**
 	 * 
 	 * @param umr
@@ -574,10 +579,27 @@ public class RequestMaker
 	}
 
 	
-	private <T> T buildResultGeneric(String json, Type type)
+	private <T> GenericResult<T> buildResultGeneric(String json, Type type, Class<T> classOfT)
 	{
 		GenericResult<T> result = new GenericResult<>();
-		return result.getResult();
+		try
+		{
+			result = gson.fromJson(json, type);
+		}
+		
+		catch(JsonSyntaxException e)
+		{
+			errorLogger.log(Level.SEVERE, json, e);
+		}
+		
+		catch(Exception e)
+		{
+			errorLogger.log(Level.SEVERE, json, e);
+		}
+		
+		if(result == null)
+			return new GenericResult<T>();
+		return result;
 	}
 	
 	

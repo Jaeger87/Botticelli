@@ -10,6 +10,7 @@ import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
+import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
@@ -347,6 +348,14 @@ public abstract class Bot {
 		if(acq == null)
 			return false;
 		return rm.answerCallbackQuery(acq);
+	}
+	
+	
+	public final int getMembersCount(ChatRequests crs)
+	{
+		if(crs == null)
+			return -1;
+		return rm.getMembersCount(crs);
 	}
 	
 	/**
