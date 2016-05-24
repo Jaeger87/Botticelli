@@ -112,7 +112,9 @@ public class RequestMaker
 	
 	
 	private Type intResult;
-	
+	private Type chatResult;
+	private Type booleanResult;
+	private Type messageResult;
 	private final static Logger errorLogger = Logger.getLogger("errors");
 
 	private Gson gson;
