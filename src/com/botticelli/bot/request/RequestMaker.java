@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.lang.reflect.Type;
+
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
@@ -62,6 +64,7 @@ import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.Chat;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
+import com.botticelli.bot.request.methods.types.GenericResult;
 import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.ResultChat;
@@ -74,6 +77,7 @@ import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 public class RequestMaker
 {
@@ -105,6 +109,9 @@ public class RequestMaker
 	private String urlGetUserProfilePhotos;
 	private String urlGetFile;
 	private String urlDownloadFile;
+	
+	
+	private Type intResult;
 	
 	private final static Logger errorLogger = Logger.getLogger("errors");
 
@@ -142,6 +149,10 @@ public class RequestMaker
 		urlAnswerCallbackQuery = Constants.APIURL + token + Constants.ANSWERCALLBACKQUERY;
 		urlGetFile = Constants.APIURL + token + Constants.GETFILE;
 		urlDownloadFile = Constants.APIFILEURL + token + '/';
+		
+		
+		intResult = new TypeToken<GenericResult<Integer>>() {
+        }.getType();
 	}
 
 	/**
@@ -559,9 +570,16 @@ public class RequestMaker
 		}
 		if (rfile != null)
 			return rfile.getResult();
-		return null;
+		return new ResultFile();
 	}
 
+	
+	private <T> T buildResultGeneric(String json, Type type)
+	{
+		GenericResult<T> result = new GenericResult<>();
+		return result.getResult();
+	}
+	
 	
 	private ResultChat buildResultChat(String json)
 	{
