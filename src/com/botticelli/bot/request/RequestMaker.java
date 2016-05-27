@@ -64,10 +64,9 @@ import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.Chat;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
-import com.botticelli.bot.request.methods.types.GenericResult;
+import com.botticelli.bot.request.methods.types.Result;
 import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
-import com.botticelli.bot.request.methods.types.ResultUpdate;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
 import com.google.gson.Gson;
@@ -152,19 +151,19 @@ public class RequestMaker
 		urlDownloadFile = Constants.APIFILEURL + token + '/';
 		
 		
-		intResult = new TypeToken<GenericResult<Integer>>() {
+		intResult = new TypeToken<Result<Integer>>() {
         }.getType();
-        booleanResult = new TypeToken<GenericResult<Boolean>>() {
+        booleanResult = new TypeToken<Result<Boolean>>() {
         }.getType();
-        chatResult = new TypeToken<GenericResult<Chat>>() {
+        chatResult = new TypeToken<Result<Chat>>() {
         }.getType();
-        messageResult = new TypeToken<GenericResult<Message>>() {
+        messageResult = new TypeToken<Result<Message>>() {
         }.getType();
-        userProfilePhotosResult = new TypeToken<GenericResult<UserProfilePhotos>>() {
+        userProfilePhotosResult = new TypeToken<Result<UserProfilePhotos>>() {
         }.getType();
-        downlodableFileResult = new TypeToken<GenericResult<DownlodableFile>>() {
+        downlodableFileResult = new TypeToken<Result<DownlodableFile>>() {
         }.getType();
-        listUpdateResult = new TypeToken<GenericResult<List<Update>>>() {
+        listUpdateResult = new TypeToken<Result<List<Update>>>() {
         }.getType();
         
 	}
@@ -189,20 +188,7 @@ public class RequestMaker
 	public List<Update> getUpdates(UpdateRequest upr)
 	{
 		String json = makeRequest(urlGetUpdates, upr);
-	//	return buildResultGeneric(json, listUpdateResult, List<Update>.class);
-		
-		ResultUpdate ru = new ResultUpdate();
-		try
-		{
-			ru = gson.fromJson(json, ResultUpdate.class);
-		} catch (JsonSyntaxException e)
-		{
-			errorLogger.log(Level.SEVERE, json, e);
-			return new ArrayList<Update>();
-		}
-		if (ru != null)
-			return ru.getResult();
-		return new ArrayList<Update>();
+		return buildResult(json, listUpdateResult, new Result<List<Update>>()).getResult();
 	}
 
 	/**
@@ -215,7 +201,7 @@ public class RequestMaker
 	public Message sendMessage(MessageToSend mts)
 	{
 		String json = makeRequest(urlSendMessage, mts);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -228,7 +214,7 @@ public class RequestMaker
 	public Message forwardMessage(ForwardMessageToSend fts)
 	{
 		String json = makeRequest(urlForwardMessage, fts);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -241,7 +227,7 @@ public class RequestMaker
 	public Message sendPhotobyReference(PhotoReferenceToSend prs)
 	{
 		String json = makeRequest(urlSendPhoto, prs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -254,7 +240,7 @@ public class RequestMaker
 	public Message sendPhotoFile(PhotoFileToSend pfs)
 	{
 		String json = makeRequestFile(urlSendPhoto, pfs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -267,7 +253,7 @@ public class RequestMaker
 	public Message sendAudiobyReference(AudioReferenceToSend ars)
 	{
 		String json = makeRequest(urlSendAudio, ars);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -284,7 +270,7 @@ public class RequestMaker
 	public Message sendAudioFile(AudioFileToSend afs)
 	{
 		String json = makeRequestFile(urlSendAudio, afs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -297,7 +283,7 @@ public class RequestMaker
 	public Message sendDocumentbyReference(DocumentReferenceToSend drs)
 	{
 		String json = makeRequest(urlSendDocument, drs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -311,7 +297,7 @@ public class RequestMaker
 	public Message sendDocumentFile(DocumentFileToSend dfs)
 	{
 		String json = makeRequestFile(urlSendDocument, dfs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -324,7 +310,7 @@ public class RequestMaker
 	public Message sendStickerbyReference(StickerReferenceToSend srs)
 	{
 		String json = makeRequest(urlSendSticker, srs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -337,7 +323,7 @@ public class RequestMaker
 	public Message sendStickerFile(StickerFileToSend sfs)
 	{
 		String json = makeRequestFile(urlSendSticker, sfs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -350,7 +336,7 @@ public class RequestMaker
 	public Message sendVideobyReference(VideoReferenceToSend vrs)
 	{
 		String json = makeRequest(urlSendVideo, vrs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -365,7 +351,7 @@ public class RequestMaker
 	public Message sendVideoFile(VideoFileToSend vfs)
 	{
 		String json = makeRequestFile(urlSendVideo, vfs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -376,7 +362,7 @@ public class RequestMaker
 	public Message sendVoicebyReference(VoiceReferenceToSend vrs)
 	{
 		String json = makeRequest(urlSendVoice, vrs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -387,7 +373,7 @@ public class RequestMaker
 	public Message sendVoiceFile(VoiceFileToSend vfs)
 	{
 		String json = makeRequestFile(urlSendVoice, vfs);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -399,7 +385,7 @@ public class RequestMaker
 	public Message sendVenue(VenueToSend vts)
 	{
 		String json = makeRequest(urlSendVenue, vts);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 	
 	/**
@@ -411,7 +397,7 @@ public class RequestMaker
 	public Message sendContact(ContactToSend cts)
 	{
 		String json = makeRequest(urlSendContact, cts);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 	
 	/**
@@ -424,7 +410,7 @@ public class RequestMaker
 	public Message sendLocation(LocationToSend lts)
 	{
 		String json = makeRequest(urlSendLocation, lts);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	/**
@@ -452,7 +438,7 @@ public class RequestMaker
 	 */
 	public boolean kickChatMember(KickChatMemberRequest kmr)
 	{
-		return buildResultGeneric(makeRequest(urlKickChatMember, kmr), booleanResult, Boolean.class).getOk();
+		return buildResult(makeRequest(urlKickChatMember, kmr), booleanResult, new Result<Boolean>()).getOk();
 	}
 	
 	/**
@@ -462,18 +448,18 @@ public class RequestMaker
 	 */
 	public boolean leaveChat(ChatRequests crs)
 	{
-		return buildResultGeneric(makeRequest(urlLeaveChat, crs), booleanResult, Boolean.class).getOk();
+		return buildResult(makeRequest(urlLeaveChat, crs), booleanResult, new Result<Boolean>()).getOk();
 	}
 	
 	
 	public Chat getChat(ChatRequests crs)
 	{
-		return buildResultGeneric(makeRequest(urlGetChat, crs), chatResult, Chat.class).getResult();
+		return buildResult(makeRequest(urlGetChat, crs), chatResult, new Result<Chat>()).getResult();
 	}
 	
 	public int getMembersCount(ChatRequests crs)
 	{
-		return buildResultGeneric(makeRequest(urlGetMembersCount, crs), intResult, Integer.class).getResult();
+		return buildResult(makeRequest(urlGetMembersCount, crs), intResult, new Result<Integer>()).getResult();
 	}
 	
 	/**
@@ -483,7 +469,7 @@ public class RequestMaker
 	 */
 	public boolean unbanChatMember(UnbanChatMemberRequest umr)
 	{
-		return buildResultGeneric(makeRequest(urlUnbanChatMember, umr), booleanResult, Boolean.class).getOk();
+		return buildResult(makeRequest(urlUnbanChatMember, umr), booleanResult, new Result<Boolean>()).getOk();
 	}
 	/**
 	 * 
@@ -493,7 +479,7 @@ public class RequestMaker
 	public Message editMessageText(EditMessageTextRequest emt)
 	{
 		String json = makeRequest(urlEditMessageText, emt);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 	/**
 	 * 
@@ -503,7 +489,7 @@ public class RequestMaker
 	public Message editMessageCaption(EditMessageCaptionRequest emc)
 	{
 		String json = makeRequest(urlEditMessageCaption, emc);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 	/**
 	 * 
@@ -513,7 +499,7 @@ public class RequestMaker
 	public Message editMessageReplyMarkup(EditMessageReplyMarkupRequest emr)
 	{
 		String json = makeRequest(urlEditMessageReplyMarkup, emr);
-		return buildResultGeneric(json, messageResult, Message.class).getResult();
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 	
 	/**
@@ -523,7 +509,7 @@ public class RequestMaker
 	 */
 	public boolean answerInlineQuery(AnswerInlineQueryRequest aiq)
 	{
-        return buildResultGeneric(makeRequest(urlAnswerInlineQuery, aiq), booleanResult, Boolean.class).getOk();
+        return buildResult(makeRequest(urlAnswerInlineQuery, aiq), booleanResult, new Result<Boolean>()).getOk();
 	}
 	
 	/**
@@ -533,7 +519,7 @@ public class RequestMaker
 	 */
 	public boolean answerCallbackQuery(AnswerCallbackQueryToSend acq)
 	{
-        return buildResultGeneric(makeRequest(urlAnswerCallbackQuery, acq), booleanResult, Boolean.class).getOk();
+        return buildResult(makeRequest(urlAnswerCallbackQuery, acq), booleanResult, new Result<Boolean>()).getOk();
 	}
 	
 	/**
@@ -546,19 +532,19 @@ public class RequestMaker
 	public UserProfilePhotos getUserProfilePhotos(UserProfilePhotosRequest upr)
 	{
 		String json = makeRequest(urlGetUserProfilePhotos, upr);
-		return buildResultGeneric(json, userProfilePhotosResult, UserProfilePhotos.class).getResult();
+		return buildResult(json, userProfilePhotosResult, new Result<UserProfilePhotos>()).getResult();
 	}
 
 	public DownlodableFile getFile(GetFile gf)
 	{
 		String json = makeRequest(urlGetFile, gf);
-		return buildResultGeneric(json, downlodableFileResult, DownlodableFile.class).getResult();
+		return buildResult(json, downlodableFileResult, new Result<DownlodableFile>()).getResult();
 	}
-
 	
-	private <T> GenericResult<T> buildResultGeneric(String json, Type type, Class<T> classOfT)
+	
+	private <T> Result<T> buildResult(String json, Type type, Result<T> source)
 	{
-		GenericResult<T> result = new GenericResult<>();
+		Result<T> result = new Result<>();
 		try
 		{
 			result = gson.fromJson(json, type);
@@ -575,7 +561,7 @@ public class RequestMaker
 		}
 		
 		if(result == null)
-			return new GenericResult<T>();
+			return source;
 		return result;
 	}
 	
