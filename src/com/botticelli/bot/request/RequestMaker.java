@@ -36,6 +36,7 @@ import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
+import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
@@ -63,6 +64,7 @@ import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.Chat;
+import com.botticelli.bot.request.methods.types.ChatMember;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.Result;
 import com.botticelli.bot.request.methods.types.GsonOwner;
@@ -112,6 +114,9 @@ public class RequestMaker
 	private Type userProfilePhotosResult;
 	private Type downlodableFileResult;
 	private Type listUpdateResult;
+	private Type listChatMembersResult;
+	private Type chatMembersResult;
+	
 	
 	private final static Logger errorLogger = Logger.getLogger("errors");
 
@@ -165,7 +170,10 @@ public class RequestMaker
         }.getType();
         listUpdateResult = new TypeToken<Result<List<Update>>>() {
         }.getType();
-        
+        listChatMembersResult = new TypeToken<Result<List<ChatMember>>>() {
+        }.getType();
+        chatMembersResult = new TypeToken<Result<ChatMember>>() {
+        }.getType();
 	}
 
 	/**
@@ -451,16 +459,36 @@ public class RequestMaker
 		return buildResult(makeRequest(urlLeaveChat, crs), booleanResult, new Result<Boolean>()).getOk();
 	}
 	
-	
+	/**
+	 * 
+	 * @param crs
+	 * @return
+	 */
 	public Chat getChat(ChatRequests crs)
 	{
 		return buildResult(makeRequest(urlGetChat, crs), chatResult, new Result<Chat>()).getResult();
 	}
-	
-	public int getMembersCount(ChatRequests crs)
+	/**
+	 * 
+	 * @param crs
+	 * @return
+	 */
+	public int getChatMembersCount(ChatRequests crs)
 	{
 		return buildResult(makeRequest(urlGetMembersCount, crs), intResult, new Result<Integer>()).getResult();
 	}
+	
+	
+	public List<ChatMember> getChatAdministrators(ChatRequests crs)
+	{
+		return buildResult(makeRequest(urlGetChatAdministrators, crs), listChatMembersResult, new Result<List<ChatMember>>()).getResult();
+	}
+	
+	public ChatMember getChatMember(ChatMemberRequest cmr)
+	{
+		return buildResult(makeRequest(urlGetMember, cmr), chatMembersResult, new Result<ChatMember>()).getResult();
+	}
+	
 	
 	/**
 	 * 
