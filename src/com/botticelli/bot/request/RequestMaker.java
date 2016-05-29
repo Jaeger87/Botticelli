@@ -572,7 +572,7 @@ public class RequestMaker
 	
 	private <T> Result<T> buildResult(String json, Type type, Result<T> source)
 	{
-		Result<T> result = new Result<>();
+		Result<T> result = source;
 		try
 		{
 			result = gson.fromJson(json, type);

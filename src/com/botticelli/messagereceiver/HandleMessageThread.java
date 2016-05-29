@@ -12,11 +12,13 @@ public class HandleMessageThread implements Runnable
 	
 	private Bot bot;
 	private Update update;
+	private boolean ignoreEditedMessages;
 	
-	public HandleMessageThread(Bot bot, Update u) 
+	public HandleMessageThread(Bot bot, Update u, boolean ignoreEditedMessages) 
 	{
 		this.update = u;
 		this.bot = bot;
+		this.ignoreEditedMessages = ignoreEditedMessages;
 	}
 	
 	@Override
@@ -30,6 +32,8 @@ public class HandleMessageThread implements Runnable
 			bot.chose_inline_result(update.getChosenInlineResult());
 		if(update.isCallbackUpdate())
 			bot.callback_query(update.getCallback_query());
+		if(!ignoreEditedMessages && update.isEditedMessageUpdate())
+			bot.manageMessage(update.getEdited_message());
 	}
 
 }
