@@ -29,6 +29,7 @@ public class MessageReceiver {
 	private int millis;
 	private ExecutorService pool;
 	private boolean stop = false;
+	private boolean ignoreEditedMessages = false;
 	/**
 	 * 
 	 * @param bot  Your bot.
@@ -78,6 +79,11 @@ public class MessageReceiver {
 		this.ur.setOffset(-1);
 	}
 	
+	public void ignoreEditedMessages()
+	{
+		ignoreEditedMessages = true;
+	}
+	
 	/**
 	 * In this method there is a while (true) loop cycle on which every amount of milliseconds
 	 * updates are downloaded and worked.
@@ -92,7 +98,7 @@ public class MessageReceiver {
 				{
 					ur.setOffset(u.getUpdateID() + 1);
 		
-					HandleMessageThread hmt = new HandleMessageThread(bot, u);
+					HandleMessageThread hmt = new HandleMessageThread(bot, u, ignoreEditedMessages);
 					if(hmt != null)
 					    pool.submit(hmt);
 				}

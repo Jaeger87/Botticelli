@@ -10,6 +10,7 @@ import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
+import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
@@ -34,6 +35,8 @@ import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.CallbackQuery;
+import com.botticelli.bot.request.methods.types.Chat;
+import com.botticelli.bot.request.methods.types.ChatMember;
 import com.botticelli.bot.request.methods.types.ChosenInlineResult;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
 import com.botticelli.bot.request.methods.types.InlineQuery;
@@ -350,12 +353,60 @@ public abstract class Bot {
 		return rm.answerCallbackQuery(acq);
 	}
 	
-	
-	public final int getMembersCount(ChatRequests crs)
+	/**
+	 * 
+	 * @param crs
+	 * @return
+	 */
+	public final int getChatMembersCount(ChatRequests crs)
 	{
 		if(crs == null)
 			return -1;
-		return rm.getMembersCount(crs);
+		return rm.getChatMembersCount(crs);
+	}
+	
+	/**
+	 * 
+	 * @param cmr
+	 * @return
+	 */
+	public final ChatMember getChatMember(ChatMemberRequest cmr)
+	{
+		if(cmr == null)
+			return null;
+		return rm.getChatMember(cmr);
+	}
+	
+	/**
+	 * 
+	 * @param crs
+	 * @return
+	 */
+	public final List<ChatMember> getChatAdministrators(ChatRequests crs)
+	{
+		if(crs == null)
+			return null;
+		return rm.getChatAdministrators(crs);
+	}
+	
+	/**
+	 * 
+	 * @param crs
+	 * @return
+	 */
+	public final Chat getChat(ChatRequests crs)
+	{
+		if(crs == null)
+			return null;
+		return rm.getChat(crs);
+	}
+	
+	
+	public boolean leaveChat(ChatRequests crs)
+	{
+		if(crs == null)
+			return false;
+		return rm.leaveChat(crs);
 	}
 	
 	/**
