@@ -31,5 +31,16 @@ public class ReplyKeyboardMarkupWithButtons extends AbstractReplyKeyboardMarkup{
 	     }
 	     return list;
 	}
+
+	@Override
+	public void addLine(String... strings) {
+		ArrayList<KeyboardButton> kbl = new ArrayList<>();
+		for(int i = 0; i < strings.length; i++)
+			kbl.add(new KeyboardButton(strings[i]));
+		keyboard.add(kbl);
+		
+	}
+    
+	
 	
 }

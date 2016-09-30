@@ -1,6 +1,7 @@
 package com.botticelli.bot.request.methods.types;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,6 +49,13 @@ public class ReplyKeyboardMarkup extends AbstractReplyKeyboardMarkup{
 	    	 list.add(k);
 	     }
 	     return list;
+	}
+
+
+	@Override
+	public void addLine(String... strings) 
+	{
+		keyboard.add(Arrays.asList(strings));
 	}
 	
 }

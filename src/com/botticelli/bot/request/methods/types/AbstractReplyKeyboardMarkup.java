@@ -1,6 +1,6 @@
 package com.botticelli.bot.request.methods.types;
 
-public class AbstractReplyKeyboardMarkup extends ReplyKeyboard{
+public abstract class AbstractReplyKeyboardMarkup extends ReplyKeyboard{
 
 	private boolean resize_keyboard;
 
@@ -57,4 +57,5 @@ public class AbstractReplyKeyboardMarkup extends ReplyKeyboard{
 		this.one_time_keyboard = one_time_keyboard;
 	}
 
+	public abstract void addLine(String... strings);
 }
