@@ -7,7 +7,7 @@ public class CallbackQuery {
 	private Message message;
 	private String inline_message_id;
 	private String data;
-	
+	private String game_short_name;
 	
 	public String getId() 
 	{
@@ -57,6 +57,16 @@ public class CallbackQuery {
 	public void setData(String data) 
 	{
 		this.data = data;
+	}
+
+	public String getGame_short_name()
+	{
+		return game_short_name;
+	}
+
+	public void setGame_short_name(String game_short_name) 
+	{
+		this.game_short_name = game_short_name;
 	}
 
 	

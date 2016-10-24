@@ -10,7 +10,7 @@ public class Chat extends User{
 	
 	private String type;
 	private String title;
-
+	private boolean all_members_are_administrators;
 	
 	/**
 	 * Type of chat, can be either “private”, “group”, “supergroup” or “channel”
@@ -45,6 +45,16 @@ public class Chat extends User{
 	public void setTitle(String title) 
 	{
 		this.title = title;
+	}
+
+	public boolean isAll_members_are_administrators() 
+	{
+		return all_members_are_administrators;
+	}
+
+	public void setAll_members_are_administrators(boolean all_members_are_administrators) 
+	{
+		this.all_members_are_administrators = all_members_are_administrators;
 	}
 	
 	

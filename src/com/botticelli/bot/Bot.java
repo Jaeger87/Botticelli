@@ -19,6 +19,7 @@ import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
 import com.botticelli.bot.request.methods.EditMessageReplyMarkupRequest;
 import com.botticelli.bot.request.methods.EditMessageTextRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
+import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
@@ -156,6 +157,18 @@ public abstract class Bot {
 		return rm.sendAudioFile(afs);
 	}
 	
+	
+	/**
+	 * 
+	 * @param gts
+	 * @return
+	 */
+	public final Message sengGame(GameToSend gts)
+	{
+		if(gts == null)
+			return null;
+		return rm.sendGame(gts);
+	}
 	/**
 	 * Use this method to send general files. 
 	 * On success, the sent Message is returned. 
@@ -587,6 +600,12 @@ public abstract class Bot {
 			groupChatCreatedMessage(message);
 			return;
 		}
+		
+		if(message.getGame() != null)
+		{
+			gameMessage(message);
+			return;
+		}
 	}
 	/**
 	 * This method will be called when bot received a text message.
@@ -683,4 +702,9 @@ public abstract class Bot {
      * @param cq
      */
     public abstract void callback_query(CallbackQuery cq);
+    
+    /**
+     * 
+     */
+    public abstract void gameMessage(Message m);
 }

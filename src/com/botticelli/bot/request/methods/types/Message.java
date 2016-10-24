@@ -74,6 +74,8 @@ public class Message {
 	
 	private Message pinned_message;
 	
+	private Game game;
+	
 	/**
 	 * Unique message identifier
 	 * @return
@@ -643,5 +645,25 @@ public class Message {
 	{
 		this.pinned_message = pinned_message;
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Game getGame() 
+	{
+		return game;
+	}
+
+	/**
+	 * 
+	 * @param game
+	 */
+	public void setGame(Game game) 
+	{
+		this.game = game;
+	}
+	
+	
 	
 }

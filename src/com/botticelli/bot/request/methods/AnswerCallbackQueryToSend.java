@@ -8,7 +8,7 @@ public class AnswerCallbackQueryToSend implements Request{
 	private String callback_query_id;
 	private String text;
 	private boolean show_alert;
-	
+	private String url;
 	
 	public AnswerCallbackQueryToSend(String callback_query_id) 
 	{
@@ -50,8 +50,17 @@ public class AnswerCallbackQueryToSend implements Request{
 	{
 		this.show_alert = show_alert;
 	}
+	
 
+	public String getUrl() 
+	{
+		return url;
+	}
 
+	public void setUrl(String url) 
+	{
+		this.url = url;
+	}
 
 	@Override
 	public Map<String, Object> getValuesMap() 

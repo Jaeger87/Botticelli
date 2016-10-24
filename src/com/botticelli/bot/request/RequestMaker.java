@@ -46,6 +46,7 @@ import com.botticelli.bot.request.methods.EditMessageReplyMarkupRequest;
 import com.botticelli.bot.request.methods.EditMessageTextRequest;
 import com.botticelli.bot.request.methods.FileRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
+import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
@@ -102,6 +103,7 @@ public class RequestMaker
 	private String urlEditMessageReplyMarkup;
 	private String urlSendLocation;
 	private String urlSendChatAction;
+	private String urlSendGame;
 	private String urlGetUserProfilePhotos;
 	private String urlGetFile;
 	private String urlDownloadFile;
@@ -143,6 +145,7 @@ public class RequestMaker
 		urlLeaveChat = Constants.APIURL + token + Constants.LEAVECHAT;
 		urlGetChat = Constants.APIURL + token + Constants.GETCHAT;
 		urlGetChatAdministrators = Constants.APIURL + token + Constants.GETCHATADMINISTRATORS;
+		urlSendGame = Constants.APIURL + token + Constants.SENDGAME;
 		urlGetMembersCount = Constants.APIURL + token + Constants.GETCHATMEMBERSCOUNT;
 		urlGetMember = Constants.APIURL + token + Constants.GETCHATMEMBER;
 		urlKickChatMember = Constants.APIURL + token + Constants.KICKCHATMEMBER;
@@ -384,6 +387,17 @@ public class RequestMaker
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
+	/**
+	 * 
+	 * @param gts
+	 * @return
+	 */
+	public Message sendGame(GameToSend gts)
+	{
+		String json = makeRequest(urlSendGame, gts);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
+	
 	/**
 	 * Use this method to send venue. On success, the sent Message is
 	 * returned, else return null.

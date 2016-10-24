@@ -25,6 +25,7 @@ public class Constants {
 	public static final String GETCHATMEMBER ="/getChatMember";
 	public static final String LEAVECHAT ="/leaveChat";
 	public static final String SENDVENUE ="/sendVenue";
+	public static final String SENDGAME ="/sendGame";
 	public static final String SENDCONTACT ="/sendContact";
 	public static final String KICKCHATMEMBER ="/kickChatMember";
 	public static final String UNBANCHATMEMBER ="/unbanChatMember";
