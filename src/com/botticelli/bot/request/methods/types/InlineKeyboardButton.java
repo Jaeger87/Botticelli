@@ -6,6 +6,8 @@ public class InlineKeyboardButton {
 	private String url;
 	private String callback_data;
 	private String switch_inline_query;
+	private CallbackGame callback_game;
+	
 	
 	public InlineKeyboardButton(String text) 
 	{
@@ -77,4 +79,16 @@ public class InlineKeyboardButton {
 		ikb.switch_inline_query = switch_inline_query;
 		return ikb;
 	}
+
+	public CallbackGame getCallback_game() 
+	{
+		return callback_game;
+	}
+
+	public void setCallback_game(CallbackGame callback_game) 
+	{
+		this.callback_game = callback_game;
+	}
+	
+	
 }

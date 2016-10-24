@@ -72,6 +72,7 @@ import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
+import com.botticelli.bot.request.methods.types.WebhookInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -104,6 +105,9 @@ public class RequestMaker
 	private String urlSendLocation;
 	private String urlSendChatAction;
 	private String urlSendGame;
+	private String urlSetGameScore;
+	private String urlGetGameHighScores;
+	private String urlGetWebhookInfo;
 	private String urlGetUserProfilePhotos;
 	private String urlGetFile;
 	private String urlDownloadFile;
@@ -117,6 +121,7 @@ public class RequestMaker
 	private Type downlodableFileResult;
 	private Type listUpdateResult;
 	private Type listChatMembersResult;
+	private Type webHookInfoResult;
 	private Type chatMembersResult;
 	
 	
@@ -146,6 +151,9 @@ public class RequestMaker
 		urlGetChat = Constants.APIURL + token + Constants.GETCHAT;
 		urlGetChatAdministrators = Constants.APIURL + token + Constants.GETCHATADMINISTRATORS;
 		urlSendGame = Constants.APIURL + token + Constants.SENDGAME;
+		urlGetGameHighScores = Constants.APIURL + token + Constants.GETGAMEHIGHSCORES;
+		urlSetGameScore = Constants.APIURL + token + Constants.SETGAMESCORE;
+		urlGetWebhookInfo = Constants.APIURL + token + Constants.GETWEBHOOKINFO;
 		urlGetMembersCount = Constants.APIURL + token + Constants.GETCHATMEMBERSCOUNT;
 		urlGetMember = Constants.APIURL + token + Constants.GETCHATMEMBER;
 		urlKickChatMember = Constants.APIURL + token + Constants.KICKCHATMEMBER;
@@ -176,6 +184,9 @@ public class RequestMaker
         listChatMembersResult = new TypeToken<Result<List<ChatMember>>>() {
         }.getType();
         chatMembersResult = new TypeToken<Result<ChatMember>>() {
+        }.getType();
+        
+        webHookInfoResult = new TypeToken<Result<WebhookInfo>>() {
         }.getType();
 	}
 

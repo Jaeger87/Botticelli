@@ -8,6 +8,7 @@ public class CallbackQuery {
 	private String inline_message_id;
 	private String data;
 	private String game_short_name;
+	private String chat_instance;
 	
 	public String getId() 
 	{
@@ -67,6 +68,16 @@ public class CallbackQuery {
 	public void setGame_short_name(String game_short_name) 
 	{
 		this.game_short_name = game_short_name;
+	}
+
+	public String getChat_instance() 
+	{
+		return chat_instance;
+	}
+
+	public void setChat_instance(String chat_instance) 
+	{
+		this.chat_instance = chat_instance;
 	}
 
 	
