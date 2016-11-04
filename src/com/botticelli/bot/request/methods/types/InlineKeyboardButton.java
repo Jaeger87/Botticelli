@@ -6,6 +6,7 @@ public class InlineKeyboardButton {
 	private String url;
 	private String callback_data;
 	private String switch_inline_query;
+	private String switch_inline_query_current_chat;
 	private CallbackGame callback_game;
 	
 	
@@ -89,6 +90,18 @@ public class InlineKeyboardButton {
 	{
 		this.callback_game = callback_game;
 	}
+
+	public String getSwitch_inline_query_current_chat()
+	{
+		return switch_inline_query_current_chat;
+	}
+
+	public void setSwitch_inline_query_current_chat(String switch_inline_query_current_chat) 
+	{
+		this.switch_inline_query_current_chat = switch_inline_query_current_chat;
+	}
+	
+	
 	
 	
 }

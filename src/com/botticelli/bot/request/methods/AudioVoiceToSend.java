@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public abstract class AudioVoiceToSend extends AbstractReplyManageToSend{
+public abstract class AudioVoiceToSend extends AbstractCaption{
 
 	private Integer duration;
 	

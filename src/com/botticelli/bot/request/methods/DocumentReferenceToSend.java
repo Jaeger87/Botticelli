@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public class DocumentReferenceToSend extends AbstractReplyManageToSend{
+public class DocumentReferenceToSend extends AbstractCaption{
 
 	private String document;
 	

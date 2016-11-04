@@ -8,7 +8,7 @@ import java.io.File;
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public class DocumentFileToSend extends AbstractReplyManageToSend implements FileRequest{
+public class DocumentFileToSend extends AbstractCaption implements FileRequest{
 
 	private File document;
 	
