@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -12,8 +13,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.lang.reflect.Type;
-
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
@@ -67,9 +66,9 @@ import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.Chat;
 import com.botticelli.bot.request.methods.types.ChatMember;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
-import com.botticelli.bot.request.methods.types.Result;
 import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
+import com.botticelli.bot.request.methods.types.Result;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
 import com.botticelli.bot.request.methods.types.WebhookInfo;
@@ -77,8 +76,19 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import okhttp3.FormBody;
+import okhttp3.FormBody.Builder;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
+
+
 public class RequestMaker
 {
+	private OkHttpClient client;
+	public static final MediaType TEXTMEDIATYPE = MediaType.parse("text/html; charset=UTF-8");
+	
+	
 	private String urlGetUpdates;
 	private String urlSendMessage;
 	private String urlForwardMessage;
@@ -122,6 +132,7 @@ public class RequestMaker
 	private Type listUpdateResult;
 	private Type listChatMembersResult;
 	private Type webHookInfoResult;
+	private Type gameHighScoresListResult;
 	private Type chatMembersResult;
 	
 	
@@ -132,7 +143,10 @@ public class RequestMaker
 	public RequestMaker(String token)
 	{
 		gson = GsonOwner.getInstance().getGson();
-
+		
+		client = new OkHttpClient();
+		
+		
 		urlGetUpdates = Constants.APIURL + token + Constants.GETUPDATES;
 		urlSendMessage = Constants.APIURL + token + Constants.SENDMESSAGE;
 		urlForwardMessage = Constants.APIURL + token + Constants.FORWARDMESSAGE;
@@ -185,8 +199,9 @@ public class RequestMaker
         }.getType();
         chatMembersResult = new TypeToken<Result<ChatMember>>() {
         }.getType();
-        
         webHookInfoResult = new TypeToken<Result<WebhookInfo>>() {
+        }.getType();
+        gameHighScoresListResult = new TypeToken<Result<List<ChatMember>>>() {
         }.getType();
 	}
 
@@ -209,7 +224,7 @@ public class RequestMaker
 	 */
 	public List<Update> getUpdates(UpdateRequest upr)
 	{
-		String json = makeRequest(urlGetUpdates, upr);
+		String json = makeRequest2(urlGetUpdates, upr);
 		return buildResult(json, listUpdateResult, new Result<List<Update>>()).getResult();
 	}
 
@@ -222,7 +237,7 @@ public class RequestMaker
 	 */
 	public Message sendMessage(MessageToSend mts)
 	{
-		String json = makeRequest(urlSendMessage, mts);
+		String json = makeRequest2(urlSendMessage, mts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -815,4 +830,24 @@ public class RequestMaker
 		}
 		return result;
 	}
+	
+	private String makeRequest2(String url, Request req)
+	{
+	    Builder formBody = new FormBody.Builder();
+		for (Entry<String, Object> e : req.getValuesMap().entrySet())
+		{
+			if (e.getValue() != null && e.getKey() != null)
+				formBody.add(e.getKey(), e.getValue().toString());
+		}
+		okhttp3.Request request = new okhttp3.Request.Builder().url(url).post(formBody.build()).build();
+		try (Response response = client.newCall(request).execute()) {
+			return response.body().string();
+		} catch (IOException e1) {
+			errorLogger.log(Level.SEVERE, req.getClass().getName(), e1);
+		}
+		return "";
+	}
+	
+	
+
 }
