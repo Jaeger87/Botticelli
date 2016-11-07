@@ -80,6 +80,7 @@ import okhttp3.FormBody;
 import okhttp3.FormBody.Builder;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
@@ -87,7 +88,7 @@ public class RequestMaker
 {
 	private OkHttpClient client;
 	public static final MediaType TEXTMEDIATYPE = MediaType.parse("text/html; charset=UTF-8");
-	
+	public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
 	
 	private String urlGetUpdates;
 	private String urlSendMessage;
@@ -224,7 +225,7 @@ public class RequestMaker
 	 */
 	public List<Update> getUpdates(UpdateRequest upr)
 	{
-		String json = makeRequest2(urlGetUpdates, upr);
+		String json = makeRequest(urlGetUpdates, upr);
 		return buildResult(json, listUpdateResult, new Result<List<Update>>()).getResult();
 	}
 
@@ -237,7 +238,7 @@ public class RequestMaker
 	 */
 	public Message sendMessage(MessageToSend mts)
 	{
-		String json = makeRequest2(urlSendMessage, mts);
+		String json = makeRequest(urlSendMessage, mts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -333,7 +334,7 @@ public class RequestMaker
 	 */
 	public Message sendDocumentFile(DocumentFileToSend dfs)
 	{
-		String json = makeRequestFile(urlSendDocument, dfs);
+		String json = makeRequestFile2(urlSendDocument, dfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -722,85 +723,6 @@ public class RequestMaker
 		return json;
 	}
 
-	private String makeRequest(String url, Request req)
-	{
-		String json = "";
-
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-
-		HttpPost httppost = new HttpPost(url);
-
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		for (Entry<String, Object> e : req.getValuesMap().entrySet())
-		{
-			if (e.getValue() != null && e.getKey() != null)
-				params.add(new BasicNameValuePair(e.getKey(), e.getValue().toString()));
-		}
-		try
-		{
-			RequestConfig timeoutParams = RequestConfig.custom().setSocketTimeout(Constants.SOCKETTIMEOUT)
-					.setConnectTimeout(Constants.CONNECTTIMEOUT)
-					.setConnectionRequestTimeout(Constants.CONNECTIONREQUESTTIMEOUT).build();
-			httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
-			httppost.setConfig(timeoutParams);
-		} catch (UnsupportedEncodingException e)
-		{
-			// e.printStackTrace();
-			errorLogger.log(Level.SEVERE, req.getClass().getName(), e);
-			return "";
-		}
-
-		try
-		{
-
-			CloseableHttpResponse response = httpclient.execute(httppost);
-
-			try
-			{
-				HttpEntity entity = response.getEntity();
-
-				if (entity != null)
-					json = readInputStream(entity.getContent());
-			}
-
-			finally
-			{
-				try
-				{
-					response.close();
-				} catch (IOException e1)
-				{
-					e1.printStackTrace();
-					json = "";
-				}
-
-			}
-		} catch (ClientProtocolException e1)
-		{
-			// e1.printStackTrace();
-			errorLogger.log(Level.SEVERE, req.getClass().getName(), e1);
-			json = "";
-		} catch (IOException e1)
-		{
-			// e1.printStackTrace();
-			errorLogger.log(Level.SEVERE, req.getClass().getName(), e1);
-			json = "";
-		}
-
-		finally
-		{
-			try
-			{
-				httpclient.close();
-			}
-			catch (IOException e1)
-			{
-				errorLogger.log(Level.SEVERE, req.getClass().getName(), e1);
-				json = "";
-			}
-		}
-		return json;
-	}
 
 	private String readInputStream(InputStream input)
 	{
@@ -831,14 +753,9 @@ public class RequestMaker
 		return result;
 	}
 	
-	private String makeRequest2(String url, Request req)
+	private String makeRequest(String url, Request req)
 	{
-	    Builder formBody = new FormBody.Builder();
-		for (Entry<String, Object> e : req.getValuesMap().entrySet())
-		{
-			if (e.getValue() != null && e.getKey() != null)
-				formBody.add(e.getKey(), e.getValue().toString());
-		}
+	    Builder formBody = getFormBodyBuilderFromRequest(req);
 		okhttp3.Request request = new okhttp3.Request.Builder().url(url).post(formBody.build()).build();
 		try (Response response = client.newCall(request).execute()) {
 			return response.body().string();
@@ -848,6 +765,37 @@ public class RequestMaker
 		return "";
 	}
 	
-	
+	private String makeRequestFile2(String url, FileRequest fr)
+	{
+		Builder formBody = getFormBodyBuilderFromRequest(fr);
+	    okhttp3.Request request = new okhttp3.Request.Builder()
+	        .url(url)
+	        .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, fr.getFile()))
+	        .post(formBody.build())
+	        .build();
 
+	    Response response;
+		try {
+			response = client.newCall(request).execute();
+			return response.body().string();
+		} catch (IOException e) {
+			errorLogger.log(Level.SEVERE, fr.getClass().getName(), e);
+		}
+	  
+	    return "";
+		
+	}
+
+	private Builder getFormBodyBuilderFromRequest(Request req)
+	{
+	    Builder formBody = new FormBody.Builder();
+		for (Entry<String, Object> e : req.getValuesMap().entrySet())
+		{
+			if (e.getValue() != null && e.getKey() != null)
+				formBody.add(e.getKey(), e.getValue().toString());
+		}
+		
+		return formBody;
+	}
+	
 }
