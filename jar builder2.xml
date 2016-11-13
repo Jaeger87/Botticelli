@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Botticelli with libraries in sub-folder">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="c:/Botticelli/Botticelli.jar">
+            <manifest>
+                <attribute name="Class-Path" value=". Telegram_lib/commons-codec-1.9.jar Telegram_lib/commons-logging-1.2.jar Telegram_lib/fluent-hc-4.5.jar Telegram_lib/gson-2.6.2.jar 
+                    Telegram_lib/httpclient-4.5.jar Telegram_lib/httpclient-cache-4.5.jar Telegram_lib/httpclient-win-4.5.jar Telegram_lib/httpcore-4.4.1.jar
+                	Telegram_lib/httpmime-4.5.jar Telegram_lib/jna-4.1.0.jar Telegram_lib/jna-platform-4.1.0.jar Telegram_lib/okhttp-3.4.2.jar Telegram_lib/okio-1.11.0.jar"/>
+            </manifest>
+            <fileset dir="C:/Users/andre/git/Botticelli/bin"/>
+        </jar>
+        <delete dir="c:/Botticelli_lib"/>
+        <mkdir dir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/commons-codec-1.9.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/commons-logging-1.2.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/fluent-hc-4.5.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/gson-2.6.2.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/httpclient-4.5.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/httpclient-cache-4.5.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/httpclient-win-4.5.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/httpcore-4.4.1.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/httpmime-4.5.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/jna-4.1.0.jar" todir="c:/Botticelli_lib"/>
+        <copy file="C:/Users/andre/git/Botticelli/lib/jna-platform-4.1.0.jar" todir="c:/Botticelli_lib"/>
+    	<copy file="C:/Users/andre/git/Botticelli/lib/commons-io-2.4.jar" todir="c:/Botticelli_lib"/>
+    	<copy file="C:/Users/andre/git/Botticelli/lib/okhttp-3.4.2.jar" todir="c:/Botticelli_lib"/>
+    	<copy file="C:/Users/andre/git/Botticelli/lib/okio-1.11.0.jar" todir="c:/Botticelli_lib"/>
+    </target>
+</project>

@@ -2,33 +2,16 @@ package com.botticelli.bot.request;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
+
 
 import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
@@ -79,6 +62,7 @@ import com.google.gson.reflect.TypeToken;
 import okhttp3.FormBody;
 import okhttp3.FormBody.Builder;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -88,7 +72,7 @@ public class RequestMaker
 {
 	private OkHttpClient client;
 	public static final MediaType TEXTMEDIATYPE = MediaType.parse("text/html; charset=UTF-8");
-	public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
+	public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("multipart/form-data; charset=utf-8");
 	
 	private String urlGetUpdates;
 	private String urlSendMessage;
@@ -334,7 +318,7 @@ public class RequestMaker
 	 */
 	public Message sendDocumentFile(DocumentFileToSend dfs)
 	{
-		String json = makeRequestFile2(urlSendDocument, dfs);
+		String json = makeRequestFile(urlSendDocument, dfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -653,105 +637,7 @@ public class RequestMaker
 		return null;
 	}
 	
-	private String makeRequestFile(String url, FileRequest fr)
-	{
-		String json = "";
-		CloseableHttpClient client = HttpClients.createDefault();
-		HttpPost post = new HttpPost(url);
-		MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-		Charset chars = Charset.forName("UTF-8");
-		builder.setCharset(chars);
-		builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-		FileBody fileBody = new FileBody(fr.getFile()); // image should be a
-														// String
-		builder.addPart(fr.getTypeFile(), fileBody);
-
-		for (Entry<String, Object> e : fr.getValuesMap().entrySet())
-		{
-			if (e.getValue() != null && e.getKey() != null)
-				builder.addTextBody(e.getKey(), e.getValue().toString(), ContentType.TEXT_PLAIN);
-		}
-
-		HttpEntity entity = builder.build();
-
-		RequestConfig timeoutParams = RequestConfig.custom().setSocketTimeout(Constants.SOCKETTIMEOUT)
-				.setConnectTimeout(Constants.CONNECTTIMEOUT)
-				.setConnectionRequestTimeout(Constants.CONNECTIONREQUESTTIMEOUT).build();
-
-		post.setEntity(entity);
-		post.setConfig(timeoutParams);
-
-		try
-		{
-			CloseableHttpResponse response = client.execute(post);
-
-			try
-			{
-				if (response.getEntity() != null)
-					json = readInputStream(response.getEntity().getContent());
-			}
-
-			finally
-			{
-				response.close();
-			}
-		} catch (ClientProtocolException e1)
-		{
-			e1.printStackTrace();
-			errorLogger.log(Level.SEVERE, fr.getClass().getName(), e1);
-			json = "";
-		} catch (IOException e1)
-		{
-			e1.printStackTrace();
-			errorLogger.log(Level.SEVERE, fr.getClass().getName(), e1);
-			json = "";
-		} finally
-		{
-			try
-			{
-				client.close();
-			}
-
-			catch (IOException e1)
-
-			{
-				e1.printStackTrace();
-				errorLogger.log(Level.SEVERE, fr.getClass().getName(), e1);
-				json = "";
-			}
-		}
-		return json;
-	}
-
-
-	private String readInputStream(InputStream input)
-	{
-		String result = "";
-		try
-		{
-			try
-			{
-				for (int c = input.read(); c != -1; c = input.read())
-					result += (char) c;
-			} catch (IOException e)
-			{
-				errorLogger.log(Level.SEVERE, "", e);
-				return "";
-			}
-
-		} finally
-		{
-			try
-			{
-				input.close();
-			} catch (IOException e)
-			{
-				errorLogger.log(Level.SEVERE, "", e);
-				return "";
-			}
-		}
-		return result;
-	}
+	
 	
 	private String makeRequest(String url, Request req)
 	{
@@ -765,15 +651,12 @@ public class RequestMaker
 		return "";
 	}
 	
-	private String makeRequestFile2(String url, FileRequest fr)
+	private String makeRequestFile(String url, FileRequest fr)
 	{
-		Builder formBody = getFormBodyBuilderFromRequest(fr);
 	    okhttp3.Request request = new okhttp3.Request.Builder()
 	        .url(url)
-	        .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, fr.getFile()))
-	        .post(formBody.build())
-	        .build();
-
+	        .post(getMultipartBodyBuilderFromRequest(fr).build())
+	        .build();       
 	    Response response;
 		try {
 			response = client.newCall(request).execute();
@@ -783,7 +666,6 @@ public class RequestMaker
 		}
 	  
 	    return "";
-		
 	}
 
 	private Builder getFormBodyBuilderFromRequest(Request req)
@@ -796,6 +678,21 @@ public class RequestMaker
 		}
 		
 		return formBody;
+	}
+	
+	private okhttp3.MultipartBody.Builder getMultipartBodyBuilderFromRequest(FileRequest req)
+	{	    
+	okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+		
+	requestBody.addFormDataPart(req.getTypeFile(),req.getFile().getName(),RequestBody.create(null, req.getFile()));
+	
+	for (Entry<String, Object> e : req.getValuesMap().entrySet())
+		{
+			if (e.getValue() != null && e.getKey() != null)
+				requestBody.addFormDataPart(e.getKey(), e.getValue().toString());
+		}
+		
+		return requestBody;
 	}
 	
 }
