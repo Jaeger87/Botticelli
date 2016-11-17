@@ -6,7 +6,8 @@
         <jar destfile="<your destination path>/Botticelli.jar">
             <manifest>
                 <attribute name="Class-Path" value=". Telegram_lib/commons-codec-1.9.jar Telegram_lib/commons-logging-1.2.jar Telegram_lib/fluent-hc-4.5.jar Telegram_lib/gson-2.3.1.jar 
-                    Telegram_lib/httpclient-4.5.jar Telegram_lib/httpclient-cache-4.5.jar Telegram_lib/httpclient-win-4.5.jar Telegram_lib/httpcore-4.4.1.jar Telegram_lib/httpmime-4.5.jar Telegram_lib/jna-4.1.0.jar Telegram_lib/jna-platform-4.1.0.jar "/>
+                    Telegram_lib/httpclient-4.5.jar Telegram_lib/httpclient-cache-4.5.jar Telegram_lib/httpclient-win-4.5.jar 
+    	Telegram_lib/httpcore-4.4.1.jar Telegram_lib/httpmime-4.5.jar Telegram_lib/jna-4.1.0.jar Telegram_lib/jna-platform-4.1.0.jar Telegram_lib/okhttp-3.4.2.jar Telegram_lib/okio-1.11.0.jar"/>
             </manifest>
             <fileset dir="<your source path>/Botticelli/bin"/>
         </jar>
@@ -24,5 +25,7 @@
         <copy file="<your source path>/Botticelli/lib/jna-4.1.0.jar" todir="<your destination path>/Botticelli_lib"/>
         <copy file="<your source path>/Botticelli/lib/jna-platform-4.1.0.jar" todir="<your destination path>/Botticelli_lib"/>
     	<copy file="<your source path>/Botticelli/lib/commons-io-2.4.jar" todir="<your destination path>/Botticelli_lib"/>
+    	<copy file="C:/Users/andre/git/Botticelli/lib/okhttp-3.4.2.jar" todir="c:/Botticelli_lib"/>
+    	    	<copy file="C:/Users/andre/git/Botticelli/lib/okio-1.11.0.jar" todir="c:/Botticelli_lib"/>
     </target>
 </project>

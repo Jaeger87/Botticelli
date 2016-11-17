@@ -11,6 +11,7 @@ public class Result <T>{
 	private T result;
 	private int error_code;
 	private String description;
+	private ResponseParameters parameters;
 	/**
 	 * If ‘ok’ equals true, the request was successful 
 	 * and the result of the query can be found in the ‘result’ field
@@ -34,6 +35,11 @@ public class Result <T>{
 	public String getDescription() 
 	{
 		return description;
+	}
+
+	public ResponseParameters getParameters() 
+	{
+		return parameters;
 	}
 	
 	

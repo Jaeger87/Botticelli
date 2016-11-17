@@ -2,7 +2,6 @@ package com.botticelli.bot;
 
 import java.io.File;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.botticelli.bot.request.RequestMaker;
@@ -22,11 +21,13 @@ import com.botticelli.bot.request.methods.EditMessageTextRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
+import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
 import com.botticelli.bot.request.methods.PhotoReferenceToSend;
+import com.botticelli.bot.request.methods.SetGameScoreRequest;
 import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
 import com.botticelli.bot.request.methods.UpdateRequest;
@@ -41,11 +42,14 @@ import com.botticelli.bot.request.methods.types.Chat;
 import com.botticelli.bot.request.methods.types.ChatMember;
 import com.botticelli.bot.request.methods.types.ChosenInlineResult;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
+import com.botticelli.bot.request.methods.types.GameHighScore;
+import com.botticelli.bot.request.methods.types.GameScoreResult;
 import com.botticelli.bot.request.methods.types.InlineQuery;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.TelegramFile;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
+import com.botticelli.bot.request.methods.types.WebhookInfo;
 
 public abstract class Bot {
 
@@ -448,6 +452,24 @@ public abstract class Bot {
 		if(emr == null)
 			return null;
 		return rm.editMessageReplyMarkup(emr);
+	}
+	
+	public final GameScoreResult setGameScore(SetGameScoreRequest sgs)
+	{
+		if(sgs == null)
+			return null;
+		return rm.setGameScore(sgs);
+	}
+	
+	public final List<GameHighScore> getGameHighScores(GetGameHighScoresRequest gghsr)
+	{
+		if(gghsr == null)
+			return null;
+		return rm.getGameHighScores(gghsr);
+	}
+	
+	public final WebhookInfo getWebhookInfo() {
+		return rm.getWebhookInfo();
 	}
 	
 	/**

@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 
-
 import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AudioFileToSend;
@@ -30,12 +29,14 @@ import com.botticelli.bot.request.methods.FileRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
+import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
 import com.botticelli.bot.request.methods.PhotoReferenceToSend;
 import com.botticelli.bot.request.methods.Request;
+import com.botticelli.bot.request.methods.SetGameScoreRequest;
 import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
 import com.botticelli.bot.request.methods.UnbanChatMemberRequest;
@@ -49,6 +50,8 @@ import com.botticelli.bot.request.methods.VoiceReferenceToSend;
 import com.botticelli.bot.request.methods.types.Chat;
 import com.botticelli.bot.request.methods.types.ChatMember;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
+import com.botticelli.bot.request.methods.types.GameHighScore;
+import com.botticelli.bot.request.methods.types.GameScoreResult;
 import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.Result;
@@ -67,13 +70,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
-public class RequestMaker
-{
+public class RequestMaker {
 	private OkHttpClient client;
 	public static final MediaType TEXTMEDIATYPE = MediaType.parse("text/html; charset=UTF-8");
 	public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("multipart/form-data; charset=utf-8");
-	
+
+	private static final int JSONBOOLEANLENGHT = 50;
 	private String urlGetUpdates;
 	private String urlSendMessage;
 	private String urlForwardMessage;
@@ -103,11 +105,11 @@ public class RequestMaker
 	private String urlSetGameScore;
 	private String urlGetGameHighScores;
 	private String urlGetWebhookInfo;
+
 	private String urlGetUserProfilePhotos;
 	private String urlGetFile;
 	private String urlDownloadFile;
-	
-	
+
 	private Type intResult;
 	private Type chatResult;
 	private Type booleanResult;
@@ -119,19 +121,16 @@ public class RequestMaker
 	private Type webHookInfoResult;
 	private Type gameHighScoresListResult;
 	private Type chatMembersResult;
-	
-	
+
 	private final static Logger errorLogger = Logger.getLogger("errors");
 
 	private Gson gson;
 
-	public RequestMaker(String token)
-	{
+	public RequestMaker(String token) {
 		gson = GsonOwner.getInstance().getGson();
-		
+
 		client = new OkHttpClient();
-		
-		
+
 		urlGetUpdates = Constants.APIURL + token + Constants.GETUPDATES;
 		urlSendMessage = Constants.APIURL + token + Constants.SENDMESSAGE;
 		urlForwardMessage = Constants.APIURL + token + Constants.FORWARDMESSAGE;
@@ -164,30 +163,30 @@ public class RequestMaker
 		urlAnswerCallbackQuery = Constants.APIURL + token + Constants.ANSWERCALLBACKQUERY;
 		urlGetFile = Constants.APIURL + token + Constants.GETFILE;
 		urlDownloadFile = Constants.APIFILEURL + token + '/';
-		
-		
+
 		intResult = new TypeToken<Result<Integer>>() {
-        }.getType();
-        booleanResult = new TypeToken<Result<Boolean>>() {
-        }.getType();
-        chatResult = new TypeToken<Result<Chat>>() {
-        }.getType();
-        messageResult = new TypeToken<Result<Message>>() {
-        }.getType();
-        userProfilePhotosResult = new TypeToken<Result<UserProfilePhotos>>() {
-        }.getType();
-        downlodableFileResult = new TypeToken<Result<DownlodableFile>>() {
-        }.getType();
-        listUpdateResult = new TypeToken<Result<List<Update>>>() {
-        }.getType();
-        listChatMembersResult = new TypeToken<Result<List<ChatMember>>>() {
-        }.getType();
-        chatMembersResult = new TypeToken<Result<ChatMember>>() {
-        }.getType();
-        webHookInfoResult = new TypeToken<Result<WebhookInfo>>() {
-        }.getType();
-        gameHighScoresListResult = new TypeToken<Result<List<ChatMember>>>() {
-        }.getType();
+		}.getType();
+		booleanResult = new TypeToken<Result<Boolean>>() {
+		}.getType();
+		chatResult = new TypeToken<Result<Chat>>() {
+		}.getType();
+		messageResult = new TypeToken<Result<Message>>() {
+		}.getType();
+		userProfilePhotosResult = new TypeToken<Result<UserProfilePhotos>>() {
+		}.getType();
+		downlodableFileResult = new TypeToken<Result<DownlodableFile>>() {
+		}.getType();
+		listUpdateResult = new TypeToken<Result<List<Update>>>() {
+		}.getType();
+		listChatMembersResult = new TypeToken<Result<List<ChatMember>>>() {
+		}.getType();
+		chatMembersResult = new TypeToken<Result<ChatMember>>() {
+		}.getType();
+		webHookInfoResult = new TypeToken<Result<WebhookInfo>>() {
+		}.getType();
+		gameHighScoresListResult = new TypeToken<Result<List<ChatMember>>>() {
+		}.getType();
+
 	}
 
 	/**
@@ -195,8 +194,7 @@ public class RequestMaker
 	 * 
 	 * @return
 	 */
-	public static Logger getErrorLogger()
-	{
+	public static Logger getErrorLogger() {
 		return errorLogger;
 	}
 
@@ -207,8 +205,7 @@ public class RequestMaker
 	 * @param upr
 	 * @return
 	 */
-	public List<Update> getUpdates(UpdateRequest upr)
-	{
+	public List<Update> getUpdates(UpdateRequest upr) {
 		String json = makeRequest(urlGetUpdates, upr);
 		return buildResult(json, listUpdateResult, new Result<List<Update>>()).getResult();
 	}
@@ -220,8 +217,7 @@ public class RequestMaker
 	 * @param mts
 	 * @return
 	 */
-	public Message sendMessage(MessageToSend mts)
-	{
+	public Message sendMessage(MessageToSend mts) {
 		String json = makeRequest(urlSendMessage, mts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -233,8 +229,7 @@ public class RequestMaker
 	 * @param fts
 	 * @return
 	 */
-	public Message forwardMessage(ForwardMessageToSend fts)
-	{
+	public Message forwardMessage(ForwardMessageToSend fts) {
 		String json = makeRequest(urlForwardMessage, fts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -246,8 +241,7 @@ public class RequestMaker
 	 * @param prs
 	 * @return
 	 */
-	public Message sendPhotobyReference(PhotoReferenceToSend prs)
-	{
+	public Message sendPhotobyReference(PhotoReferenceToSend prs) {
 		String json = makeRequest(urlSendPhoto, prs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -259,8 +253,7 @@ public class RequestMaker
 	 * @param pfs
 	 * @return
 	 */
-	public Message sendPhotoFile(PhotoFileToSend pfs)
-	{
+	public Message sendPhotoFile(PhotoFileToSend pfs) {
 		String json = makeRequestFile(urlSendPhoto, pfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -272,8 +265,7 @@ public class RequestMaker
 	 * @param ars
 	 * @return
 	 */
-	public Message sendAudiobyReference(AudioReferenceToSend ars)
-	{
+	public Message sendAudiobyReference(AudioReferenceToSend ars) {
 		String json = makeRequest(urlSendAudio, ars);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -289,8 +281,7 @@ public class RequestMaker
 	 * @param afs
 	 * @return
 	 */
-	public Message sendAudioFile(AudioFileToSend afs)
-	{
+	public Message sendAudioFile(AudioFileToSend afs) {
 		String json = makeRequestFile(urlSendAudio, afs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -302,8 +293,7 @@ public class RequestMaker
 	 * @param drs
 	 * @return
 	 */
-	public Message sendDocumentbyReference(DocumentReferenceToSend drs)
-	{
+	public Message sendDocumentbyReference(DocumentReferenceToSend drs) {
 		String json = makeRequest(urlSendDocument, drs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -316,8 +306,7 @@ public class RequestMaker
 	 * @param dfs
 	 * @return
 	 */
-	public Message sendDocumentFile(DocumentFileToSend dfs)
-	{
+	public Message sendDocumentFile(DocumentFileToSend dfs) {
 		String json = makeRequestFile(urlSendDocument, dfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -329,8 +318,7 @@ public class RequestMaker
 	 * @param srs
 	 * @return
 	 */
-	public Message sendStickerbyReference(StickerReferenceToSend srs)
-	{
+	public Message sendStickerbyReference(StickerReferenceToSend srs) {
 		String json = makeRequest(urlSendSticker, srs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -342,8 +330,7 @@ public class RequestMaker
 	 * @param sfs
 	 * @return
 	 */
-	public Message sendStickerFile(StickerFileToSend sfs)
-	{
+	public Message sendStickerFile(StickerFileToSend sfs) {
 		String json = makeRequestFile(urlSendSticker, sfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -355,8 +342,7 @@ public class RequestMaker
 	 * @param vrs
 	 * @return
 	 */
-	public Message sendVideobyReference(VideoReferenceToSend vrs)
-	{
+	public Message sendVideobyReference(VideoReferenceToSend vrs) {
 		String json = makeRequest(urlSendVideo, vrs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -370,8 +356,7 @@ public class RequestMaker
 	 * @param vfs
 	 * @return
 	 */
-	public Message sendVideoFile(VideoFileToSend vfs)
-	{
+	public Message sendVideoFile(VideoFileToSend vfs) {
 		String json = makeRequestFile(urlSendVideo, vfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -381,8 +366,7 @@ public class RequestMaker
 	 * @param vrs
 	 * @return
 	 */
-	public Message sendVoicebyReference(VoiceReferenceToSend vrs)
-	{
+	public Message sendVoicebyReference(VoiceReferenceToSend vrs) {
 		String json = makeRequest(urlSendVoice, vrs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -392,8 +376,7 @@ public class RequestMaker
 	 * @param vfs
 	 * @return
 	 */
-	public Message sendVoiceFile(VoiceFileToSend vfs)
-	{
+	public Message sendVoiceFile(VoiceFileToSend vfs) {
 		String json = makeRequestFile(urlSendVoice, vfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -403,36 +386,35 @@ public class RequestMaker
 	 * @param gts
 	 * @return
 	 */
-	public Message sendGame(GameToSend gts)
-	{
+	public Message sendGame(GameToSend gts) {
 		String json = makeRequest(urlSendGame, gts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
-	
+
 	/**
-	 * Use this method to send venue. On success, the sent Message is
-	 * returned, else return null.
+	 * Use this method to send venue. On success, the sent Message is returned,
+	 * else return null.
+	 * 
 	 * @param vts
 	 * @return
 	 */
-	public Message sendVenue(VenueToSend vts)
-	{
+	public Message sendVenue(VenueToSend vts) {
 		String json = makeRequest(urlSendVenue, vts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
-	
+
 	/**
 	 * Use this method to send a contact. On success, the sent Message is
 	 * returned, else return null.
+	 * 
 	 * @param vts
 	 * @return
 	 */
-	public Message sendContact(ContactToSend cts)
-	{
+	public Message sendContact(ContactToSend cts) {
 		String json = makeRequest(urlSendContact, cts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
-	
+
 	/**
 	 * Use this method to send point on the map. On success, the sent Message is
 	 * returned, else return null.
@@ -440,8 +422,7 @@ public class RequestMaker
 	 * @param lts
 	 * @return
 	 */
-	public Message sendLocation(LocationToSend lts)
-	{
+	public Message sendLocation(LocationToSend lts) {
 		String json = makeRequest(urlSendLocation, lts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
@@ -459,8 +440,7 @@ public class RequestMaker
 	 * @param cts
 	 * @return
 	 */
-	public void sendChatAction(ChatActionToSend cts)
-	{
+	public void sendChatAction(ChatActionToSend cts) {
 		makeRequest(urlSendChatAction, cts);
 	}
 
@@ -469,112 +449,128 @@ public class RequestMaker
 	 * @param kmr
 	 * @return
 	 */
-	public boolean kickChatMember(KickChatMemberRequest kmr)
-	{
+	public boolean kickChatMember(KickChatMemberRequest kmr) {
 		return buildResult(makeRequest(urlKickChatMember, kmr), booleanResult, new Result<Boolean>()).getOk();
 	}
-	
+
 	/**
 	 * 
 	 * @param kmr
 	 * @return
 	 */
-	public boolean leaveChat(ChatRequests crs)
-	{
+	public boolean leaveChat(ChatRequests crs) {
 		return buildResult(makeRequest(urlLeaveChat, crs), booleanResult, new Result<Boolean>()).getOk();
 	}
-	
+
 	/**
 	 * 
 	 * @param crs
 	 * @return
 	 */
-	public Chat getChat(ChatRequests crs)
-	{
+	public Chat getChat(ChatRequests crs) {
 		return buildResult(makeRequest(urlGetChat, crs), chatResult, new Result<Chat>()).getResult();
 	}
+
 	/**
 	 * 
 	 * @param crs
 	 * @return
 	 */
-	public int getChatMembersCount(ChatRequests crs)
-	{
+	public int getChatMembersCount(ChatRequests crs) {
 		return buildResult(makeRequest(urlGetMembersCount, crs), intResult, new Result<Integer>()).getResult();
 	}
-	
-	
-	public List<ChatMember> getChatAdministrators(ChatRequests crs)
-	{
-		return buildResult(makeRequest(urlGetChatAdministrators, crs), listChatMembersResult, new Result<List<ChatMember>>()).getResult();
+
+	public List<ChatMember> getChatAdministrators(ChatRequests crs) {
+		return buildResult(makeRequest(urlGetChatAdministrators, crs), listChatMembersResult,
+				new Result<List<ChatMember>>()).getResult();
 	}
-	
-	public ChatMember getChatMember(ChatMemberRequest cmr)
-	{
+
+	/**
+	 * 
+	 * @param cmr
+	 * @return
+	 */
+	public ChatMember getChatMember(ChatMemberRequest cmr) {
 		return buildResult(makeRequest(urlGetMember, cmr), chatMembersResult, new Result<ChatMember>()).getResult();
 	}
-	
-	
+
+	public GameScoreResult setGameScore(SetGameScoreRequest sgs) {
+		String json = makeRequest(urlSetGameScore, sgs);
+		GameScoreResult gsr = new GameScoreResult();
+		if (json.length() > JSONBOOLEANLENGHT)
+			gsr.setMessage(buildResult(json, messageResult, new Result<Message>()).getResult());
+		else
+			gsr.setOk(buildResult(json, booleanResult, new Result<Boolean>()).getResult());
+		return gsr;
+	}
+
+	public List<GameHighScore> getGameHighScores(GetGameHighScoresRequest gghsr) {
+		String json = makeRequest(urlGetGameHighScores, gghsr);
+		return buildResult(json, gameHighScoresListResult, new Result<List<GameHighScore>>()).getResult();
+	}
+
 	/**
 	 * 
 	 * @param umr
 	 * @return
 	 */
-	public boolean unbanChatMember(UnbanChatMemberRequest umr)
-	{
+	public boolean unbanChatMember(UnbanChatMemberRequest umr) {
 		return buildResult(makeRequest(urlUnbanChatMember, umr), booleanResult, new Result<Boolean>()).getOk();
 	}
+
 	/**
 	 * 
 	 * @param emt
 	 * @return
 	 */
-	public Message editMessageText(EditMessageTextRequest emt)
-	{
+	public Message editMessageText(EditMessageTextRequest emt) {
 		String json = makeRequest(urlEditMessageText, emt);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
+
 	/**
 	 * 
 	 * @param emc
 	 * @return
 	 */
-	public Message editMessageCaption(EditMessageCaptionRequest emc)
-	{
+	public Message editMessageCaption(EditMessageCaptionRequest emc) {
 		String json = makeRequest(urlEditMessageCaption, emc);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
+
 	/**
 	 * 
 	 * @param emr
 	 * @return
 	 */
-	public Message editMessageReplyMarkup(EditMessageReplyMarkupRequest emr)
-	{
+	public Message editMessageReplyMarkup(EditMessageReplyMarkupRequest emr) {
 		String json = makeRequest(urlEditMessageReplyMarkup, emr);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
-	
+
+	public WebhookInfo getWebhookInfo() {
+		String json = makeRequest(urlGetWebhookInfo, null);
+		return buildResult(json, webHookInfoResult, new Result<WebhookInfo>()).getResult();
+	}
+
 	/**
 	 * 
 	 * @param aiq
 	 * @return
 	 */
-	public boolean answerInlineQuery(AnswerInlineQueryRequest aiq)
-	{
-        return buildResult(makeRequest(urlAnswerInlineQuery, aiq), booleanResult, new Result<Boolean>()).getOk();
+	public boolean answerInlineQuery(AnswerInlineQueryRequest aiq) {
+		return buildResult(makeRequest(urlAnswerInlineQuery, aiq), booleanResult, new Result<Boolean>()).getOk();
 	}
-	
+
 	/**
 	 * 
 	 * @param acq
 	 * @return
 	 */
-	public boolean answerCallbackQuery(AnswerCallbackQueryToSend acq)
-	{
-        return buildResult(makeRequest(urlAnswerCallbackQuery, acq), booleanResult, new Result<Boolean>()).getOk();
+	public boolean answerCallbackQuery(AnswerCallbackQueryToSend acq) {
+		return buildResult(makeRequest(urlAnswerCallbackQuery, acq), booleanResult, new Result<Boolean>()).getOk();
 	}
-	
+
 	/**
 	 * Use this method to get a list of profile pictures for a user. Returns a
 	 * UserProfilePhotos object.
@@ -582,66 +578,52 @@ public class RequestMaker
 	 * @param upr
 	 * @return
 	 */
-	public UserProfilePhotos getUserProfilePhotos(UserProfilePhotosRequest upr)
-	{
+	public UserProfilePhotos getUserProfilePhotos(UserProfilePhotosRequest upr) {
 		String json = makeRequest(urlGetUserProfilePhotos, upr);
 		return buildResult(json, userProfilePhotosResult, new Result<UserProfilePhotos>()).getResult();
 	}
 
-	public DownlodableFile getFile(GetFile gf)
-	{
+	public DownlodableFile getFile(GetFile gf) {
 		String json = makeRequest(urlGetFile, gf);
 		return buildResult(json, downlodableFileResult, new Result<DownlodableFile>()).getResult();
 	}
-	
-	
-	private <T> Result<T> buildResult(String json, Type type, Result<T> source)
-	{
+
+	private <T> Result<T> buildResult(String json, Type type, Result<T> source) {
 		Result<T> result = source;
-		try
-		{
+		try {
 			result = gson.fromJson(json, type);
 		}
-		
-		catch(JsonSyntaxException e)
-		{
+
+		catch (JsonSyntaxException e) {
 			errorLogger.log(Level.SEVERE, json, e);
 		}
-		
-		catch(Exception e)
-		{
+
+		catch (Exception e) {
 			errorLogger.log(Level.SEVERE, json, e);
 		}
-		
-		if(result == null)
+
+		if (result == null)
 			return source;
 		return result;
 	}
-	
-	
-	public File downloadFileFromTelegramServer(DownlodableFile df, String filename)
-	{
-		
+
+	public File downloadFileFromTelegramServer(DownlodableFile df, String filename) {
+
 		try {
 			URL u = new URL(urlDownloadFile + df.getFilePath());
 			File f = new File(filename);
 			FileUtils.copyURLToFile(u, f);
 			return f;
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	
-	
-	private String makeRequest(String url, Request req)
-	{
-	    Builder formBody = getFormBodyBuilderFromRequest(req);
+
+	private String makeRequest(String url, Request req) {
+		Builder formBody = getFormBodyBuilderFromRequest(req);
 		okhttp3.Request request = new okhttp3.Request.Builder().url(url).post(formBody.build()).build();
 		try (Response response = client.newCall(request).execute()) {
 			return response.body().string();
@@ -650,49 +632,44 @@ public class RequestMaker
 		}
 		return "";
 	}
-	
-	private String makeRequestFile(String url, FileRequest fr)
-	{
-	    okhttp3.Request request = new okhttp3.Request.Builder()
-	        .url(url)
-	        .post(getMultipartBodyBuilderFromRequest(fr).build())
-	        .build();       
-	    Response response;
+
+	private String makeRequestFile(String url, FileRequest fr) {
+		okhttp3.Request request = new okhttp3.Request.Builder().url(url)
+				.post(getMultipartBodyBuilderFromRequest(fr).build()).build();
+		Response response;
 		try {
 			response = client.newCall(request).execute();
 			return response.body().string();
 		} catch (IOException e) {
 			errorLogger.log(Level.SEVERE, fr.getClass().getName(), e);
 		}
-	  
-	    return "";
+
+		return "";
 	}
 
-	private Builder getFormBodyBuilderFromRequest(Request req)
-	{
-	    Builder formBody = new FormBody.Builder();
-		for (Entry<String, Object> e : req.getValuesMap().entrySet())
-		{
-			if (e.getValue() != null && e.getKey() != null)
-				formBody.add(e.getKey(), e.getValue().toString());
-		}
-		
+	private Builder getFormBodyBuilderFromRequest(Request req) {
+		Builder formBody = new FormBody.Builder();
+		if (req != null)
+			for (Entry<String, Object> e : req.getValuesMap().entrySet()) {
+				if (e.getValue() != null && e.getKey() != null)
+					formBody.add(e.getKey(), e.getValue().toString());
+			}
+
 		return formBody;
 	}
-	
-	private okhttp3.MultipartBody.Builder getMultipartBodyBuilderFromRequest(FileRequest req)
-	{	    
-	okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-		
-	requestBody.addFormDataPart(req.getTypeFile(),req.getFile().getName(),RequestBody.create(null, req.getFile()));
-	
-	for (Entry<String, Object> e : req.getValuesMap().entrySet())
-		{
+
+	private okhttp3.MultipartBody.Builder getMultipartBodyBuilderFromRequest(FileRequest req) {
+		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+		requestBody.addFormDataPart(req.getTypeFile(), req.getFile().getName(),
+				RequestBody.create(null, req.getFile()));
+
+		for (Entry<String, Object> e : req.getValuesMap().entrySet()) {
 			if (e.getValue() != null && e.getKey() != null)
 				requestBody.addFormDataPart(e.getKey(), e.getValue().toString());
 		}
-		
+
 		return requestBody;
 	}
-	
+
 }
