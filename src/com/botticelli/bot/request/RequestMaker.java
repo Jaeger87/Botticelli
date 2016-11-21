@@ -3,14 +3,10 @@ package com.botticelli.bot.request;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.apache.commons.io.FileUtils;
 
 import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
@@ -69,6 +65,8 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.BufferedSink;
+import okio.Okio;
 
 public class RequestMaker {
 	private OkHttpClient client;
@@ -607,6 +605,7 @@ public class RequestMaker {
 		return result;
 	}
 
+	/*
 	public File downloadFileFromTelegramServer(DownlodableFile df, String filename) {
 
 		try {
@@ -621,7 +620,25 @@ public class RequestMaker {
 		}
 		return null;
 	}
+*/
+	
+	public File downloadFileFromTelegramServer(DownlodableFile df, String filename) {
 
+		okhttp3.Request request = new okhttp3.Request.Builder().url(urlDownloadFile + df.getFilePath()).build();
+		try (Response response = client.newCall(request).execute()) {
+			File f = new File(filename);
+			BufferedSink sink = Okio.buffer(Okio.sink(f));
+            sink.writeAll(response.body().source());
+            sink.close();
+            return f;
+		}
+		
+		catch (IOException e1) {
+			errorLogger.log(Level.SEVERE, df.getClass().getName(), e1);
+		}
+		return null;
+	}
+	
 	private String makeRequest(String url, Request req) {
 		Builder formBody = getFormBodyBuilderFromRequest(req);
 		okhttp3.Request request = new okhttp3.Request.Builder().url(url).post(formBody.build()).build();
