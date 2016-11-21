@@ -24,6 +24,8 @@ public class Message {
 	
 	private Chat forward_from_chat;
 	
+	private int forward_from_message_id;
+	
 	private int forward_date;
 	
 	private Message reply_to_message;
@@ -164,6 +166,29 @@ public class Message {
 		this.forward_from = forward_from;
 	}
 	
+	
+	/**
+	 *  	Optional. For forwarded channel posts, identifier of the original message in the channel
+	 * @return
+	 */
+	public int getForward_from_message_id() 
+	{
+		return forward_from_message_id;
+	}
+
+	/**
+	 *  	Optional. For forwarded channel posts, identifier of the original message in the channel
+	 * @param forward_from_message_id
+	 */
+	public void setForward_from_message_id(int forward_from_message_id)
+	{
+		this.forward_from_message_id = forward_from_message_id;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
 	public Chat getForward_from_chat() 
 	{
 		return forward_from_chat;

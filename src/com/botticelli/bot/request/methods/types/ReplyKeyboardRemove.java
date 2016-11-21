@@ -2,11 +2,11 @@ package com.botticelli.bot.request.methods.types;
 
 public class ReplyKeyboardRemove extends ReplyKeyboard{
 	
-	private boolean hide_keyboard;
+	private boolean remove_keyboard;
 
 	public ReplyKeyboardRemove() 
 	{
-		hide_keyboard = true;
+		remove_keyboard = true;
 	}
 	/**
 	 * Use this constructor to set immediately selective parameter
@@ -15,7 +15,7 @@ public class ReplyKeyboardRemove extends ReplyKeyboard{
 	public ReplyKeyboardRemove(boolean selective)
 	{
 		super(selective);
-		hide_keyboard = true;
+		remove_keyboard = true;
 	}
 	/**
 	 * Requests clients to hide the custom keyboard
@@ -23,7 +23,7 @@ public class ReplyKeyboardRemove extends ReplyKeyboard{
 	 */
 	public boolean getHideKeyboard()
 	{
-		return hide_keyboard;
+		return remove_keyboard;
 	}
 
 }

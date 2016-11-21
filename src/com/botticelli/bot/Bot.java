@@ -569,6 +569,7 @@ public abstract class Bot {
 		if(message.getVoice() != null)
 		{
 			voiceMessage(message);
+			return;
 		}
 		if(message.getContact() != null)
 		{
