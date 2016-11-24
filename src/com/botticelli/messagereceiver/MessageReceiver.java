@@ -85,7 +85,7 @@ public class MessageReceiver {
 		ignoreEditedMessages = true;
 	}
 	
-	public void ignoreChannelMessaes()
+	public void ignoreChannelMessages()
 	{
 		ignoreChannelMessages = true;
 	}
