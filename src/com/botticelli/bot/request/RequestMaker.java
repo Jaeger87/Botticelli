@@ -16,6 +16,7 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
+import com.botticelli.bot.request.methods.DeleteMessageToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
@@ -82,6 +83,7 @@ public class RequestMaker {
 	private String urlSendDocument;
 	private String urlSendSticker;
 	private String urlSendVideo;
+	private String urlSendVideoNote;
 	private String urlSendVoice;
 	private String urlSendVenue;
 	private String urlSendContact;
@@ -93,6 +95,7 @@ public class RequestMaker {
 	private String urlGetMembersCount;
 	private String urlGetMember;
 	private String urlKickChatMember;
+	private String urlDeleteMessage;
 	private String urlUnbanChatMember;
 	private String urlEditMessageText;
 	private String urlEditMessageCaption;
@@ -137,6 +140,7 @@ public class RequestMaker {
 		urlSendDocument = Constants.APIURL + token + Constants.SENDDOCUMENT;
 		urlSendSticker = Constants.APIURL + token + Constants.SENDSTICKER;
 		urlSendVideo = Constants.APIURL + token + Constants.SENDVIDEO;
+		urlSendVideoNote = Constants.APIURL + token + Constants.SENDVIDEONOTE;
 		urlSendVoice = Constants.APIURL + token + Constants.SENDVOICE;
 		urlSendLocation = Constants.APIURL + token + Constants.SENDLOCATION;
 		urlSendChatAction = Constants.APIURL + token + Constants.SENDCHATACTION;
@@ -153,6 +157,7 @@ public class RequestMaker {
 		urlGetMembersCount = Constants.APIURL + token + Constants.GETCHATMEMBERSCOUNT;
 		urlGetMember = Constants.APIURL + token + Constants.GETCHATMEMBER;
 		urlKickChatMember = Constants.APIURL + token + Constants.KICKCHATMEMBER;
+		urlDeleteMessage = Constants.APIURL + token + Constants.DELETEMESSAGE;
 		urlUnbanChatMember = Constants.APIURL + token + Constants.UNBANCHATMEMBER;
 		urlEditMessageText = Constants.APIURL + token + Constants.EDITMESSAGETEXT;
 		urlEditMessageCaption = Constants.APIURL + token + Constants.EDITMESSAGECAPTION;
@@ -460,6 +465,15 @@ public class RequestMaker {
 		return buildResult(makeRequest(urlLeaveChat, crs), booleanResult, new Result<Boolean>()).getOk();
 	}
 
+	/**
+	 * 
+	 * @param crs
+	 * @return
+	 */
+	public boolean deleteMessage(DeleteMessageToSend dms) {
+		return buildResult(makeRequest(urlDeleteMessage, dms), booleanResult, new Result<Boolean>()).getOk();
+	}
+	
 	/**
 	 * 
 	 * @param crs

@@ -15,6 +15,8 @@ public class InlineQueryResultGif extends InlineQueryResult
 	
 	private String thumb_url;
 	
+	private int gif_duration;
+	
 	public InlineQueryResultGif(String id, String gif_url, String thumb_url)
 	{
 		super(id);
@@ -60,6 +62,16 @@ public class InlineQueryResultGif extends InlineQueryResult
 	public String getThumb_url() 
 	{
 		return thumb_url;
+	}
+
+	public int getGifDuration() 
+	{
+		return gif_duration;
+	}
+
+	public void setGifDuration(int gif_duration) 
+	{
+		this.gif_duration = gif_duration;
 	}
 
 	

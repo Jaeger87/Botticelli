@@ -56,6 +56,8 @@ public class Message {
 	
 	private User new_chat_member;
 	
+	private List<User> new_chat_members;
+	
 	private User left_chat_member;
 	
 	private String new_chat_title;
@@ -77,6 +79,8 @@ public class Message {
 	private Message pinned_message;
 	
 	private Game game;
+	
+	private VideoNote video_note;
 	
 	/**
 	 * Unique message identifier
@@ -687,6 +691,42 @@ public class Message {
 	public void setGame(Game game) 
 	{
 		this.game = game;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public List<User> getNewChatMembers() 
+	{
+		return new_chat_members;
+	}
+
+	/**
+	 * 
+	 * @param new_chat_members
+	 */
+	public void setNewChatMembers(List<User> new_chat_members) 
+	{
+		this.new_chat_members = new_chat_members;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public VideoNote getVideoNote() 
+	{
+		return video_note;
+	}
+
+	/**
+	 * 
+	 * @param video_note
+	 */
+	public void setVideoNote(VideoNote video_note) 
+	{
+		this.video_note = video_note;
 	}
 	
 	

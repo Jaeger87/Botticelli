@@ -8,7 +8,7 @@ package com.botticelli.bot.request.methods.types;
 public enum ActionToSend
 {
 	TYPING("typing"),UPLOADPHOTO("upload_photo"),RECORDVIDEO("record_video"),UPLOADVIDEO("upload_video"),RECORDAUDIO("record_audio"),UPLOADAUDIO("upload_audio"),
-	UPLOADDOCUMENT("upload_document"), FINDLOCATION("find_location");
+	UPLOADDOCUMENT("upload_document"), FINDLOCATION("find_location"), RECORDVIDEONOTE("record_video_note"), UPLOADVIDEONOTE("upload_video_note");
 	private String str;
 	/**
 	 * Builder

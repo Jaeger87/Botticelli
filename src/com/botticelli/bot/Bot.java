@@ -13,6 +13,7 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
+import com.botticelli.bot.request.methods.DeleteMessageToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
@@ -347,6 +348,18 @@ public abstract class Bot {
 			return false;
 		return rm.kickChatMember(kmr);
 	}
+	
+	/**
+	 * 
+	 * @param dms
+	 * @return
+	 */
+	public final boolean deleteMessage(DeleteMessageToSend dms)
+	{
+		if(dms == null)
+			return false;
+		return rm.deleteMessage(dms);
+	}
 	/**
 	 * 
 	 * @param aiq
@@ -566,6 +579,12 @@ public abstract class Bot {
 			return;
 		}
 
+		if(message.getVideoNote() != null)
+		{
+			videoNoteMessage(message);
+			return;
+		}
+		
 		if(message.getVoice() != null)
 		{
 			voiceMessage(message);
@@ -592,6 +611,12 @@ public abstract class Bot {
 		if(message.getNewChatMember() != null)
 		{
 			newChatMemberMessage(message);
+			return;
+		}
+		
+		if(message.getNewChatMembers() != null)
+		{
+			newChatMembersMessage(message);
 			return;
 		}
 		
@@ -685,7 +710,13 @@ public abstract class Bot {
      * This method will be called when a new member join the Chat.
      * @param m
      */
+    @Deprecated
     public abstract void newChatMemberMessage(Message m);
+    /**
+     * This method will be called when a new members join the Chat.
+     * @param m
+     */
+    public abstract void newChatMembersMessage(Message m);
     /**
      * This method will be called when a member left the chat
      * @param m
@@ -731,4 +762,9 @@ public abstract class Bot {
      * 
      */
     public abstract void gameMessage(Message m);
+    /**
+     * 
+     * @param m
+     */
+    public abstract void videoNoteMessage(Message m);
 }

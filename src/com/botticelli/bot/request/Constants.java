@@ -12,6 +12,7 @@ public class Constants {
 	public static final String SENDDOCUMENT = "/sendDocument";
 	public static final String SENDSTICKER = "/sendSticker";
 	public static final String SENDVIDEO = "/sendVideo";
+	public static final String SENDVIDEONOTE = "/sendVideoNote";
 	public static final String SENDVOICE = "/sendVoice";
 	public static final String SENDLOCATION = "/sendLocation";
 	public static final String SENDCHATACTION = "/sendChatAction";
@@ -31,6 +32,7 @@ public class Constants {
 	public static final String GETWEBHOOKINFO ="/getWebhookInfo";
 	public static final String SENDCONTACT ="/sendContact";
 	public static final String KICKCHATMEMBER ="/kickChatMember";
+	public static final String DELETEMESSAGE ="/deleteMessage";
 	public static final String UNBANCHATMEMBER ="/unbanChatMember";
 	public static final String EDITMESSAGETEXT ="/editMessageText";
 	public static final String EDITMESSAGECAPTION ="/editMessageCaption";

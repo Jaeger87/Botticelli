@@ -15,7 +15,7 @@ public class User{
 	
 	private String username;
 	
-	
+	private String language_code;
 	
 	/**
 	 * 
@@ -25,7 +25,6 @@ public class User{
 	{
 		return id;
 	}
-
 
 	/**
 	 * 
@@ -101,5 +100,24 @@ public class User{
 	{
 		return false;
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getLanguageCode() 
+	{
+		return language_code;
+	}
+
+	/**
+	 * 
+	 * @param language_code
+	 */
+	public void setLanguageCode(String language_code) 
+	{
+		this.language_code = language_code;
+	}
+	
 	
 }

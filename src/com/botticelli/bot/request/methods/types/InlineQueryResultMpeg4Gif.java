@@ -10,6 +10,8 @@ public class InlineQueryResultMpeg4Gif extends InlineQueryResult {
 	
 	private int mpeg4_height;
 	
+	private int mpeg4_duration;
+	
 	private String caption;
 	
 	private String thumb_url;
@@ -59,6 +61,16 @@ public class InlineQueryResultMpeg4Gif extends InlineQueryResult {
 	public void setCaption(String caption)
 	{
 		this.caption = caption;
+	}
+
+	public int getMpeg4Duration() 
+	{
+		return mpeg4_duration;
+	}
+
+	public void setMpeg4Duration(int mpeg4_duration) 
+	{
+		this.mpeg4_duration = mpeg4_duration;
 	}
 	
 	
