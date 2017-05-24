@@ -35,6 +35,8 @@ import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
 import com.botticelli.bot.request.methods.VideoFileToSend;
+import com.botticelli.bot.request.methods.VideoNoteFileToSend;
+import com.botticelli.bot.request.methods.VideoNoteReferenceToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
@@ -267,6 +269,13 @@ public abstract class Bot {
 		return rm.sendVoicebyReference(vrs);
 	}
 	
+	
+	public final Message sendVideoNotebyReference(VideoNoteReferenceToSend vnr)
+	{
+		if(vnr == null)
+			return null;
+		return rm.sendVideoNotebyReference(vnr);
+	}
 	/**
 	 * 
 	 * @param vts
@@ -305,6 +314,13 @@ public abstract class Bot {
 		if(vfs == null)
 			return null;
 		return rm.sendVideoFile(vfs);
+	}
+	
+	public final Message sendVideoNoteFile(VideoNoteFileToSend vnf)
+	{
+		if(vnf == null)
+			return null;
+		return rm.sendVideoNoteFile(vnf);
 	}
 	/**
 	 * Use this method to send point on the map. On success, the sent Message is returned.

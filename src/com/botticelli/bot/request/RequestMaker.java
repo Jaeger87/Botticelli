@@ -41,6 +41,8 @@ import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
 import com.botticelli.bot.request.methods.VideoFileToSend;
+import com.botticelli.bot.request.methods.VideoNoteFileToSend;
+import com.botticelli.bot.request.methods.VideoNoteReferenceToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
@@ -351,6 +353,15 @@ public class RequestMaker {
 	}
 
 	/**
+	 * 
+	 * @param vnr
+	 * @return
+	 */
+	public Message sendVideoNotebyReference(VideoNoteReferenceToSend vnr) {
+		String json = makeRequest(urlSendVideo, vnr);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
+	/**
 	 * Use this method to send video files, Telegram clients support mp4 videos
 	 * (other formats may be sent as Document). On success, the sent Message is
 	 * returned, else return null. Bots can currently send video files of up to
@@ -364,6 +375,10 @@ public class RequestMaker {
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
+	public Message sendVideoNoteFile(VideoNoteFileToSend vnf) {
+		String json = makeRequestFile(urlSendVideo, vnf);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
 	/**
 	 * 
 	 * @param vrs

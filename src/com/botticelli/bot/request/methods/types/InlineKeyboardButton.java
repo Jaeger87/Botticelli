@@ -8,7 +8,7 @@ public class InlineKeyboardButton {
 	private String switch_inline_query;
 	private String switch_inline_query_current_chat;
 	private CallbackGame callback_game;
-	
+	private boolean pay;
 	
 	public InlineKeyboardButton(String text) 
 	{
@@ -99,6 +99,16 @@ public class InlineKeyboardButton {
 	public void setSwitch_inline_query_current_chat(String switch_inline_query_current_chat) 
 	{
 		this.switch_inline_query_current_chat = switch_inline_query_current_chat;
+	}
+
+	public boolean isPay() 
+	{
+		return pay;
+	}
+
+	public void setPay(boolean pay) 
+	{
+		this.pay = pay;
 	}
 	
 	
