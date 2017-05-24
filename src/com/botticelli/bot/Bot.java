@@ -97,6 +97,22 @@ public abstract class Bot {
 		return rm.sendMessage(mts);
 	}
 	
+	
+/*failed experiment
+	public final Message ASyncSendMessage(MessageToSend mts)
+	{
+		if(mts == null)
+			return null;
+		return ASyncExecutor(Bot::sendMessage,mts);
+	}
+	
+	
+    private Message ASyncExecutor(BiFunction<Bot, Request, Message> f, Request r)
+    {
+        return f.apply(this,r);
+    }
+	*/
+	
 	/**
 	 * Use this method to forward messages of any kind. On success, the sent Message is returned.
 	 * @param fts
