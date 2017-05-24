@@ -13,6 +13,7 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
+import com.botticelli.bot.request.methods.DeleteMessageToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
@@ -34,6 +35,8 @@ import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
 import com.botticelli.bot.request.methods.VideoFileToSend;
+import com.botticelli.bot.request.methods.VideoNoteFileToSend;
+import com.botticelli.bot.request.methods.VideoNoteReferenceToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
@@ -96,22 +99,6 @@ public abstract class Bot {
 			return null;
 		return rm.sendMessage(mts);
 	}
-	
-	
-/*failed experiment
-	public final Message ASyncSendMessage(MessageToSend mts)
-	{
-		if(mts == null)
-			return null;
-		return ASyncExecutor(Bot::sendMessage,mts);
-	}
-	
-	
-    private Message ASyncExecutor(BiFunction<Bot, Request, Message> f, Request r)
-    {
-        return f.apply(this,r);
-    }
-	*/
 	
 	/**
 	 * Use this method to forward messages of any kind. On success, the sent Message is returned.
@@ -282,6 +269,13 @@ public abstract class Bot {
 		return rm.sendVoicebyReference(vrs);
 	}
 	
+	
+	public final Message sendVideoNotebyReference(VideoNoteReferenceToSend vnr)
+	{
+		if(vnr == null)
+			return null;
+		return rm.sendVideoNotebyReference(vnr);
+	}
 	/**
 	 * 
 	 * @param vts
@@ -321,6 +315,13 @@ public abstract class Bot {
 			return null;
 		return rm.sendVideoFile(vfs);
 	}
+	
+	public final Message sendVideoNoteFile(VideoNoteFileToSend vnf)
+	{
+		if(vnf == null)
+			return null;
+		return rm.sendVideoNoteFile(vnf);
+	}
 	/**
 	 * Use this method to send point on the map. On success, the sent Message is returned.
 	 * @param lts
@@ -339,9 +340,9 @@ public abstract class Bot {
 	 * Telegram clients clear its typing status).
 	 * Example: 
 	 * The ImageBot needs some time to process a request and upload the image. 
-	 * Instead of sending a text message along the lines of “Retrieving image, please wait…”, 
+	 * Instead of sending a text message along the lines of Â“Retrieving image, please waitÂ…Â”, 
 	 * the bot may use sendChatAction with action = upload_photo. 
-	 * The user will see a “sending photo” status for the bot. 
+	 * The user will see a Â“sending photoÂ” status for the bot. 
 	 * @param cts
 	 * @return
 	 */
@@ -362,6 +363,18 @@ public abstract class Bot {
 		if(kmr == null)
 			return false;
 		return rm.kickChatMember(kmr);
+	}
+	
+	/**
+	 * 
+	 * @param dms
+	 * @return
+	 */
+	public final boolean deleteMessage(DeleteMessageToSend dms)
+	{
+		if(dms == null)
+			return false;
+		return rm.deleteMessage(dms);
 	}
 	/**
 	 * 
@@ -582,9 +595,16 @@ public abstract class Bot {
 			return;
 		}
 
+		if(message.getVideoNote() != null)
+		{
+			videoNoteMessage(message);
+			return;
+		}
+		
 		if(message.getVoice() != null)
 		{
 			voiceMessage(message);
+			return;
 		}
 		if(message.getContact() != null)
 		{
@@ -607,6 +627,12 @@ public abstract class Bot {
 		if(message.getNewChatMember() != null)
 		{
 			newChatMemberMessage(message);
+			return;
+		}
+		
+		if(message.getNewChatMembers() != null)
+		{
+			newChatMembersMessage(message);
 			return;
 		}
 		
@@ -700,7 +726,13 @@ public abstract class Bot {
      * This method will be called when a new member join the Chat.
      * @param m
      */
+    @Deprecated
     public abstract void newChatMemberMessage(Message m);
+    /**
+     * This method will be called when a new members join the Chat.
+     * @param m
+     */
+    public abstract void newChatMembersMessage(Message m);
     /**
      * This method will be called when a member left the chat
      * @param m
@@ -746,4 +778,9 @@ public abstract class Bot {
      * 
      */
     public abstract void gameMessage(Message m);
+    /**
+     * 
+     * @param m
+     */
+    public abstract void videoNoteMessage(Message m);
 }
