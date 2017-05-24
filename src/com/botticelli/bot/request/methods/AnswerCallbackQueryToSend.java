@@ -9,6 +9,7 @@ public class AnswerCallbackQueryToSend implements Request{
 	private String text;
 	private boolean show_alert;
 	private String url;
+	private int cache_time;
 	
 	public AnswerCallbackQueryToSend(String callback_query_id) 
 	{
@@ -69,7 +70,18 @@ public class AnswerCallbackQueryToSend implements Request{
 		map.put("callback_query_id", callback_query_id);
 		map.put("text", text);
 		map.put("show_alert", show_alert);
+		map.put("cache_time", cache_time);
 		return map;
+	}
+
+	public int getCache_time() 
+	{
+		return cache_time;
+	}
+
+	public void setCache_time(int cache_time) 
+	{
+		this.cache_time = cache_time;
 	}
 	
 	

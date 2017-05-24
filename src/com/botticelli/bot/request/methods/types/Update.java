@@ -19,7 +19,9 @@ public class Update {
 	
 	private CallbackQuery callback_query; 
 	
-
+	private Message channel_post;
+	
+	private Message edited_channel_post;
 
 	/**
 	 * The update‘s unique identifier. 
@@ -66,6 +68,27 @@ public class Update {
 		return edited_message != null;
 	}
 	
+	
+	public boolean isChannelPostUpdate()
+	{
+		return channel_post != null;
+	}
+	
+	public boolean isEditedChannelPostUpdate()
+	{
+		return edited_channel_post != null;
+	}
+	
+	public Message getChannel_post() 
+	{
+		return channel_post;
+	}
+
+	public Message getEdited_channel_post() 
+	{
+		return edited_channel_post;
+	}
+
 	public Message getEdited_message() 
 	{
 		return edited_message;
@@ -111,4 +134,7 @@ public class Update {
 	{
 		return callback_query != null;
 	}
+	
+	
+	
 }

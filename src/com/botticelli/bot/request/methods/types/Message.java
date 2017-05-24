@@ -24,6 +24,8 @@ public class Message {
 	
 	private Chat forward_from_chat;
 	
+	private int forward_from_message_id;
+	
 	private int forward_date;
 	
 	private Message reply_to_message;
@@ -54,6 +56,8 @@ public class Message {
 	
 	private User new_chat_member;
 	
+	private List<User> new_chat_members;
+	
 	private User left_chat_member;
 	
 	private String new_chat_title;
@@ -75,6 +79,8 @@ public class Message {
 	private Message pinned_message;
 	
 	private Game game;
+	
+	private VideoNote video_note;
 	
 	/**
 	 * Unique message identifier
@@ -164,6 +170,29 @@ public class Message {
 		this.forward_from = forward_from;
 	}
 	
+	
+	/**
+	 *  	Optional. For forwarded channel posts, identifier of the original message in the channel
+	 * @return
+	 */
+	public int getForward_from_message_id() 
+	{
+		return forward_from_message_id;
+	}
+
+	/**
+	 *  	Optional. For forwarded channel posts, identifier of the original message in the channel
+	 * @param forward_from_message_id
+	 */
+	public void setForward_from_message_id(int forward_from_message_id)
+	{
+		this.forward_from_message_id = forward_from_message_id;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
 	public Chat getForward_from_chat() 
 	{
 		return forward_from_chat;
@@ -662,6 +691,42 @@ public class Message {
 	public void setGame(Game game) 
 	{
 		this.game = game;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public List<User> getNewChatMembers() 
+	{
+		return new_chat_members;
+	}
+
+	/**
+	 * 
+	 * @param new_chat_members
+	 */
+	public void setNewChatMembers(List<User> new_chat_members) 
+	{
+		this.new_chat_members = new_chat_members;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public VideoNote getVideoNote() 
+	{
+		return video_note;
+	}
+
+	/**
+	 * 
+	 * @param video_note
+	 */
+	public void setVideoNote(VideoNote video_note) 
+	{
+		this.video_note = video_note;
 	}
 	
 	

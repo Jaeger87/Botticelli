@@ -3,14 +3,10 @@ package com.botticelli.bot.request;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.apache.commons.io.FileUtils;
 
 import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
@@ -20,6 +16,7 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
+import com.botticelli.bot.request.methods.DeleteMessageToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
@@ -44,6 +41,8 @@ import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
 import com.botticelli.bot.request.methods.VideoFileToSend;
+import com.botticelli.bot.request.methods.VideoNoteFileToSend;
+import com.botticelli.bot.request.methods.VideoNoteReferenceToSend;
 import com.botticelli.bot.request.methods.VideoReferenceToSend;
 import com.botticelli.bot.request.methods.VoiceFileToSend;
 import com.botticelli.bot.request.methods.VoiceReferenceToSend;
@@ -69,6 +68,8 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.BufferedSink;
+import okio.Okio;
 
 public class RequestMaker {
 	private OkHttpClient client;
@@ -84,6 +85,7 @@ public class RequestMaker {
 	private String urlSendDocument;
 	private String urlSendSticker;
 	private String urlSendVideo;
+	private String urlSendVideoNote;
 	private String urlSendVoice;
 	private String urlSendVenue;
 	private String urlSendContact;
@@ -95,6 +97,7 @@ public class RequestMaker {
 	private String urlGetMembersCount;
 	private String urlGetMember;
 	private String urlKickChatMember;
+	private String urlDeleteMessage;
 	private String urlUnbanChatMember;
 	private String urlEditMessageText;
 	private String urlEditMessageCaption;
@@ -139,6 +142,7 @@ public class RequestMaker {
 		urlSendDocument = Constants.APIURL + token + Constants.SENDDOCUMENT;
 		urlSendSticker = Constants.APIURL + token + Constants.SENDSTICKER;
 		urlSendVideo = Constants.APIURL + token + Constants.SENDVIDEO;
+		urlSendVideoNote = Constants.APIURL + token + Constants.SENDVIDEONOTE;
 		urlSendVoice = Constants.APIURL + token + Constants.SENDVOICE;
 		urlSendLocation = Constants.APIURL + token + Constants.SENDLOCATION;
 		urlSendChatAction = Constants.APIURL + token + Constants.SENDCHATACTION;
@@ -155,6 +159,7 @@ public class RequestMaker {
 		urlGetMembersCount = Constants.APIURL + token + Constants.GETCHATMEMBERSCOUNT;
 		urlGetMember = Constants.APIURL + token + Constants.GETCHATMEMBER;
 		urlKickChatMember = Constants.APIURL + token + Constants.KICKCHATMEMBER;
+		urlDeleteMessage = Constants.APIURL + token + Constants.DELETEMESSAGE;
 		urlUnbanChatMember = Constants.APIURL + token + Constants.UNBANCHATMEMBER;
 		urlEditMessageText = Constants.APIURL + token + Constants.EDITMESSAGETEXT;
 		urlEditMessageCaption = Constants.APIURL + token + Constants.EDITMESSAGECAPTION;
@@ -348,6 +353,15 @@ public class RequestMaker {
 	}
 
 	/**
+	 * 
+	 * @param vnr
+	 * @return
+	 */
+	public Message sendVideoNotebyReference(VideoNoteReferenceToSend vnr) {
+		String json = makeRequest(urlSendVideo, vnr);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
+	/**
 	 * Use this method to send video files, Telegram clients support mp4 videos
 	 * (other formats may be sent as Document). On success, the sent Message is
 	 * returned, else return null. Bots can currently send video files of up to
@@ -361,6 +375,10 @@ public class RequestMaker {
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
+	public Message sendVideoNoteFile(VideoNoteFileToSend vnf) {
+		String json = makeRequestFile(urlSendVideo, vnf);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
 	/**
 	 * 
 	 * @param vrs
@@ -462,6 +480,15 @@ public class RequestMaker {
 		return buildResult(makeRequest(urlLeaveChat, crs), booleanResult, new Result<Boolean>()).getOk();
 	}
 
+	/**
+	 * 
+	 * @param crs
+	 * @return
+	 */
+	public boolean deleteMessage(DeleteMessageToSend dms) {
+		return buildResult(makeRequest(urlDeleteMessage, dms), booleanResult, new Result<Boolean>()).getOk();
+	}
+	
 	/**
 	 * 
 	 * @param crs
@@ -607,6 +634,7 @@ public class RequestMaker {
 		return result;
 	}
 
+	/*
 	public File downloadFileFromTelegramServer(DownlodableFile df, String filename) {
 
 		try {
@@ -621,7 +649,25 @@ public class RequestMaker {
 		}
 		return null;
 	}
+*/
+	
+	public File downloadFileFromTelegramServer(DownlodableFile df, String filename) {
 
+		okhttp3.Request request = new okhttp3.Request.Builder().url(urlDownloadFile + df.getFilePath()).build();
+		try (Response response = client.newCall(request).execute()) {
+			File f = new File(filename);
+			BufferedSink sink = Okio.buffer(Okio.sink(f));
+            sink.writeAll(response.body().source());
+            sink.close();
+            return f;
+		}
+		
+		catch (IOException e1) {
+			errorLogger.log(Level.SEVERE, df.getClass().getName(), e1);
+		}
+		return null;
+	}
+	
 	private String makeRequest(String url, Request req) {
 		Builder formBody = getFormBodyBuilderFromRequest(req);
 		okhttp3.Request request = new okhttp3.Request.Builder().url(url).post(formBody.build()).build();
