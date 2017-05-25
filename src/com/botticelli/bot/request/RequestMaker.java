@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
+import com.botticelli.bot.request.methods.AnswerShippingQuery;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
@@ -27,6 +28,7 @@ import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
 import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
+import com.botticelli.bot.request.methods.InvoiceToSend;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
@@ -88,8 +90,10 @@ public class RequestMaker {
 	private String urlSendVideoNote;
 	private String urlSendVoice;
 	private String urlSendVenue;
+	private String urlSendInvoice;
 	private String urlSendContact;
 	private String urlAnswerInlineQuery;
+	private String urlAnswerShippingQuery;
 	private String urlAnswerCallbackQuery;
 	private String urlLeaveChat;;
 	private String urlGetChat;
@@ -148,8 +152,10 @@ public class RequestMaker {
 		urlSendChatAction = Constants.APIURL + token + Constants.SENDCHATACTION;
 		urlGetUserProfilePhotos = Constants.APIURL + token + Constants.GETUSERPROFILEPHOTOS;
 		urlSendVenue = Constants.APIURL + token + Constants.SENDVENUE;
+		urlAnswerShippingQuery = Constants.APIURL + token + Constants.ANSWERSHIPPINGQUERY;
 		urlSendContact = Constants.APIURL + token + Constants.SENDCONTACT;
 		urlLeaveChat = Constants.APIURL + token + Constants.LEAVECHAT;
+		urlSendInvoice = Constants.APIURL + token + Constants.SENDINVOICE;
 		urlGetChat = Constants.APIURL + token + Constants.GETCHAT;
 		urlGetChatAdministrators = Constants.APIURL + token + Constants.GETCHATADMINISTRATORS;
 		urlSendGame = Constants.APIURL + token + Constants.SENDGAME;
@@ -358,7 +364,7 @@ public class RequestMaker {
 	 * @return
 	 */
 	public Message sendVideoNotebyReference(VideoNoteReferenceToSend vnr) {
-		String json = makeRequest(urlSendVideo, vnr);
+		String json = makeRequest(urlSendVideoNote, vnr);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 	/**
@@ -376,7 +382,7 @@ public class RequestMaker {
 	}
 
 	public Message sendVideoNoteFile(VideoNoteFileToSend vnf) {
-		String json = makeRequestFile(urlSendVideo, vnf);
+		String json = makeRequestFile(urlSendVideoNote, vnf);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 	/**
@@ -445,6 +451,12 @@ public class RequestMaker {
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
+	
+	public Message sendInvoice(InvoiceToSend its) {
+		String json = makeRequest(urlSendInvoice, its);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
+	
 	/**
 	 * Use this method when you need to tell the user that something is
 	 * happening on the bot's side. The status is set for 5 seconds or less
@@ -489,6 +501,15 @@ public class RequestMaker {
 		return buildResult(makeRequest(urlDeleteMessage, dms), booleanResult, new Result<Boolean>()).getOk();
 	}
 	
+	
+	/**
+	 * 
+	 * @param asq
+	 * @return
+	 */
+	public boolean answerShippingQuery(AnswerShippingQuery asq) {
+		return buildResult(makeRequest(urlAnswerShippingQuery, asq), booleanResult, new Result<Boolean>()).getOk();
+	}
 	/**
 	 * 
 	 * @param crs

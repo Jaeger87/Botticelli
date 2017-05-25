@@ -14,6 +14,7 @@ public class Constants {
 	public static final String SENDVIDEO = "/sendVideo";
 	public static final String SENDVIDEONOTE = "/sendVideoNote";
 	public static final String SENDVOICE = "/sendVoice";
+	public static final String SENDINVOICE = "/sendInvoice";
 	public static final String SENDLOCATION = "/sendLocation";
 	public static final String SENDCHATACTION = "/sendChatAction";
 	public static final String GETUSERPROFILEPHOTOS = "/getUserProfilePhotos";
@@ -38,6 +39,7 @@ public class Constants {
 	public static final String EDITMESSAGECAPTION ="/editMessageCaption";
 	public static final String EDITMESSAGEREPLYMARKUP ="/editMessageReplyMarkup";
 	public static final String ANSWERINLINEQUERY ="/answerInlineQuery";
+	public static final String ANSWERSHIPPINGQUERY ="/answerShippingQuery";
 	public static final String ANSWERCALLBACKQUERY ="/answerCallbackQuery";
 	public static final String URLENCODEDCONTENTTYPE = "application/x-www-form-urlencoded";
 	public static final String URLDATACONTENTTYPE = "multipart/form-data";

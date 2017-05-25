@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import com.botticelli.bot.request.RequestMaker;
 import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
+import com.botticelli.bot.request.methods.AnswerShippingQuery;
 import com.botticelli.bot.request.methods.AudioFileToSend;
 import com.botticelli.bot.request.methods.AudioReferenceToSend;
 import com.botticelli.bot.request.methods.ChatActionToSend;
@@ -23,6 +24,7 @@ import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
 import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
+import com.botticelli.bot.request.methods.InvoiceToSend;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
@@ -146,6 +148,13 @@ public abstract class Bot {
 		if(ars == null)
 			return null;
 		return rm.sendAudiobyReference(ars);
+	}
+	
+	public final Message sendInvoice(InvoiceToSend its)
+	{
+		if(its == null)
+			return null;
+		return rm.sendInvoice(its);
 	}
 	
 	/**
@@ -375,6 +384,14 @@ public abstract class Bot {
 		if(dms == null)
 			return false;
 		return rm.deleteMessage(dms);
+	}
+	
+	
+	public final boolean answerShippingQuery(AnswerShippingQuery asq)
+	{
+		if(asq == null)
+			return false;
+		return rm.answerShippingQuery(asq);
 	}
 	/**
 	 * 
