@@ -23,6 +23,12 @@ public class HandleMessageThread implements Runnable
 		this.ignoreChannelMessages = ignoreChannelMessages;
 	}
 	
+	public HandleMessageThread(Bot bot, Update u) 
+	{
+		this.update = u;
+		this.bot = bot;
+	}
+	
 	@Override
 	public void run() 
 	{
@@ -41,6 +47,7 @@ public class HandleMessageThread implements Runnable
 			bot.chose_inline_result(update.getChosenInlineResult());
 			return;
 		}
+		
 		if(update.isCallbackUpdate())
 		{
 			bot.callback_query(update.getCallback_query());
@@ -63,7 +70,16 @@ public class HandleMessageThread implements Runnable
 			return;
 		}
 		
+		if(update.isPreCheckOutQuery())
+		{
+			bot.preCheckOutQueryMessage(update.getPreCheckoutQuery());
+			return;
+		}
 		
+		if(update.isShippingQuery())
+		{
+			bot.shippingQueryMessage(update.getShippingQuery());
+		}
 	}
 
 }

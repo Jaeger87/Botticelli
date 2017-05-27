@@ -22,6 +22,10 @@ public class Update {
 	private Message channel_post;
 	
 	private Message edited_channel_post;
+	
+	private ShippingQuery shipping_query;
+	
+	private PreCheckoutQuery pre_checkout_query;
 
 	/**
 	 * The update‘s unique identifier. 
@@ -135,6 +139,25 @@ public class Update {
 		return callback_query != null;
 	}
 	
+	public boolean isPreCheckOutQuery()
+	{
+		return pre_checkout_query != null;
+	}
+	
+	public boolean isShippingQuery()
+	{
+		return shipping_query != null;
+	}
+
+	public ShippingQuery getShippingQuery() 
+	{
+		return shipping_query;
+	}
+
+	public PreCheckoutQuery getPreCheckoutQuery() 
+	{
+		return pre_checkout_query;
+	}
 	
 	
 }

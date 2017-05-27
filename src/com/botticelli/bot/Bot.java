@@ -51,6 +51,8 @@ import com.botticelli.bot.request.methods.types.GameHighScore;
 import com.botticelli.bot.request.methods.types.GameScoreResult;
 import com.botticelli.bot.request.methods.types.InlineQuery;
 import com.botticelli.bot.request.methods.types.Message;
+import com.botticelli.bot.request.methods.types.PreCheckoutQuery;
+import com.botticelli.bot.request.methods.types.ShippingQuery;
 import com.botticelli.bot.request.methods.types.TelegramFile;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
@@ -659,6 +661,12 @@ public abstract class Bot {
 			return;
 		}
 		
+		if(message.getPinned_message() != null)
+		{
+			pinnedMessage(message);
+			return;
+		}
+		
 		if(message.getNewChatTitle() != null)
 		{
 			newChatTitleMessage(message);
@@ -686,6 +694,18 @@ public abstract class Bot {
 		if(message.getGame() != null)
 		{
 			gameMessage(message);
+			return;
+		}
+		
+		if(message.getSuccessfulPayment() != null)
+		{
+			successfulPaymentMessage(message);
+			return;
+		}
+		
+		if(message.getInvoice() != null)
+		{
+			invoiceMessage(message);
 			return;
 		}
 	}
@@ -800,4 +820,16 @@ public abstract class Bot {
      * @param m
      */
     public abstract void videoNoteMessage(Message m);
+    /*
+     * 
+     */
+    public abstract void pinnedMessage(Message m);
+    
+    public abstract void preCheckOutQueryMessage(PreCheckoutQuery pcq);
+    
+    public abstract void shippingQueryMessage(ShippingQuery sq);
+    
+    public abstract void invoiceMessage(Message m);
+    
+    public abstract void successfulPaymentMessage(Message m);
 }

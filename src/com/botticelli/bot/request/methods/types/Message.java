@@ -82,6 +82,10 @@ public class Message {
 	
 	private VideoNote video_note;
 	
+	private Invoice invoice;
+	
+	private SuccessfulPayment successful_payment;
+	
 	/**
 	 * Unique message identifier
 	 * @return
@@ -727,6 +731,26 @@ public class Message {
 	public void setVideoNote(VideoNote video_note) 
 	{
 		this.video_note = video_note;
+	}
+
+	public Invoice getInvoice() 
+	{
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) 
+	{
+		this.invoice = invoice;
+	}
+
+	public SuccessfulPayment getSuccessfulPayment() 
+	{
+		return successful_payment;
+	}
+
+	public void setSuccessfulPayment(SuccessfulPayment successful_payment) 
+	{
+		this.successful_payment = successful_payment;
 	}
 	
 	
