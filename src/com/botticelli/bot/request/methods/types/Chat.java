@@ -11,6 +11,9 @@ public class Chat extends User{
 	private String type;
 	private String title;
 	private boolean all_members_are_administrators;
+	private ChatPhoto photo;
+	private String description;
+	private String invite_link;
 	
 	/**
 	 * Type of chat, can be either “private”, “group”, “supergroup” or “channel”
@@ -55,6 +58,33 @@ public class Chat extends User{
 	public void setAll_members_are_administrators(boolean all_members_are_administrators) 
 	{
 		this.all_members_are_administrators = all_members_are_administrators;
+	}
+
+	public ChatPhoto getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(ChatPhoto photo) {
+		this.photo = photo;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) 
+	{
+		this.description = description;
+	}
+
+	public String getInvite_link() 
+	{
+		return invite_link;
+	}
+
+	public void setInvite_link(String invite_link) 
+	{
+		this.invite_link = invite_link;
 	}
 	
 	
