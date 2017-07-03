@@ -35,6 +35,15 @@ public class Constants {
 	public static final String KICKCHATMEMBER ="/kickChatMember";
 	public static final String DELETEMESSAGE ="/deleteMessage";
 	public static final String UNBANCHATMEMBER ="/unbanChatMember";
+	public static final String RESTRICTCHATMEMBER = "/restrictChatMember";
+	public static final String PROMOTECHATMEMBER = "/promoteChatMember";
+	public static final String EXPORTCHATINVITELINK = "/exportChatInviteLink";
+	public static final String SETCHATPHOTO = "/setChatPhoto";
+	public static final String DELETECHATPHOTO = "/deleteChatPhoto";
+	public static final String SETCHATTITLE = "/setChatTitle";
+	public static final String SETCHATDESCRIPTION = "/setChatDescription";
+	public static final String PINCHATMESSAGE = "/pinChatMessage";
+	public static final String UNPINCHATMESSAGE = "/unpinChatMessage";
 	public static final String EDITMESSAGETEXT ="/editMessageText";
 	public static final String EDITMESSAGECAPTION ="/editMessageCaption";
 	public static final String EDITMESSAGEREPLYMARKUP ="/editMessageReplyMarkup";

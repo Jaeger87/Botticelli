@@ -112,11 +112,18 @@ public class RequestMaker {
 	private String urlSetGameScore;
 	private String urlGetGameHighScores;
 	private String urlGetWebhookInfo;
-
+	private String urlRescrictChatMembers;
+	private String urlPromoteChatMember;
+	private String urlExportChatInviteLink;
+	private String urlSetChatPhoto;
+	private String urlDeleteChatPhoto;
+	private String urlSetChatTitle;
+	private String urlSetChatDescription;
+	private String urlPinChatMessage;
+	private String urlUnpinChatMessage;
 	private String urlGetUserProfilePhotos;
 	private String urlGetFile;
 	private String urlDownloadFile;
-
 	private Type intResult;
 	private Type chatResult;
 	private Type booleanResult;
