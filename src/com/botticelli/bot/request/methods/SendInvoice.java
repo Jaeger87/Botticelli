@@ -3,6 +3,7 @@ package com.botticelli.bot.request.methods;
 import java.util.List;
 import java.util.Map;
 
+import com.botticelli.bot.request.methods.types.Currency;
 import com.botticelli.bot.request.methods.types.LabeledPrice;
 
 public class SendInvoice extends AbstractReplyManageToSend{
@@ -13,7 +14,7 @@ public class SendInvoice extends AbstractReplyManageToSend{
 	private String payload;
 	private String provider_token;
 	private String start_parameter;
-	private String currency;
+	private Currency currency;
 	private List<LabeledPrice> prices;
 	private String photo_url;
 	private int photo_size;
@@ -51,7 +52,7 @@ public class SendInvoice extends AbstractReplyManageToSend{
 
 	
 	public SendInvoice(long chat_id, String title, String description, String payload, String provider_token,
-			String start_parameter, String currency, List<LabeledPrice> prices) 
+			String start_parameter, Currency currency, List<LabeledPrice> prices) 
 	{
 		super(chat_id);
 		this.title = title;

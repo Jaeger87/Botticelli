@@ -6,7 +6,7 @@ public class PreCheckoutQuery {
 	
 	private User from;
 	
-	private String currency;
+	private Currency currency;
 	
 	private int total_amount;
 	
@@ -36,12 +36,12 @@ public class PreCheckoutQuery {
 		this.from = from;
 	}
 
-	public String getCurrency() 
+	public Currency getCurrency() 
 	{
 		return currency;
 	}
 
-	public void setCurrency(String currency) 
+	public void setCurrency(Currency currency) 
 	{
 		this.currency = currency;
 	}

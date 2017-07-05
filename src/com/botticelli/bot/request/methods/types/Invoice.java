@@ -9,7 +9,7 @@ public class Invoice {
 	
 	private String start_parameter;
 	
-	private String currency;
+	private Currency currency;
 	
 	private int total_amount;
 
@@ -43,12 +43,12 @@ public class Invoice {
 		this.start_parameter = start_parameter;
 	}
 
-	public String getCurrency() 
+	public Currency getCurrency() 
 	{
 		return currency;
 	}
 
-	public void setCurrency(String currency) 
+	public void setCurrency(Currency currency) 
 	{
 		this.currency = currency;
 	}

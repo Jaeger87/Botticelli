@@ -2,7 +2,7 @@ package com.botticelli.bot.request.methods.types;
 
 public class SuccessfulPayment {
 
-	private String currency;
+	private Currency currency;
 	private int total_amount;
 	private String invoice_payload;
 	private String shipping_option_id;
@@ -11,12 +11,12 @@ public class SuccessfulPayment {
 	private String provider_payment_charge_id;
 	
 	
-	public String getCurrency() 
+	public Currency getCurrency() 
 	{
 		return currency;
 	}
 	
-	public void setCurrency(String currency) 
+	public void setCurrency(Currency currency) 
 	{
 		this.currency = currency;
 	}
