@@ -17,12 +17,14 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
+import com.botticelli.bot.request.methods.DeleteChatPhotoRequest;
 import com.botticelli.bot.request.methods.DeleteMessageToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
 import com.botticelli.bot.request.methods.EditMessageReplyMarkupRequest;
 import com.botticelli.bot.request.methods.EditMessageTextRequest;
+import com.botticelli.bot.request.methods.ExportChatInviteLinkRequest;
 import com.botticelli.bot.request.methods.FileRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GameToSend;
@@ -34,11 +36,18 @@ import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
 import com.botticelli.bot.request.methods.PhotoReferenceToSend;
+import com.botticelli.bot.request.methods.PinChatMessageRequest;
+import com.botticelli.bot.request.methods.PromoteChatMemberRequest;
 import com.botticelli.bot.request.methods.Request;
+import com.botticelli.bot.request.methods.RestrictChatMemberRequest;
+import com.botticelli.bot.request.methods.SetChatDescriptionRequest;
+import com.botticelli.bot.request.methods.SetChatPhotoRequest;
+import com.botticelli.bot.request.methods.SetChatTitleRequest;
 import com.botticelli.bot.request.methods.SetGameScoreRequest;
 import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
 import com.botticelli.bot.request.methods.UnbanChatMemberRequest;
+import com.botticelli.bot.request.methods.UnpinChatMessageRequest;
 import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
@@ -128,6 +137,7 @@ public class RequestMaker {
 	private Type chatResult;
 	private Type booleanResult;
 	private Type messageResult;
+	private Type stringResult;
 	private Type userProfilePhotosResult;
 	private Type downlodableFileResult;
 	private Type listUpdateResult;
@@ -181,7 +191,17 @@ public class RequestMaker {
 		urlAnswerCallbackQuery = Constants.APIURL + token + Constants.ANSWERCALLBACKQUERY;
 		urlGetFile = Constants.APIURL + token + Constants.GETFILE;
 		urlDownloadFile = Constants.APIFILEURL + token + '/';
-
+		urlRescrictChatMembers = Constants.APIURL + token + Constants.RESTRICTCHATMEMBER;
+		urlPromoteChatMember = Constants.APIURL + token + Constants.PROMOTECHATMEMBER;
+		urlExportChatInviteLink = Constants.APIURL + token + Constants.EXPORTCHATINVITELINK;
+		urlSetChatPhoto = Constants.APIURL + token + Constants.SETCHATPHOTO;
+		urlDeleteChatPhoto = Constants.APIURL + token + Constants.DELETECHATPHOTO;
+		urlSetChatTitle = Constants.APIURL + token + Constants.SETCHATTITLE;
+		urlSetChatDescription = Constants.APIURL + token + Constants.SETCHATDESCRIPTION;
+		urlPinChatMessage = Constants.APIURL + token + Constants.PINCHATMESSAGE;
+		urlUnpinChatMessage = Constants.APIURL + token + Constants.UNPINCHATMESSAGE;
+		
+		
 		intResult = new TypeToken<Result<Integer>>() {
 		}.getType();
 		booleanResult = new TypeToken<Result<Boolean>>() {
@@ -190,6 +210,8 @@ public class RequestMaker {
 		}.getType();
 		messageResult = new TypeToken<Result<Message>>() {
 		}.getType();
+		stringResult = new TypeToken<Result<String>>() {
+		}.getType(); 
 		userProfilePhotosResult = new TypeToken<Result<UserProfilePhotos>>() {
 		}.getType();
 		downlodableFileResult = new TypeToken<Result<DownlodableFile>>() {
@@ -593,6 +615,96 @@ public class RequestMaker {
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
+	/**
+	 * 
+	 * @param rcm
+	 * @return
+	 */
+	public boolean restrictChatMember(RestrictChatMemberRequest rcm)
+	{
+		String json = makeRequest(urlRescrictChatMembers, rcm);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	/**
+	 * 
+	 * @param pcm
+	 * @return
+	 */
+	public boolean promoteChatMember(PromoteChatMemberRequest pcm)
+	{
+		String json = makeRequest(urlPromoteChatMember, pcm);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
+	/**
+	 * 
+	 * @param eci
+	 * @return
+	 */
+	public String exportChatInviteLink(ExportChatInviteLinkRequest eci)
+	{
+		String json = makeRequest(urlExportChatInviteLink, eci);
+		return buildResult(json, stringResult, new Result<String>()).getResult();
+	}
+	
+	/**
+	 * 
+	 * @param scp
+	 * @return
+	 */
+	public boolean setChatPhoto(SetChatPhotoRequest scp)
+	{
+		String json = makeRequest(urlSetChatPhoto, scp);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
+	/**
+	 * 
+	 * @param dcp
+	 * @return
+	 */
+	public boolean deleteChatPhoto(DeleteChatPhotoRequest dcp)
+	{
+		String json = makeRequest(urlDeleteChatPhoto, dcp);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	/**
+	 * 
+	 * @param sct
+	 * @return
+	 */
+	public boolean setChatTitle(SetChatTitleRequest sct)
+	{
+		String json = makeRequest(urlSetChatTitle, sct);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	/**
+	 * 
+	 * @param scd
+	 * @return
+	 */
+	public boolean setChatDescription(SetChatDescriptionRequest scd)
+	{
+		String json = makeRequest(urlSetChatDescription, scd);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
+	/**
+	 * 
+	 * @param pcm
+	 * @return
+	 */
+	public boolean pinChatMessage(PinChatMessageRequest pcm)
+	{
+		String json = makeRequest(urlPinChatMessage, pcm);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+
+	public boolean unpinChatMessage(UnpinChatMessageRequest ucm)
+	{
+		String json = makeRequest(urlUnpinChatMessage, ucm);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
 	/**
 	 * 
 	 * @param emr

@@ -14,12 +14,14 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
+import com.botticelli.bot.request.methods.DeleteChatPhotoRequest;
 import com.botticelli.bot.request.methods.DeleteMessageToSend;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
 import com.botticelli.bot.request.methods.EditMessageReplyMarkupRequest;
 import com.botticelli.bot.request.methods.EditMessageTextRequest;
+import com.botticelli.bot.request.methods.ExportChatInviteLinkRequest;
 import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
@@ -30,9 +32,16 @@ import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
 import com.botticelli.bot.request.methods.PhotoReferenceToSend;
+import com.botticelli.bot.request.methods.PinChatMessageRequest;
+import com.botticelli.bot.request.methods.PromoteChatMemberRequest;
+import com.botticelli.bot.request.methods.RestrictChatMemberRequest;
+import com.botticelli.bot.request.methods.SetChatDescriptionRequest;
+import com.botticelli.bot.request.methods.SetChatPhotoRequest;
+import com.botticelli.bot.request.methods.SetChatTitleRequest;
 import com.botticelli.bot.request.methods.SetGameScoreRequest;
 import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
+import com.botticelli.bot.request.methods.UnpinChatMessageRequest;
 import com.botticelli.bot.request.methods.UpdateRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
@@ -487,6 +496,11 @@ public abstract class Bot {
 		return rm.editMessageText(emt);
 	}
 	
+	/**
+	 * 
+	 * @param emc
+	 * @return
+	 */
 	public final Message editMessageCaption(EditMessageCaptionRequest emc)
 	{
 		if(emc == null)
@@ -494,7 +508,11 @@ public abstract class Bot {
 		return rm.editMessageCaption(emc);
 	}
 	
-	
+	/**
+	 * 
+	 * @param emr
+	 * @return
+	 */
 	public final Message editMessageReplyMarkup(EditMessageReplyMarkupRequest emr)
 	{
 		if(emr == null)
@@ -502,6 +520,106 @@ public abstract class Bot {
 		return rm.editMessageReplyMarkup(emr);
 	}
 	
+	/**
+	 * 
+	 * @param rcm
+	 * @return
+	 */
+	public final boolean restrictChatMember(RestrictChatMemberRequest rcm)
+	{
+		if(rcm == null)
+			return false;
+		return rm.restrictChatMember(rcm);
+	}
+	/**
+	 * 
+	 * @param rcm
+	 * @return
+	 */
+	public final boolean promoteChatMember(PromoteChatMemberRequest pcm)
+	{
+		if(pcm == null)
+			return false;
+		return rm.promoteChatMember(pcm);
+	}
+	
+	public final String exportChatInviteLink(ExportChatInviteLinkRequest eci)
+	{
+		if(eci == null)
+			return null;
+		return rm.exportChatInviteLink(eci);
+	}
+	/**
+	 * 
+	 * @param scp
+	 * @return
+	 */
+	public final boolean setChatPhoto(SetChatPhotoRequest scp)
+	{
+		if(scp == null)
+			return false;
+		return rm.setChatPhoto(scp);
+	}
+	/**
+	 * 
+	 * @param dcp
+	 * @return
+	 */
+	public final boolean deleteChatPhoto(DeleteChatPhotoRequest dcp)
+	{
+		if(dcp == null)
+			return false;
+		return rm.deleteChatPhoto(dcp);
+	}
+	/**
+	 * 
+	 * @param sct
+	 * @return
+	 */
+	public final boolean setChatTitle(SetChatTitleRequest sct)
+	{
+		if(sct == null)
+			return false;
+		return rm.setChatTitle(sct);
+	}
+	/**
+	 * 
+	 * @param scd
+	 * @return
+	 */
+	public final boolean setChatDescription(SetChatDescriptionRequest scd)
+	{
+		if(scd == null)
+			return false;
+		return rm.setChatDescription(scd);
+	}
+	/**
+	 * 
+	 * @param pcm
+	 * @return
+	 */
+	public final boolean pinChatMessage(PinChatMessageRequest pcm)
+	{
+		if(pcm == null)
+			return false;
+		return rm.pinChatMessage(pcm);
+	}
+	/**
+	 * 
+	 * @param ucm
+	 * @return
+	 */
+	public final boolean unpinChatMessage(UnpinChatMessageRequest ucm)
+	{
+		if(ucm == null)
+			return false;
+		return rm.unpinChatMessage(ucm);
+	}
+	/**
+	 * 
+	 * @param sgs
+	 * @return
+	 */
 	public final GameScoreResult setGameScore(SetGameScoreRequest sgs)
 	{
 		if(sgs == null)
@@ -509,6 +627,11 @@ public abstract class Bot {
 		return rm.setGameScore(sgs);
 	}
 	
+	/**
+	 * 
+	 * @param gghsr
+	 * @return
+	 */
 	public final List<GameHighScore> getGameHighScores(GetGameHighScoresRequest gghsr)
 	{
 		if(gghsr == null)
