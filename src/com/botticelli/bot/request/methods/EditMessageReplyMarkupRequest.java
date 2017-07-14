@@ -57,7 +57,8 @@ public class EditMessageReplyMarkupRequest implements Request {
 			else
 				map.put("chat_id", new Long(chat_id));
 		}
-		map.put("inline_message_id", inline_message_id);
+		else
+		    map.put("inline_message_id", inline_message_id);
 		map.put("reply_markup", reply_markup);
 		return map;
 	}

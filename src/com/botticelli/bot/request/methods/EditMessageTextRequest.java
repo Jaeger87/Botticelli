@@ -17,9 +17,6 @@ public class EditMessageTextRequest extends EditMessageReplyMarkupRequest{
 		super(chat_id, message_id);
 		this.text = text;
 	}
-	
-	
-
 
 	public EditMessageTextRequest(String channelusername, int message_id, String text) 
 	{
