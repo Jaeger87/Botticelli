@@ -28,6 +28,12 @@ public class Constants {
 	public static final String LEAVECHAT ="/leaveChat";
 	public static final String SENDVENUE ="/sendVenue";
 	public static final String SENDGAME ="/sendGame";
+	public static final String GETSTICKERSET ="/getStickerSet";
+	public static final String UPLOADSTICKERFILE ="/uploadStickerFile";
+	public static final String CREATENEWSTICKERSET ="/createNewStickerSet";
+	public static final String ADDSTICKERTOSET ="/addStickerToSet";
+	public static final String SETSTICKERPOSITIONINSET ="/setStickerPositionInSet";
+	public static final String DELETESTICKERFROMSET ="/deleteStickerFromSet";
 	public static final String SETGAMESCORE ="/setGameScore";
 	public static final String GETGAMEHIGHSCORES ="/getGameHighScores";
 	public static final String GETWEBHOOKINFO ="/getWebhookInfo";

@@ -65,6 +65,7 @@ import com.botticelli.bot.request.methods.types.GameScoreResult;
 import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.Result;
+import com.botticelli.bot.request.methods.types.StickerSet;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
 import com.botticelli.bot.request.methods.types.WebhookInfo;
@@ -133,6 +134,13 @@ public class RequestMaker {
 	private String urlGetUserProfilePhotos;
 	private String urlGetFile;
 	private String urlDownloadFile;
+	private String urlGetStickerSet;
+	private String urlUploadStickerFile;
+	private String urlCreateNewStickerSet;
+	private String urlAddStickerToSet;
+	private String urlSetStickerPositionInSet;
+	private String urlDeleteStickerFromSet;
+	
 	private Type intResult;
 	private Type chatResult;
 	private Type booleanResult;
@@ -145,6 +153,7 @@ public class RequestMaker {
 	private Type webHookInfoResult;
 	private Type gameHighScoresListResult;
 	private Type chatMembersResult;
+	private Type stickerSetResult;
 
 	private final static Logger errorLogger = Logger.getLogger("errors");
 
@@ -199,9 +208,14 @@ public class RequestMaker {
 		urlSetChatTitle = Constants.APIURL + token + Constants.SETCHATTITLE;
 		urlSetChatDescription = Constants.APIURL + token + Constants.SETCHATDESCRIPTION;
 		urlPinChatMessage = Constants.APIURL + token + Constants.PINCHATMESSAGE;
-		urlUnpinChatMessage = Constants.APIURL + token + Constants.UNPINCHATMESSAGE;
-		
-		
+		urlUnpinChatMessage = Constants.APIURL + token + Constants.UNPINCHATMESSAGE;		
+		urlGetStickerSet = Constants.APIURL + token + Constants.GETSTICKERSET;
+		urlUploadStickerFile = Constants.APIURL + token + Constants.UPLOADSTICKERFILE;
+		urlCreateNewStickerSet = Constants.APIURL + token + Constants.CREATENEWSTICKERSET;
+		urlAddStickerToSet = Constants.APIURL + token + Constants.ADDSTICKERTOSET;
+		urlSetStickerPositionInSet = Constants.APIURL + token + Constants.SETSTICKERPOSITIONINSET;
+		urlDeleteStickerFromSet = Constants.APIURL + token + Constants.DELETESTICKERFROMSET;
+
 		intResult = new TypeToken<Result<Integer>>() {
 		}.getType();
 		booleanResult = new TypeToken<Result<Boolean>>() {
@@ -225,6 +239,8 @@ public class RequestMaker {
 		webHookInfoResult = new TypeToken<Result<WebhookInfo>>() {
 		}.getType();
 		gameHighScoresListResult = new TypeToken<Result<List<ChatMember>>>() {
+		}.getType();
+		stickerSetResult = new TypeToken<Result<List<StickerSet>>>() {
 		}.getType();
 
 	}
