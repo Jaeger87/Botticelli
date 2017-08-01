@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.botticelli.bot.request.methods.AddStickerToSetByFile;
+import com.botticelli.bot.request.methods.AddStickerToSetByReferenceOrLink;
 import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AnswerShippingQuery;
@@ -17,8 +19,11 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
+import com.botticelli.bot.request.methods.CreateNewStickerSetByFile;
+import com.botticelli.bot.request.methods.CreateNewStickerSetByReferenceOrLinkRequest;
 import com.botticelli.bot.request.methods.DeleteChatPhotoRequest;
 import com.botticelli.bot.request.methods.DeleteMessageToSend;
+import com.botticelli.bot.request.methods.DeleteStickerFromSetRequest;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
@@ -30,6 +35,7 @@ import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
 import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
+import com.botticelli.bot.request.methods.GetStickerSetRequest;
 import com.botticelli.bot.request.methods.InvoiceToSend;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
@@ -44,11 +50,13 @@ import com.botticelli.bot.request.methods.SetChatDescriptionRequest;
 import com.botticelli.bot.request.methods.SetChatPhotoRequest;
 import com.botticelli.bot.request.methods.SetChatTitleRequest;
 import com.botticelli.bot.request.methods.SetGameScoreRequest;
+import com.botticelli.bot.request.methods.SetStickerPositionInSet;
 import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
 import com.botticelli.bot.request.methods.UnbanChatMemberRequest;
 import com.botticelli.bot.request.methods.UnpinChatMessageRequest;
 import com.botticelli.bot.request.methods.UpdateRequest;
+import com.botticelli.bot.request.methods.UploadStickerFileRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
 import com.botticelli.bot.request.methods.VideoFileToSend;
@@ -403,6 +411,81 @@ public class RequestMaker {
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
+	/**
+	 * 
+	 * @param gss
+	 * @return
+	 */
+	public StickerSet getStickerSet(GetStickerSetRequest gss)
+	{
+		String json = makeRequest(urlGetStickerSet, gss);
+		return buildResult(json, stickerSetResult, new Result<StickerSet>()).getResult();
+	}
+	
+	/**
+	 * 
+	 * @param usf
+	 * @return
+	 */
+	public File uploadStickerFile(UploadStickerFileRequest usf)
+	{
+		okhttp3.Request request = new okhttp3.Request.Builder().url(urlUploadStickerFile)
+				.post(getMultipartBodyBuilderFromRequest(usf).build()).build();
+			try (Response response = client.newCall(request).execute()) {
+				File f = new File("(updated)" + usf.getFile().getName());
+				BufferedSink sink = Okio.buffer(Okio.sink(f));
+	            sink.writeAll(response.body().source());
+	            sink.close();
+	            return f;
+			}
+		catch (IOException e1) {
+			errorLogger.log(Level.SEVERE, usf.getClass().getName(), e1);
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param cns
+	 * @return
+	 */
+	public boolean createNewStickerSetByReferenceOrLink(CreateNewStickerSetByReferenceOrLinkRequest cns)
+	{
+		String json = makeRequest(urlCreateNewStickerSet, cns);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
+	public boolean createNewStickerSetByFile(CreateNewStickerSetByFile cnf)
+	{
+		String json = makeRequestFile(urlCreateNewStickerSet, cnf);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
+	
+	public boolean addStickerToSetByReferenceOrLink(AddStickerToSetByReferenceOrLink asr)
+	{
+		String json = makeRequest(urlAddStickerToSet, asr);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
+	public boolean addStickerToSetByFile(AddStickerToSetByFile asf)
+	{
+		String json = makeRequestFile(urlAddStickerToSet, asf);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
+	public boolean setStickerPositionInSet(SetStickerPositionInSet ssp)
+	{
+		String json = makeRequest(urlSetStickerPositionInSet, ssp);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
+	public boolean deleteStickerFromSet(DeleteStickerFromSetRequest dss)
+	{
+		String json = makeRequest(urlDeleteStickerFromSet, dss);
+		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
+	}
+	
 	/**
 	 * 
 	 * @param vnr
