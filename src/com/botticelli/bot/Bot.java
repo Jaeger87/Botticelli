@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.botticelli.bot.request.RequestMaker;
+import com.botticelli.bot.request.methods.AddStickerToSetByFile;
+import com.botticelli.bot.request.methods.AddStickerToSetByReferenceOrLink;
 import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
 import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
 import com.botticelli.bot.request.methods.AnswerShippingQuery;
@@ -14,8 +16,11 @@ import com.botticelli.bot.request.methods.ChatActionToSend;
 import com.botticelli.bot.request.methods.ChatMemberRequest;
 import com.botticelli.bot.request.methods.ChatRequests;
 import com.botticelli.bot.request.methods.ContactToSend;
+import com.botticelli.bot.request.methods.CreateNewStickerSetByFile;
+import com.botticelli.bot.request.methods.CreateNewStickerSetByReferenceOrLinkRequest;
 import com.botticelli.bot.request.methods.DeleteChatPhotoRequest;
 import com.botticelli.bot.request.methods.DeleteMessageToSend;
+import com.botticelli.bot.request.methods.DeleteStickerFromSetRequest;
 import com.botticelli.bot.request.methods.DocumentFileToSend;
 import com.botticelli.bot.request.methods.DocumentReferenceToSend;
 import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
@@ -26,6 +31,7 @@ import com.botticelli.bot.request.methods.ForwardMessageToSend;
 import com.botticelli.bot.request.methods.GameToSend;
 import com.botticelli.bot.request.methods.GetFile;
 import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
+import com.botticelli.bot.request.methods.GetStickerSetRequest;
 import com.botticelli.bot.request.methods.InvoiceToSend;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
 import com.botticelli.bot.request.methods.LocationToSend;
@@ -39,10 +45,12 @@ import com.botticelli.bot.request.methods.SetChatDescriptionRequest;
 import com.botticelli.bot.request.methods.SetChatPhotoRequest;
 import com.botticelli.bot.request.methods.SetChatTitleRequest;
 import com.botticelli.bot.request.methods.SetGameScoreRequest;
+import com.botticelli.bot.request.methods.SetStickerPositionInSet;
 import com.botticelli.bot.request.methods.StickerFileToSend;
 import com.botticelli.bot.request.methods.StickerReferenceToSend;
 import com.botticelli.bot.request.methods.UnpinChatMessageRequest;
 import com.botticelli.bot.request.methods.UpdateRequest;
+import com.botticelli.bot.request.methods.UploadStickerFileRequest;
 import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
 import com.botticelli.bot.request.methods.VenueToSend;
 import com.botticelli.bot.request.methods.VideoFileToSend;
@@ -62,6 +70,7 @@ import com.botticelli.bot.request.methods.types.InlineQuery;
 import com.botticelli.bot.request.methods.types.Message;
 import com.botticelli.bot.request.methods.types.PreCheckoutQuery;
 import com.botticelli.bot.request.methods.types.ShippingQuery;
+import com.botticelli.bot.request.methods.types.StickerSet;
 import com.botticelli.bot.request.methods.types.TelegramFile;
 import com.botticelli.bot.request.methods.types.Update;
 import com.botticelli.bot.request.methods.types.UserProfilePhotos;
@@ -307,6 +316,73 @@ public abstract class Bot {
 			return null;
 		return rm.sendVenue(vts);
 	}
+	
+	/**
+	 * 
+	 * @param gss
+	 * @return
+	 */
+	public final StickerSet getStickerSet(GetStickerSetRequest gss)
+	{
+		if(gss == null)
+			return null;
+		return rm.getStickerSet(gss);
+	}
+	
+	
+	public final File uploadStickerFile(UploadStickerFileRequest usf)
+	{
+		if(usf == null)
+			return null;
+		return rm.uploadStickerFile(usf);
+	}
+	
+	
+	public final boolean createNewStickerSetByReferenceOrLink(CreateNewStickerSetByReferenceOrLinkRequest cns)
+	{
+		if(cns == null)
+			return false;
+		return rm.createNewStickerSetByReferenceOrLink(cns);
+	}
+	
+	
+	public final boolean createNewStickerSetByFile(CreateNewStickerSetByFile cnf)
+	{
+		if(cnf == null)
+			return false;
+		return rm.createNewStickerSetByFile(cnf);
+	}
+	
+	
+	public final boolean addStickerToSetByReferenceOrLink(AddStickerToSetByReferenceOrLink asr)
+	{
+		if(asr == null)
+			return false;
+		return rm.addStickerToSetByReferenceOrLink(asr);
+	}
+	
+	
+	public final boolean addStickerToSetByFile(AddStickerToSetByFile asf)
+	{
+		if(asf == null)
+			return false;
+		return rm.addStickerToSetByFile(asf);
+	}
+	
+	public final boolean setStickerPositionInSet(SetStickerPositionInSet ssp)
+	{
+		if(ssp == null)
+			return false;
+		return rm.setStickerPositionInSet(ssp);
+	}
+	
+	public final boolean deleteStickerFromSet(DeleteStickerFromSetRequest dss)
+	{
+		if(dss == null)
+			return false;
+		return rm.deleteStickerFromSet(dss);
+	}
+	
 	
 	/**
 	 * 
