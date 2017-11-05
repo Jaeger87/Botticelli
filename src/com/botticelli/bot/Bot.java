@@ -770,6 +770,13 @@ public abstract class Bot {
 	}
 	
 	
+	public final File downloadFileFromTelegramServer(String fileId, String filename)
+	{
+		if(fileId == null || filename == null)
+			return null;
+		return downloadFileFromTelegramServer(getFile(new GetFile(fileId)), filename);
+	}
+	
 	
 	/**
 	 * This method read the message values and pass the message on to the appropriate method.
