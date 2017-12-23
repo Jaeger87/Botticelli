@@ -17,6 +17,8 @@ public class User{
 	
 	private String language_code;
 	
+	private boolean is_bot;
+	
 	/**
 	 * 
 	 * @return
@@ -118,6 +120,18 @@ public class User{
 	{
 		this.language_code = language_code;
 	}
+
+	public boolean isIs_bot() 
+	{
+		return is_bot;
+	}
+
+	public void setIs_bot(boolean is_bot) 
+	{
+		this.is_bot = is_bot;
+	}
+	
+	
 	
 	
 }

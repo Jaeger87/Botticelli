@@ -64,6 +64,10 @@ public class Message {
 	
 	private List<PhotoSize> new_chat_photo;
 	
+	private String author_signature;
+	
+	private String forward_signature;
+	
 	private boolean delete_chat_photo;
 	
 	private boolean group_chat_created;
@@ -751,6 +755,24 @@ public class Message {
 	public void setSuccessfulPayment(SuccessfulPayment successful_payment) 
 	{
 		this.successful_payment = successful_payment;
+	}
+
+	public String getAuthor_signature() {
+		return author_signature;
+	}
+
+	public void setAuthor_signature(String author_signature) {
+		this.author_signature = author_signature;
+	}
+
+	public String getForward_signature() 
+	{
+		return forward_signature;
+	}
+
+	public void setForward_signature(String forward_signature) 
+	{
+		this.forward_signature = forward_signature;
 	}
 	
 	
