@@ -53,6 +53,8 @@ public class Constants {
 	public static final String EDITMESSAGETEXT ="/editMessageText";
 	public static final String EDITMESSAGECAPTION ="/editMessageCaption";
 	public static final String EDITMESSAGEREPLYMARKUP ="/editMessageReplyMarkup";
+	public static final String EDITMESSAGELIVELOCATION = "/editMessageLiveLocation";
+	public static final String STOPMESSAGELIVELOCATION = "/stopMessageLiveLocation";
 	public static final String ANSWERINLINEQUERY ="/answerInlineQuery";
 	public static final String ANSWERSHIPPINGQUERY ="/answerShippingQuery";
 	public static final String ANSWERCALLBACKQUERY ="/answerCallbackQuery";

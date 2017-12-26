@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.botticelli.bot.request.methods.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.InlineQueryResult;
-import com.google.gson.Gson;
 
 public class AnswerInlineQueryRequest implements Request
 {

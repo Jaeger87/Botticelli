@@ -34,6 +34,8 @@ import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
 import com.botticelli.bot.request.methods.GetStickerSetRequest;
 import com.botticelli.bot.request.methods.InvoiceToSend;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
+import com.botticelli.bot.request.methods.LiveLocationToEdit;
+import com.botticelli.bot.request.methods.LiveLocationToStop;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
@@ -718,6 +720,29 @@ public abstract class Bot {
 	public final WebhookInfo getWebhookInfo() {
 		return rm.getWebhookInfo();
 	}
+	/**
+	 * 
+	 * @param lte
+	 * @return
+	 */
+	public final Message editMessageLiveLocation(LiveLocationToEdit lte)
+	{
+		if(lte == null)
+			return null;
+		return rm.editMessageLiveLocation(lte);
+	}
+	
+	/**
+	 * 
+	 * @param lts
+	 * @return
+	 */
+	public final Message stopMessageLiveLocation(LiveLocationToStop lts)
+	{
+		if(lts == null)
+			return null;
+		return rm.stopMessageLiveLocation(lts);
+	}
 	
 	/**
 	 * Use this method to get a list of profile pictures for a user. 
@@ -1038,4 +1063,6 @@ public abstract class Bot {
     public abstract void invoiceMessage(Message m);
     
     public abstract void successfulPaymentMessage(Message m);
+    
+    public abstract void routine();
 }

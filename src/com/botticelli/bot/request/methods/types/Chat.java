@@ -15,6 +15,7 @@ public class Chat extends User{
 	private String description;
 	private String invite_link;
 	private String pinned_message;
+	private String sticker_set_name;
 	
 	/**
 	 * Type of chat, can be either “private”, “group”, “supergroup” or “channel”
@@ -96,6 +97,16 @@ public class Chat extends User{
 	public void setPinned_message(String pinned_message) 
 	{
 		this.pinned_message = pinned_message;
+	}
+
+	public String getSticker_set_name() 
+	{
+		return sticker_set_name;
+	}
+
+	public void setSticker_set_name(String sticker_set_name) 
+	{
+		this.sticker_set_name = sticker_set_name;
 	}
 	
 	

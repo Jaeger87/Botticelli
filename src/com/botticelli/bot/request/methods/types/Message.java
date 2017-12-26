@@ -34,6 +34,8 @@ public class Message {
 	
 	private List<MessageEntity> entities;
 	
+	private List<MessageEntity> caption_entities;
+	
 	private Audio audio;
 	
 	private Document document;
@@ -773,6 +775,16 @@ public class Message {
 	public void setForward_signature(String forward_signature) 
 	{
 		this.forward_signature = forward_signature;
+	}
+
+	public List<MessageEntity> getCaption_entities()
+	{
+		return caption_entities;
+	}
+
+	public void setCaption_entities(List<MessageEntity> caption_entities)
+	{
+		this.caption_entities = caption_entities;
 	}
 	
 	

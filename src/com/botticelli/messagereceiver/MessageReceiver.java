@@ -98,6 +98,7 @@ public class MessageReceiver {
 	{
 		while(!stop)
 		{
+			bot.routine();
 			List<Update> updates = bot.getUpdates(ur);
 			if(updates != null)
 				for (Update u : updates) 

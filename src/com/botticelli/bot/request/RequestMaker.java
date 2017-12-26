@@ -38,6 +38,8 @@ import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
 import com.botticelli.bot.request.methods.GetStickerSetRequest;
 import com.botticelli.bot.request.methods.InvoiceToSend;
 import com.botticelli.bot.request.methods.KickChatMemberRequest;
+import com.botticelli.bot.request.methods.LiveLocationToEdit;
+import com.botticelli.bot.request.methods.LiveLocationToStop;
 import com.botticelli.bot.request.methods.LocationToSend;
 import com.botticelli.bot.request.methods.MessageToSend;
 import com.botticelli.bot.request.methods.PhotoFileToSend;
@@ -148,6 +150,9 @@ public class RequestMaker {
 	private String urlAddStickerToSet;
 	private String urlSetStickerPositionInSet;
 	private String urlDeleteStickerFromSet;
+	private String urlEditMessageLiveLocation;
+	private String urlStopMessageLiveLocation;
+	
 	
 	private Type intResult;
 	private Type chatResult;
@@ -223,7 +228,10 @@ public class RequestMaker {
 		urlAddStickerToSet = Constants.APIURL + token + Constants.ADDSTICKERTOSET;
 		urlSetStickerPositionInSet = Constants.APIURL + token + Constants.SETSTICKERPOSITIONINSET;
 		urlDeleteStickerFromSet = Constants.APIURL + token + Constants.DELETESTICKERFROMSET;
-
+		urlEditMessageLiveLocation = Constants.APIURL + token + Constants.EDITMESSAGELIVELOCATION;
+		urlStopMessageLiveLocation = Constants.APIURL + token + Constants.STOPMESSAGELIVELOCATION;
+		
+		
 		intResult = new TypeToken<Result<Integer>>() {
 		}.getType();
 		booleanResult = new TypeToken<Result<Boolean>>() {
@@ -745,6 +753,30 @@ public class RequestMaker {
 		String json = makeRequest(urlExportChatInviteLink, eci);
 		return buildResult(json, stringResult, new Result<String>()).getResult();
 	}
+	
+	/**
+	 * 
+	 * @param lte
+	 * @return
+	 */
+	public Message editMessageLiveLocation(LiveLocationToEdit lte)
+	{
+		String json = makeRequest(urlEditMessageLiveLocation, lte);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
+	
+	
+	/**
+	 * 
+	 * @param lts
+	 * @return
+	 */
+	public Message stopMessageLiveLocation(LiveLocationToStop lts)
+	{
+		String json = makeRequest(urlStopMessageLiveLocation, lts);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
+	
 	
 	/**
 	 * 
