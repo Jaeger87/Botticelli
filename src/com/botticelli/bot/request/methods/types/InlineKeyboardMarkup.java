@@ -16,4 +16,12 @@ public class InlineKeyboardMarkup implements Keyboard{
 	{
 		return GsonOwner.getInstance().getGson().toJson(this);
 	}
+	
+	public void AddLine(List<InlineKeyboardButton> line)
+	{
+		if(line == null)
+			return;
+		inline_keyboard.add(line);
+	}
+	
 }
