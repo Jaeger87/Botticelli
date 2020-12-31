@@ -8,65 +8,7 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.botticelli.bot.request.methods.AddStickerToSetByFile;
-import com.botticelli.bot.request.methods.AddStickerToSetByReferenceOrLink;
-import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
-import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
-import com.botticelli.bot.request.methods.AnswerShippingQuery;
-import com.botticelli.bot.request.methods.AudioFileToSend;
-import com.botticelli.bot.request.methods.AudioReferenceToSend;
-import com.botticelli.bot.request.methods.ChatActionToSend;
-import com.botticelli.bot.request.methods.ChatMemberRequest;
-import com.botticelli.bot.request.methods.ChatRequests;
-import com.botticelli.bot.request.methods.ContactToSend;
-import com.botticelli.bot.request.methods.CreateNewStickerSetByFile;
-import com.botticelli.bot.request.methods.CreateNewStickerSetByReferenceOrLinkRequest;
-import com.botticelli.bot.request.methods.DeleteChatPhotoRequest;
-import com.botticelli.bot.request.methods.DeleteMessageToSend;
-import com.botticelli.bot.request.methods.DeleteStickerFromSetRequest;
-import com.botticelli.bot.request.methods.DocumentFileToSend;
-import com.botticelli.bot.request.methods.DocumentReferenceToSend;
-import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
-import com.botticelli.bot.request.methods.EditMessageReplyMarkupRequest;
-import com.botticelli.bot.request.methods.EditMessageTextRequest;
-import com.botticelli.bot.request.methods.ExportChatInviteLinkRequest;
-import com.botticelli.bot.request.methods.FileRequest;
-import com.botticelli.bot.request.methods.ForwardMessageToSend;
-import com.botticelli.bot.request.methods.GameToSend;
-import com.botticelli.bot.request.methods.GetFile;
-import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
-import com.botticelli.bot.request.methods.GetStickerSetRequest;
-import com.botticelli.bot.request.methods.InvoiceToSend;
-import com.botticelli.bot.request.methods.KickChatMemberRequest;
-import com.botticelli.bot.request.methods.LiveLocationToEdit;
-import com.botticelli.bot.request.methods.LiveLocationToStop;
-import com.botticelli.bot.request.methods.LocationToSend;
-import com.botticelli.bot.request.methods.MessageToSend;
-import com.botticelli.bot.request.methods.PhotoFileToSend;
-import com.botticelli.bot.request.methods.PhotoReferenceToSend;
-import com.botticelli.bot.request.methods.PinChatMessageRequest;
-import com.botticelli.bot.request.methods.PromoteChatMemberRequest;
-import com.botticelli.bot.request.methods.Request;
-import com.botticelli.bot.request.methods.RestrictChatMemberRequest;
-import com.botticelli.bot.request.methods.SetChatDescriptionRequest;
-import com.botticelli.bot.request.methods.SetChatPhotoRequest;
-import com.botticelli.bot.request.methods.SetChatTitleRequest;
-import com.botticelli.bot.request.methods.SetGameScoreRequest;
-import com.botticelli.bot.request.methods.SetStickerPositionInSet;
-import com.botticelli.bot.request.methods.StickerFileToSend;
-import com.botticelli.bot.request.methods.StickerReferenceToSend;
-import com.botticelli.bot.request.methods.UnbanChatMemberRequest;
-import com.botticelli.bot.request.methods.UnpinChatMessageRequest;
-import com.botticelli.bot.request.methods.UpdateRequest;
-import com.botticelli.bot.request.methods.UploadStickerFileRequest;
-import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
-import com.botticelli.bot.request.methods.VenueToSend;
-import com.botticelli.bot.request.methods.VideoFileToSend;
-import com.botticelli.bot.request.methods.VideoNoteFileToSend;
-import com.botticelli.bot.request.methods.VideoNoteReferenceToSend;
-import com.botticelli.bot.request.methods.VideoReferenceToSend;
-import com.botticelli.bot.request.methods.VoiceFileToSend;
-import com.botticelli.bot.request.methods.VoiceReferenceToSend;
+import com.botticelli.bot.request.methods.*;
 import com.botticelli.bot.request.methods.types.Chat;
 import com.botticelli.bot.request.methods.types.ChatMember;
 import com.botticelli.bot.request.methods.types.DownlodableFile;
@@ -138,6 +80,8 @@ public class RequestMaker {
 	private String urlSetChatPhoto;
 	private String urlDeleteChatPhoto;
 	private String urlSetChatTitle;
+	private String urlSendDice;
+	private String urlSetWebHook;
 	private String urlSetChatDescription;
 	private String urlPinChatMessage;
 	private String urlUnpinChatMessage;
@@ -230,7 +174,8 @@ public class RequestMaker {
 		urlDeleteStickerFromSet = Constants.APIURL + token + Constants.DELETESTICKERFROMSET;
 		urlEditMessageLiveLocation = Constants.APIURL + token + Constants.EDITMESSAGELIVELOCATION;
 		urlStopMessageLiveLocation = Constants.APIURL + token + Constants.STOPMESSAGELIVELOCATION;
-		
+		urlSendDice = Constants.APIURL + token + Constants.SENDDICE;
+		urlSetWebHook = Constants.APIURL + token + Constants.SETWEBHOOK;
 		
 		intResult = new TypeToken<Result<Integer>>() {
 		}.getType();
@@ -355,6 +300,19 @@ public class RequestMaker {
 	 */
 	public Message sendAudioFile(AudioFileToSend afs) {
 		String json = makeRequestFile(urlSendAudio, afs);
+		return buildResult(json, messageResult, new Result<Message>()).getResult();
+	}
+
+
+	/**
+	 * Use this method to send an animated emoji that will display a random value. On success,
+	 * the sent Message is returned.
+	 *
+	 * @param dts
+	 * @return
+	 */
+	public Message sendDice(DiceToSend dts) {
+		String json = makeRequest(urlSendDice, dts);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -567,7 +525,7 @@ public class RequestMaker {
 	 * Use this method to send a contact. On success, the sent Message is
 	 * returned, else return null.
 	 * 
-	 * @param vts
+	 * @param cts
 	 * @return
 	 */
 	public Message sendContact(ContactToSend cts) {
@@ -599,8 +557,8 @@ public class RequestMaker {
 	 * (when a message arrives from your bot, Telegram clients clear its typing
 	 * status). Example: The ImageBot needs some time to process a request and
 	 * upload the image. Instead of sending a text message along the lines of
-	 * “Retrieving image, please wait…”, the bot may use sendChatAction with
-	 * action = upload_photo. The user will see a “sending photo” status for the
+	 * ï¿½Retrieving image, please waitï¿½ï¿½, the bot may use sendChatAction with
+	 * action = upload_photo. The user will see a ï¿½sending photoï¿½ status for the
 	 * bot.
 	 * 
 	 * @param cts
@@ -621,7 +579,7 @@ public class RequestMaker {
 
 	/**
 	 * 
-	 * @param kmr
+	 * @param crs
 	 * @return
 	 */
 	public boolean leaveChat(ChatRequests crs) {
@@ -630,7 +588,7 @@ public class RequestMaker {
 
 	/**
 	 * 
-	 * @param crs
+	 * @param dms
 	 * @return
 	 */
 	public boolean deleteMessage(DeleteMessageToSend dms) {

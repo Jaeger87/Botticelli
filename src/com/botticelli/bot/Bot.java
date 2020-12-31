@@ -5,78 +5,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.botticelli.bot.request.RequestMaker;
-import com.botticelli.bot.request.methods.AddStickerToSetByFile;
-import com.botticelli.bot.request.methods.AddStickerToSetByReferenceOrLink;
-import com.botticelli.bot.request.methods.AnswerCallbackQueryToSend;
-import com.botticelli.bot.request.methods.AnswerInlineQueryRequest;
-import com.botticelli.bot.request.methods.AnswerShippingQuery;
-import com.botticelli.bot.request.methods.AudioFileToSend;
-import com.botticelli.bot.request.methods.AudioReferenceToSend;
-import com.botticelli.bot.request.methods.ChatActionToSend;
-import com.botticelli.bot.request.methods.ChatMemberRequest;
-import com.botticelli.bot.request.methods.ChatRequests;
-import com.botticelli.bot.request.methods.ContactToSend;
-import com.botticelli.bot.request.methods.CreateNewStickerSetByFile;
-import com.botticelli.bot.request.methods.CreateNewStickerSetByReferenceOrLinkRequest;
-import com.botticelli.bot.request.methods.DeleteChatPhotoRequest;
-import com.botticelli.bot.request.methods.DeleteMessageToSend;
-import com.botticelli.bot.request.methods.DeleteStickerFromSetRequest;
-import com.botticelli.bot.request.methods.DocumentFileToSend;
-import com.botticelli.bot.request.methods.DocumentReferenceToSend;
-import com.botticelli.bot.request.methods.EditMessageCaptionRequest;
-import com.botticelli.bot.request.methods.EditMessageReplyMarkupRequest;
-import com.botticelli.bot.request.methods.EditMessageTextRequest;
-import com.botticelli.bot.request.methods.ExportChatInviteLinkRequest;
-import com.botticelli.bot.request.methods.ForwardMessageToSend;
-import com.botticelli.bot.request.methods.GameToSend;
-import com.botticelli.bot.request.methods.GetFile;
-import com.botticelli.bot.request.methods.GetGameHighScoresRequest;
-import com.botticelli.bot.request.methods.GetStickerSetRequest;
-import com.botticelli.bot.request.methods.InvoiceToSend;
-import com.botticelli.bot.request.methods.KickChatMemberRequest;
-import com.botticelli.bot.request.methods.LiveLocationToEdit;
-import com.botticelli.bot.request.methods.LiveLocationToStop;
-import com.botticelli.bot.request.methods.LocationToSend;
-import com.botticelli.bot.request.methods.MessageToSend;
-import com.botticelli.bot.request.methods.PhotoFileToSend;
-import com.botticelli.bot.request.methods.PhotoReferenceToSend;
-import com.botticelli.bot.request.methods.PinChatMessageRequest;
-import com.botticelli.bot.request.methods.PromoteChatMemberRequest;
-import com.botticelli.bot.request.methods.RestrictChatMemberRequest;
-import com.botticelli.bot.request.methods.SetChatDescriptionRequest;
-import com.botticelli.bot.request.methods.SetChatPhotoRequest;
-import com.botticelli.bot.request.methods.SetChatTitleRequest;
-import com.botticelli.bot.request.methods.SetGameScoreRequest;
-import com.botticelli.bot.request.methods.SetStickerPositionInSet;
-import com.botticelli.bot.request.methods.StickerFileToSend;
-import com.botticelli.bot.request.methods.StickerReferenceToSend;
-import com.botticelli.bot.request.methods.UnpinChatMessageRequest;
-import com.botticelli.bot.request.methods.UpdateRequest;
-import com.botticelli.bot.request.methods.UploadStickerFileRequest;
-import com.botticelli.bot.request.methods.UserProfilePhotosRequest;
-import com.botticelli.bot.request.methods.VenueToSend;
-import com.botticelli.bot.request.methods.VideoFileToSend;
-import com.botticelli.bot.request.methods.VideoNoteFileToSend;
-import com.botticelli.bot.request.methods.VideoNoteReferenceToSend;
-import com.botticelli.bot.request.methods.VideoReferenceToSend;
-import com.botticelli.bot.request.methods.VoiceFileToSend;
-import com.botticelli.bot.request.methods.VoiceReferenceToSend;
-import com.botticelli.bot.request.methods.types.CallbackQuery;
-import com.botticelli.bot.request.methods.types.Chat;
-import com.botticelli.bot.request.methods.types.ChatMember;
-import com.botticelli.bot.request.methods.types.ChosenInlineResult;
-import com.botticelli.bot.request.methods.types.DownlodableFile;
-import com.botticelli.bot.request.methods.types.GameHighScore;
-import com.botticelli.bot.request.methods.types.GameScoreResult;
-import com.botticelli.bot.request.methods.types.InlineQuery;
-import com.botticelli.bot.request.methods.types.Message;
-import com.botticelli.bot.request.methods.types.PreCheckoutQuery;
-import com.botticelli.bot.request.methods.types.ShippingQuery;
-import com.botticelli.bot.request.methods.types.StickerSet;
-import com.botticelli.bot.request.methods.types.TelegramFile;
-import com.botticelli.bot.request.methods.types.Update;
-import com.botticelli.bot.request.methods.types.UserProfilePhotos;
-import com.botticelli.bot.request.methods.types.WebhookInfo;
+import com.botticelli.bot.request.methods.*;
+import com.botticelli.bot.request.methods.types.*;
 
 public abstract class Bot {
 
@@ -222,7 +152,21 @@ public abstract class Bot {
 			return null;
 		return rm.sendDocumentFile(dfs);
 	}
-	
+
+
+	/**
+	 * Use this method to send an animated emoji that will display a random value. On success,
+	 * the sent Message is returned.
+	 *
+	 * @param dts
+	 * @return
+	 */
+	public Message sendDice(DiceToSend dts) {
+		if(dts == null)
+			return null;
+		return rm.sendDice(dts);
+	}
+
 	/**
 	 * Use this method to send files by file_id, On success, the sent Message is returned.
 	 * @param drs
@@ -496,7 +440,7 @@ public abstract class Bot {
 	
 	/**
 	 * 
-	 * @param aiq
+	 * @param acq
 	 * @return
 	 */
 	public final boolean answerCallbackQuery(AnswerCallbackQueryToSend acq)
@@ -611,7 +555,7 @@ public abstract class Bot {
 	}
 	/**
 	 * 
-	 * @param rcm
+	 * @param pcm
 	 * @return
 	 */
 	public final boolean promoteChatMember(PromoteChatMemberRequest pcm)
@@ -873,6 +817,12 @@ public abstract class Bot {
 			venueMessage(message);
 			return;
 		}
+
+		if (message.getDice() != null)
+		{
+			diceMessage(message);
+			return;
+		}
 		
 		if(message.getNewChatMember() != null)
 		{
@@ -975,10 +925,18 @@ public abstract class Bot {
      * @param m
      */
     public abstract void photoMessage(Message m);
+
+	/**
+	 * This method will be called when bot received a dice
+	 * @param m
+	 */
+	public abstract void diceMessage(Message m);
     /**
      * This method will be called when bot received a contact
      * @param m
      */
+
+
     public abstract void contactMessage(Message m);
     /**
      * This method will be called when bot received a location

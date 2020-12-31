@@ -55,6 +55,8 @@ public class Message {
 	private Location location;
 	
 	private Venue venue;
+
+	private Dice dice;
 	
 	private User new_chat_member;
 	
@@ -443,7 +445,7 @@ public class Message {
 	/**
 	 * Optional. A new member was added to the group, set information about them 
 	 * (this member may be bot itself)
-	 * @param new_chat_participant
+	 * @param new_chat_member
 	 */
 	public void setNewChatMember(User new_chat_member)
 	{
@@ -463,7 +465,7 @@ public class Message {
 	/**
 	 * Optional. A member was removed from the group, set information about them 
 	 * (this member may be bot itself)
-	 * @param new_chat_participant
+	 * @param left_chat_member
 	 */
 	public void setLeftChatMember(User left_chat_member)
 	{
@@ -529,7 +531,7 @@ public class Message {
 	
 	/**
 	 * Optional. Set that the group has been created or not 
-	 * @param delete_chat_photo
+	 * @param group_chat_created
 	 * @return
 	 */
 	public void setGroupChatCreated(boolean group_chat_created)
@@ -549,7 +551,7 @@ public class Message {
 	
 	/**
 	 * Optional. Set that the super group has been created or not 
-	 * @param delete_chat_photo
+	 * @param supergroup_chat_created
 	 * @return
 	 */
 	public void setSuperGroupChatCreated(boolean supergroup_chat_created)
@@ -568,7 +570,7 @@ public class Message {
 	
 	/**
 	 * Optional. Set that the chanel chat has been created or not 
-	 * @param delete_chat_photo
+	 * @param channel_chat_created
 	 * @return
 	 */
 	public void setChanelChatCreated(boolean channel_chat_created)
@@ -578,7 +580,7 @@ public class Message {
 	
 	
 	/**
-	 * Conversation the message belongs to — user in case of a private message,
+	 * Conversation the message belongs to ï¿½ user in case of a private message,
 	 * GroupChat in case of a group
 	 * @return
 	 */
@@ -719,6 +721,14 @@ public class Message {
 	public void setNewChatMembers(List<User> new_chat_members) 
 	{
 		this.new_chat_members = new_chat_members;
+	}
+
+	public Dice getDice() {
+		return dice;
+	}
+
+	public void setDice(Dice dice) {
+		this.dice = dice;
 	}
 
 	/**
