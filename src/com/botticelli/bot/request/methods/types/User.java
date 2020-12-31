@@ -1,5 +1,7 @@
 package com.botticelli.bot.request.methods.types;
 
+import java.util.Objects;
+
 /**
  * This object represents a Telegram user or bot.
  * @author Andrea Rosati (@Jaeger87)
@@ -39,7 +41,7 @@ public class User{
 
 
 	/**
-	 * User‘s or bot’s first name
+	 * Userï¿½s or botï¿½s first name
 	 * @return
 	 */
 	public String getFirstName()
@@ -49,7 +51,7 @@ public class User{
 	
 	
 	/**
-	 * Set user‘s or bot’s first name
+	 * Set userï¿½s or botï¿½s first name
 	 * @param first_name
 	 */
 	public void setFirstName(String first_name)
@@ -59,7 +61,7 @@ public class User{
 	
 	
 	/**
-	 * Optional. User‘s or bot’s last name
+	 * Optional. Userï¿½s or botï¿½s last name
 	 * @return
 	 */
 	public String getLastName()
@@ -69,7 +71,7 @@ public class User{
 	
 	
 	/**
-	 * Optional. Set user‘s or bot’s last name
+	 * Optional. Set userï¿½s or botï¿½s last name
 	 * @param last_name
 	 */
 	public void setLastName(String last_name)
@@ -78,7 +80,7 @@ public class User{
 	}
 	
 	/**
-	 * Optional. User‘s or bot’s username
+	 * Optional. Userï¿½s or botï¿½s username
 	 * @return
 	 */
 	public String getUserName()
@@ -88,7 +90,7 @@ public class User{
 
 
 	/**
-	 * Optional. Set user‘s or bot’s username
+	 * Optional. Set userï¿½s or botï¿½s username
 	 * @param username
 	 */
 	public void setUsername(String username)
@@ -130,8 +132,17 @@ public class User{
 	{
 		this.is_bot = is_bot;
 	}
-	
-	
-	
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return id == user.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }
