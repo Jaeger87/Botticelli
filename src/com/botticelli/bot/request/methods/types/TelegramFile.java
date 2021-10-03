@@ -7,8 +7,11 @@ package com.botticelli.bot.request.methods.types;
 public abstract class TelegramFile {
 
 	private String file_id;
-	
+	private String file_unique_id;
+
 	private int file_size;
+
+
 	
 	/**
 	 * Unique identifier for this file
@@ -45,5 +48,19 @@ public abstract class TelegramFile {
 	public void setFileSize(int file_size)
 	{
 		this.file_size = file_size;
+	}
+
+	/*
+
+	 */
+	public String getFile_unique_id() {
+		return file_unique_id;
+	}
+
+	/*
+
+	 */
+	public void setFile_unique_id(String file_unique_id) {
+		this.file_unique_id = file_unique_id;
 	}
 }

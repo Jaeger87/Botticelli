@@ -14,7 +14,7 @@
         <delete dir="<your destination path>/Botticelli_lib"/>
         <mkdir dir="<your destination path>/Botticelli_lib"/>
         <copy file="<your source path>/Botticelli/lib/gson-2.8.2.jar" todir="<your destination path>/Botticelli_lib"/>
-    	<copy file="C:/Users/andre/git/Botticelli/lib/okhttp-3.9.1.jar" todir="c:/Botticelli_lib"/>
-    	    	<copy file="C:/Users/andre/git/Botticelli/lib/okio-1.13.0.jar" todir="c:/Botticelli_lib"/>
+    	<copy file="<your source path>/Botticelli/lib/okhttp-3.9.1.jar" todir="<your destination path>/Botticelli_lib"/>
+    	    	<copy file="<your source path>/Botticelli/lib/okio-1.13.0.jar" todir="<your destination path>/Botticelli_lib"/>
     </target>
 </project>
