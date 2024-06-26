@@ -796,7 +796,5 @@ public class Message {
 	{
 		this.caption_entities = caption_entities;
 	}
-	
-	
-	
+
 }

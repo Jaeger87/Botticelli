@@ -25,11 +25,7 @@ public class Chat extends User{
 	{
 		return type;
 	}
-	
-	/**
-	 * Set the type
-	 * @param type
-	 */
+
 	public void setType(String type)
 	{
 		this.type = type;
@@ -108,7 +104,4 @@ public class Chat extends User{
 	{
 		this.sticker_set_name = sticker_set_name;
 	}
-	
-	
-
 }

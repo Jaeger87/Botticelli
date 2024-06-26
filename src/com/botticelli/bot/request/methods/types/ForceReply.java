@@ -1,14 +1,16 @@
 package com.botticelli.bot.request.methods.types;
 
+import com.botticelli.bot.request.methods.types.replykeyboard.ReplyKeyboard;
+
 /**
  * Upon receiving a message with this object, Telegram clients will display a reply interface to the user 
- * (act as if the user has selected the bot‘s message and tapped ’Reply'). 
+ * (act as if the user has selected the botï¿½s message and tapped ï¿½Reply'). 
  * This can be extremely useful if you want to create user-friendly step-by-step interfaces
  *  without having to sacrifice privacy mode.
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public class ForceReply extends ReplyKeyboard{
+public class ForceReply extends ReplyKeyboard {
 
 	private boolean force_reply;
 	
@@ -29,7 +31,7 @@ public class ForceReply extends ReplyKeyboard{
 	}
 	/**
 	 *  Shows reply interface to the user, 
-	 *  as if they manually selected the bot‘s message and tapped ’Reply'
+	 *  as if they manually selected the botï¿½s message and tapped ï¿½Reply'
 	 * @return
 	 */
 	public boolean getForceReply()
