@@ -15,8 +15,7 @@ public class DocumentReferenceToSend extends AbstractCaption{
 		super(chat_id);
 		this.document = document;
 	}
-	
-	
+
 	public DocumentReferenceToSend(String channelusername, String document) {
 		super(channelusername);
 		this.document = document;

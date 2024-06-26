@@ -12,7 +12,6 @@ public class DeleteStickerFromSetRequest implements Request{
 		this.sticker = sticker;
 	}
 
-
 	@Override
 	public Map<String, Object> getValuesMap() {
 		HashMap <String, Object> map = new HashMap<String, Object>();

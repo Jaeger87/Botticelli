@@ -19,7 +19,6 @@ public class VideoFileToSend extends AbstractCaption implements FileRequest{
 		this.video = video;
 	}
 
-	
 	public VideoFileToSend(String channelusername, File video) 
 	{
 		super(channelusername);

@@ -19,8 +19,7 @@ public class VideoNoteFileToSend extends AbstractReplyManageToSend implements Fi
 		super(channelusername);
 		this.video_note = video_note;
 	}
-	
-	
+
 	@Override
 	public File getFile() 
 	{

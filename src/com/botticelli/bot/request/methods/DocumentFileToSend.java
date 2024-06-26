@@ -17,7 +17,6 @@ public class DocumentFileToSend extends AbstractCaption implements FileRequest{
 		this.document = document;
 	}
 
-	
 	public DocumentFileToSend(String channelusername, File document) {
 		super(channelusername);
 		this.document = document;

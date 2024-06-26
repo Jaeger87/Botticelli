@@ -20,7 +20,6 @@ public class VideoNoteReferenceToSend extends AbstractReplyManageToSend{
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	@Override
 	public Map<String, Object> getValuesMap()
 	{
@@ -50,7 +49,4 @@ public class VideoNoteReferenceToSend extends AbstractReplyManageToSend{
 	{
 		this.length = length;
 	}
-	
-	
-	
 }

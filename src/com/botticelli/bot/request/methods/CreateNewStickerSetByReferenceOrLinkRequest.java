@@ -13,7 +13,6 @@ public class CreateNewStickerSetByReferenceOrLinkRequest extends AbstractCreateN
 		this.png_sticker = png_sticker;
 	}
 
-
 	@Override
 	public Map<String, Object> getValuesMap() 
 	{
@@ -22,6 +21,4 @@ public class CreateNewStickerSetByReferenceOrLinkRequest extends AbstractCreateN
 		return map;
 	}
 
-	
-	
 }

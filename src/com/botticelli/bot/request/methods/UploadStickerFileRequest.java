@@ -36,6 +36,4 @@ public class UploadStickerFileRequest implements FileRequest{
 	{
 		return "png_sticker";
 	}
-
-	
 }
