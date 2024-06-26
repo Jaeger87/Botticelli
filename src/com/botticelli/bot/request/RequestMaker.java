@@ -426,8 +426,7 @@ public class RequestMaker {
 		String json = makeRequestFile(urlCreateNewStickerSet, cnf);
 		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
 	}
-	
-	
+
 	public boolean addStickerToSetByReferenceOrLink(AddStickerToSetByReferenceOrLink asr)
 	{
 		String json = makeRequest(urlAddStickerToSet, asr);
@@ -862,23 +861,6 @@ public class RequestMaker {
 			return source;
 		return result;
 	}
-
-	/*
-	public File downloadFileFromTelegramServer(DownlodableFile df, String filename) {
-
-		try {
-			URL u = new URL(urlDownloadFile + df.getFilePath());
-			File f = new File(filename);
-			FileUtils.copyURLToFile(u, f);
-			return f;
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-*/
 	
 	public File downloadFileFromTelegramServer(DownlodableFile df, String filename) {
 
@@ -943,7 +925,6 @@ public class RequestMaker {
 			if (e.getValue() != null && e.getKey() != null)
 				requestBody.addFormDataPart(e.getKey(), e.getValue().toString());
 		}
-
 		return requestBody;
 	}
 
