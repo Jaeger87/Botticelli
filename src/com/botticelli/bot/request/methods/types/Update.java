@@ -1,5 +1,7 @@
 package com.botticelli.bot.request.methods.types;
 
+import com.botticelli.bot.request.methods.types.inlinequery.InlineQuery;
+
 /**
  * This object represents an incoming update. 
  * @author Andrea Rosati (@Jaeger87)
@@ -28,9 +30,9 @@ public class Update {
 	private PreCheckoutQuery pre_checkout_query;
 
 	/**
-	 * The update‘s unique identifier. 
+	 * The updateï¿½s unique identifier. 
 	 * Update identifiers start from a certain positive number and increase sequentially. 
-	 * This ID becomes especially handy if you’re using Webhooks, 
+	 * This ID becomes especially handy if youï¿½re using Webhooks, 
 	 * since it allows you to ignore repeated updates or to restore the correct update sequence, 
 	 * should they get out of order.
 	 * @return
@@ -41,7 +43,7 @@ public class Update {
 	}
 	
 	/**
-	 * Optional. New incoming message of any kind — text, photo, sticker, etc.
+	 * Optional. New incoming message of any kind ï¿½ text, photo, sticker, etc.
 	 * @return
 	 */
 	public Message getMessage()

@@ -17,6 +17,7 @@ public class Constants {
 	public static final String SENDINVOICE = "/sendInvoice";
 	public static final String SENDLOCATION = "/sendLocation";
 	public static final String SENDCHATACTION = "/sendChatAction";
+	public static final String SENDMEDIAGROUP = "/sendMediaGroup";
 	public static final String GETUSERPROFILEPHOTOS = "/getUserProfilePhotos";
 	public static final String GETUPDATES ="/getUpdates";
 	public static final String SETWEBHOOK ="/setWebhook";
