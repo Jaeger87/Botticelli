@@ -916,10 +916,11 @@ public class RequestMaker {
 	}
 
 	private okhttp3.MultipartBody.Builder getMultipartBodyBuilderFromRequest(FileRequest req) {
+		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
 		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
 		requestBody.addFormDataPart(req.getTypeFile(), req.getFile().getName(),
-				RequestBody.create(null, req.getFile()));
+				RequestBody.create(contentType, req.getFile()));
 
 		for (Entry<String, Object> e : req.getValuesMap().entrySet()) {
 			if (e.getValue() != null && e.getKey() != null)
