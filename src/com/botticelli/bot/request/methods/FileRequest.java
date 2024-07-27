@@ -11,7 +11,7 @@ public interface FileRequest extends Request{
 	public File getFile();
 
 	/**
-	 * It return the type of the file (don't touch!!)
+	 * It returns the type of the file (don't touch!!)
 	 * @return
 	 */
 	public String getTypeFile();

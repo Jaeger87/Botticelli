@@ -1,8 +1,54 @@
 package com.botticelli.bot.request.methods.types.inputmedia;
 
+import java.io.File;
+
 public class InputMediaAudio extends InputMedia{
 
-    public InputMediaAudio(String type) {
-        super("audio");
+    private int duration;
+    private String performer;
+    private String title;
+
+    public InputMediaAudio(String type, String media) {
+        super("audio", media);
+    }
+
+    public InputMediaAudio(String type, File media) {
+        super("audio", media);
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    /**
+     * Duration of the audio in seconds
+     * @param duration
+     */
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Title of the audio
+     * @param title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPerformer() {
+        return performer;
+    }
+
+    /**
+     *  Performer of the audio
+     * @param performer
+     */
+    public void setPerformer(String performer) {
+        this.performer = performer;
     }
 }

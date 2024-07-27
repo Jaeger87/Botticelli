@@ -1,7 +1,14 @@
 package com.botticelli.bot.request.methods.types.inputmedia;
 
-public class InputMediaPhoto extends InputMedia{
-    public InputMediaPhoto() {
-        super("photo");
+import java.io.File;
+
+public class InputMediaPhoto extends InputMediaCaptionAbove{
+
+    public InputMediaPhoto(String media) {
+        super("photo", media);
+    }
+
+    public InputMediaPhoto(File media) {
+        super("photo", media);
     }
 }
