@@ -16,6 +16,7 @@ public class SetInlineGameScoreRequest implements Request{
 	
 	public SetInlineGameScoreRequest(String inline_message_id, long user_id, int score)
 	{
+		this.inline_message_id = inline_message_id;
 		this.user_id = user_id;
 		this.score = score;
 	}
