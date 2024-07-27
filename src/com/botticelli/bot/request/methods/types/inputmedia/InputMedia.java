@@ -9,8 +9,9 @@ import java.util.List;
 public abstract class InputMedia {
 
     private final String type;
-    private String mediaReference;
-    private File mediaFile;
+
+    private transient File mediaFile;
+    private String media;
     private String caption;
     private ParseMode parse_mode;
     private List<MessageEntity> caption_entities;
@@ -18,12 +19,18 @@ public abstract class InputMedia {
 
     public InputMedia(String type, String media) {
         this.type = type;
-        this.mediaReference = media;
+        this.media = media;
     }
 
     public InputMedia(String type, File media) {
         this.type = type;
         this.mediaFile = media;
+        this.media = "attach://" + media.getName();
+    }
+
+
+    public String getMedia() {
+        return media;
     }
 
     public String getType()
@@ -34,11 +41,6 @@ public abstract class InputMedia {
     public boolean isInputMediaFile()
     {
         return mediaFile != null;
-    }
-
-    public String getMediaReference()
-    {
-        return mediaReference;
     }
 
     public File getMediaFile()
@@ -83,4 +85,5 @@ public abstract class InputMedia {
     {
         this.caption_entities = caption_entities;
     }
+
 }

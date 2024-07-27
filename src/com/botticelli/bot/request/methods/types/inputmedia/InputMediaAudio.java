@@ -4,6 +4,8 @@ import java.io.File;
 
 public class InputMediaAudio extends InputMedia{
 
+    private transient File thumbnailFile;
+    private String thumbnail;
     private int duration;
     private String performer;
     private String title;
@@ -14,6 +16,15 @@ public class InputMediaAudio extends InputMedia{
 
     public InputMediaAudio(String type, File media) {
         super("audio", media);
+    }
+
+    public File getThumbnailFile() {
+        return thumbnailFile;
+    }
+
+    public void setThumbnailFile(File thumbnailFile) {
+        this.thumbnailFile = thumbnailFile;
+        thumbnail = "attach://" + thumbnailFile.getName();
     }
 
     public int getDuration() {

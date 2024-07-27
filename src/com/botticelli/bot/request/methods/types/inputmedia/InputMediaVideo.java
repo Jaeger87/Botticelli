@@ -4,7 +4,8 @@ import java.io.File;
 
 public class InputMediaVideo extends InputMediaCaptionAbove{
 
-    private File thumbnail;
+    private transient File thumbnailFile;
+    private String thumbnail;
     private int width;
     private int height;
     private int duration;
@@ -19,12 +20,13 @@ public class InputMediaVideo extends InputMediaCaptionAbove{
         super("video", media);
     }
 
-    public File getThumbnail() {
-        return thumbnail;
+    public File getThumbnailFile() {
+        return thumbnailFile;
     }
 
-    public void setThumbnail(File thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setThumbnailFile(File thumbnailFile) {
+        this.thumbnailFile = thumbnailFile;
+        thumbnail = "attach://" + thumbnailFile.getName();
     }
 
     public int getWidth() {
