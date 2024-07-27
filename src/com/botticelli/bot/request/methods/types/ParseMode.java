@@ -7,7 +7,7 @@ package com.botticelli.bot.request.methods.types;
  */
 public enum ParseMode
 {
-    HTML("HTML"), MARKDOWN("Markdown");
+	MARKDOWNV2("MarkdownV2 "), HTML("HTML"), MARKDOWN("Markdown");
 	
 	private String str;
 	/**
