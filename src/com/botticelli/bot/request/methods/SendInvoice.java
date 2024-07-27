@@ -17,6 +17,7 @@ public class SendInvoice extends AbstractReplyManageToSend{
 	private Currency currency;
 	private List<LabeledPrice> prices;
 	private String photo_url;
+	private String provider_data;
 	private int photo_size;
 	private int photo_width;
 	private int photo_height;
@@ -25,6 +26,8 @@ public class SendInvoice extends AbstractReplyManageToSend{
 	private boolean need_email;
 	private boolean need_shipping_address;
 	private boolean is_flexible;
+	private boolean send_phone_number_to_provider;
+	private boolean send_email_to_provider;
 
 	@Override
 	public Map<String, Object> getValuesMap()
@@ -38,6 +41,7 @@ public class SendInvoice extends AbstractReplyManageToSend{
 		map.put("currency", currency);
 		map.put("prices", prices);
 		map.put("photo_url", photo_url);
+		map.put("provider_data", provider_data);
 		map.put("photo_size", photo_size);
 		map.put("photo_width", photo_width);
 		map.put("photo_height", photo_height);
@@ -46,6 +50,8 @@ public class SendInvoice extends AbstractReplyManageToSend{
 		map.put("need_email", need_email);
 		map.put("need_shipping_address", need_shipping_address);
 		map.put("is_flexible", is_flexible);
+		map.put("send_phone_number_to_provider", send_phone_number_to_provider);
+		map.put("send_email_to_provider", send_email_to_provider);
 		return map;
 	}
 
@@ -142,7 +148,15 @@ public class SendInvoice extends AbstractReplyManageToSend{
 		this.need_shipping_address = need_shipping_address;
 	}
 
-	public boolean isIsFlexible() 
+	public String getProvider_data() {
+		return provider_data;
+	}
+
+	public void setProvider_data(String provider_data) {
+		this.provider_data = provider_data;
+	}
+
+	public boolean isIsFlexible()
 	{
 		return is_flexible;
 	}
@@ -152,4 +166,19 @@ public class SendInvoice extends AbstractReplyManageToSend{
 		this.is_flexible = is_flexible;
 	}
 
+	public boolean isSend_email_to_provider() {
+		return send_email_to_provider;
+	}
+
+	public void setSend_email_to_provider(boolean send_email_to_provider) {
+		this.send_email_to_provider = send_email_to_provider;
+	}
+
+	public boolean isSend_phone_number_to_provider() {
+		return send_phone_number_to_provider;
+	}
+
+	public void setSend_phone_number_to_provider(boolean send_phone_number_to_provider) {
+		this.send_phone_number_to_provider = send_phone_number_to_provider;
+	}
 }
