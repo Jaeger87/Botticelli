@@ -1,6 +1,7 @@
 package com.botticelli.bot.request.methods;
 
 import java.util.List;
+import java.util.Map;
 
 import com.botticelli.bot.request.methods.types.LabeledPrice;
 
@@ -24,7 +25,11 @@ public class InvoiceToSend extends AbstractReplyManageToSend{
 	private boolean need_shipping_address;
 	private boolean is_flexible;
 	private boolean disable_notification;
-	
+	private boolean send_phone_number_to_provider;
+	private boolean send_email_to_provider;
+
+	private boolean protect_content;
+	private String message_effect_id;
 
 	public InvoiceToSend(long chat_id, String title, String description, String payload, String provider_token,
 			String start_parameter, String currency, List<LabeledPrice> prices) {
@@ -36,6 +41,34 @@ public class InvoiceToSend extends AbstractReplyManageToSend{
 		this.start_parameter = start_parameter;
 		this.currency = currency;
 		this.prices = prices;
+	}
+
+	@Override
+	public Map<String, Object> getValuesMap()
+	{
+		Map<String, Object> map = super.getValuesMap();
+		map.put("title", title);
+		map.put("description", description);
+		map.put("payload", payload);
+		map.put("provider_token", provider_token);
+		map.put("start_parameter", start_parameter);
+		map.put("currency", currency);
+		map.put("prices", prices);
+		map.put("photo_url", photo_url);
+		map.put("provider_data", provider_data);
+		map.put("photo_size", photo_size);
+		map.put("photo_width", photo_width);
+		map.put("photo_height", photo_height);
+		map.put("need_name", need_name);
+		map.put("need_phone_number", need_phone_number);
+		map.put("need_email", need_email);
+		map.put("need_shipping_address", need_shipping_address);
+		map.put("is_flexible", is_flexible);
+		map.put("send_phone_number_to_provider", send_phone_number_to_provider);
+		map.put("send_email_to_provider", send_email_to_provider);
+		map.put("protect_content", protect_content);
+		map.put("message_effect_id", message_effect_id);
+		return map;
 	}
 
 
@@ -170,6 +203,37 @@ public class InvoiceToSend extends AbstractReplyManageToSend{
 		this.disable_notification = disable_notification;
 	}
 
-	
-	
+
+
+	public String getMessage_effect_id() {
+		return message_effect_id;
+	}
+
+	public void setMessage_effect_id(String message_effect_id) {
+		this.message_effect_id = message_effect_id;
+	}
+
+	public boolean isProtect_content() {
+		return protect_content;
+	}
+
+	public void setProtect_content(boolean protect_content) {
+		this.protect_content = protect_content;
+	}
+
+	public boolean isSend_email_to_provider() {
+		return send_email_to_provider;
+	}
+
+	public void setSend_email_to_provider(boolean send_email_to_provider) {
+		this.send_email_to_provider = send_email_to_provider;
+	}
+
+	public boolean isSend_phone_number_to_provider() {
+		return send_phone_number_to_provider;
+	}
+
+	public void setSend_phone_number_to_provider(boolean send_phone_number_to_provider) {
+		this.send_phone_number_to_provider = send_phone_number_to_provider;
+	}
 }
