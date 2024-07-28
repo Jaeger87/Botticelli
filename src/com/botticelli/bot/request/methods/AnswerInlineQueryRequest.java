@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.botticelli.bot.request.methods.types.GsonOwner;
-import com.botticelli.bot.request.methods.types.InlineQueryResult;
+import com.botticelli.bot.request.methods.types.inlinequery.InlineQueryResult;
 
 public class AnswerInlineQueryRequest implements Request
 {

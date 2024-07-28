@@ -1,5 +1,7 @@
 package com.botticelli.bot.request.methods.types.inlinequery;
 
+import com.botticelli.bot.request.methods.types.DocumentMimeType;
+
 public class InlineQueryResultDocument extends InlineQueryResultWithDescription{
 
 	public final String type = "document";

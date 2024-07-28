@@ -1,5 +1,8 @@
 package com.botticelli.bot.request.methods.types.inlinequery;
 
+import com.botticelli.bot.request.methods.types.InlineKeyboardMarkup;
+import com.botticelli.bot.request.methods.types.InputMessageContent;
+
 public abstract class InlineQueryResult
 {
 	private String id;
