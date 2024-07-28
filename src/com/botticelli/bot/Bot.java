@@ -126,6 +126,13 @@ public abstract class Bot {
 			return null;
 		return rm.sendAudioFile(afs);
 	}
+
+	public final List<Message> sendMediaGroup(MediaGroupToSend<?> mediaGroupToSend)
+	{
+		if(mediaGroupToSend == null)
+			return null;
+		return rm.sendMediaGroup(mediaGroupToSend);
+	}
 	
 	
 	/**
