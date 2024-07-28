@@ -6,7 +6,7 @@ public class InputMediaAudio extends InputMedia{
 
     private transient File thumbnailFile;
     private String thumbnail;
-    private int duration;
+    private Integer duration;
     private String performer;
     private String title;
 

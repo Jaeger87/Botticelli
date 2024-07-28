@@ -6,9 +6,9 @@ public class InputMediaVideo extends InputMediaCaptionAbove{
 
     private transient File thumbnailFile;
     private String thumbnail;
-    private int width;
-    private int height;
-    private int duration;
+    private Integer width;
+    private Integer height;
+    private Integer duration;
     private boolean supports_streaming;
 
 

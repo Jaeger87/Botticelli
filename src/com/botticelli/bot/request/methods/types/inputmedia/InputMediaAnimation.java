@@ -6,9 +6,9 @@ public class InputMediaAnimation extends InputMediaCaptionAbove{
 
     private transient File thumbnailFile;
     private String thumbnail;
-    private int width;
-    private int height;
-    private int duration;
+    private Integer width;
+    private Integer height;
+    private Integer duration;
 
     public InputMediaAnimation(String media) {
         super("animation", media);
