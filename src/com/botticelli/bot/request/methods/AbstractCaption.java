@@ -1,10 +1,13 @@
 package com.botticelli.bot.request.methods;
 
+import com.botticelli.bot.request.methods.types.ParseMode;
+
 import java.util.Map;
 
 public abstract class AbstractCaption extends AbstractReplyManageToSend{
 
 	private String caption;
+	private ParseMode parse_mode;
 	public final static int MAXCAPTIONLENGHT = 200;
 	
 	public AbstractCaption(long chat_id) 
@@ -22,6 +25,7 @@ public abstract class AbstractCaption extends AbstractReplyManageToSend{
 	{
 		Map <String, Object> map = super.getValuesMap();
 		map.put("caption", caption);
+		map.put("parse_mode", parse_mode);
 		return map;
 	}
 
@@ -36,7 +40,12 @@ public abstract class AbstractCaption extends AbstractReplyManageToSend{
 			return;
 		this.caption = caption;
 	}
-	
-	
-	
+
+	public ParseMode getParse_mode() {
+		return parse_mode;
+	}
+
+	public void setParse_mode(ParseMode parse_mode) {
+		this.parse_mode = parse_mode;
+	}
 }
