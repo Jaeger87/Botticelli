@@ -765,7 +765,7 @@ public class RequestMaker {
 	public List<Message> sendMediaGroup(MediaGroupToSend<?> mediaGroupToSend)
 	{
 		String json = makeMediaGroupToSendRequest(urlSendMediaGroup, mediaGroupToSend);
-		return buildResult(json, messageResult, new Result<List<Message>>()).getResult();
+		return buildResult(json, listMessageResult, new Result<List<Message>>()).getResult();
 	}
 	/**
 	 * 
@@ -925,7 +925,6 @@ public class RequestMaker {
 		} catch (IOException e) {
 			errorLogger.log(Level.SEVERE, mgts.getClass().getName(), e);
 		}
-
 		return "";
 	}
 
