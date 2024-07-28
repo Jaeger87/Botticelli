@@ -91,6 +91,8 @@ public class Message {
 	private VideoNote video_note;
 	
 	private Invoice invoice;
+
+	private String connected_website;
 	
 	private SuccessfulPayment successful_payment;
 	
@@ -797,4 +799,11 @@ public class Message {
 		this.caption_entities = caption_entities;
 	}
 
+	public String getConnected_website() {
+		return connected_website;
+	}
+
+	public void setConnected_website(String connected_website) {
+		this.connected_website = connected_website;
+	}
 }
