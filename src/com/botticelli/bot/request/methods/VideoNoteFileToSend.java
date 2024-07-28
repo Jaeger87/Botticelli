@@ -27,7 +27,7 @@ public class VideoNoteFileToSend extends AbstractReplyManageToSend implements Fi
 	}
 
 	@Override
-	public String getParameterName()
+	public String getFormDataParameterName()
 	{
 		return "video_note";
 	}

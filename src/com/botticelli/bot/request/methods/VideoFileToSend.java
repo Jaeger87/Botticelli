@@ -41,7 +41,7 @@ public class VideoFileToSend extends AbstractCaption implements FileRequest{
 	}
 
 	@Override
-	public String getParameterName()
+	public String getFormDataParameterName()
 	{
 		return "video";
 	}

@@ -40,7 +40,7 @@ public class AudioFileToSend extends AudioToSend implements FileRequest{
 
 
 	@Override
-	public String getParameterName()
+	public String getFormDataParameterName()
 	{
 		return "audio";
 	}

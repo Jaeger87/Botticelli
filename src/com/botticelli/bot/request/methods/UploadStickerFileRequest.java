@@ -32,7 +32,7 @@ public class UploadStickerFileRequest implements FileRequest{
 	}
 
 	@Override
-	public String getParameterName()
+	public String getFormDataParameterName()
 	{
 		return "png_sticker";
 	}

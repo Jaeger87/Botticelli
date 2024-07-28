@@ -19,7 +19,7 @@ public class AddStickerToSetByFile extends AbstractCreateNewStickerSet implement
 	}
 
 	@Override
-	public String getParameterName()
+	public String getFormDataParameterName()
 	{
 		return "png_sticker";
 	}

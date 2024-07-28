@@ -943,7 +943,7 @@ public class RequestMaker {
 		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
 		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-		requestBody.addFormDataPart(req.getParameterName(), req.getFile().getName(),
+		requestBody.addFormDataPart(req.getFormDataParameterName(), req.getFile().getName(),
 				RequestBody.create(contentType, req.getFile()));
 
 		for (Entry<String, Object> e : req.getValuesMap().entrySet()) {

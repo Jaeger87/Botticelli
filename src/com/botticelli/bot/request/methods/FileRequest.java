@@ -14,5 +14,5 @@ public interface FileRequest extends Request{
 	 * It returns the type of the file (don't touch!!)
 	 * @return
 	 */
-	public String getParameterName();
+	public String getFormDataParameterName();
 }

@@ -31,7 +31,7 @@ public class VoiceFileToSend extends AudioVoiceToSend implements FileRequest
 	}
 
 	@Override
-	public String getParameterName()
+	public String getFormDataParameterName()
 	{
 		return "voice";
 	}

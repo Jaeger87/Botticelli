@@ -25,7 +25,7 @@ public class SetChatPhotoRequest extends AbstractToSend implements FileRequest{
 	}
 
 	@Override
-	public String getParameterName()
+	public String getFormDataParameterName()
 	{
 		return "photo";
 	}

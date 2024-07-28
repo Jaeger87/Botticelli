@@ -39,7 +39,7 @@ public class StickerFileToSend extends AbstractReplyManageToSend implements File
 	}
 
 	@Override
-	public String getParameterName()
+	public String getFormDataParameterName()
 	{
 		return "sticker";
 	}
