@@ -18,11 +18,18 @@ public class InputMediaAudio extends InputMedia{
         super("audio", media);
     }
 
+    @Override
+    public boolean hasThumbnail() {
+        return thumbnail != null;
+    }
+
     public File getThumbnailFile() {
         return thumbnailFile;
     }
 
     public void setThumbnailFile(File thumbnailFile) {
+        if(thumbnailFile == null)
+            return;
         this.thumbnailFile = thumbnailFile;
         thumbnail = "attach://" + thumbnailFile.getName();
     }

@@ -40,7 +40,7 @@ public class PhotoFileToSend extends PhotoToSend implements FileRequest{
 	}
 
 	@Override
-	public String getTypeFile() 
+	public String getParameterName()
 	{
 		return "photo";
 	}

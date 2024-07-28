@@ -25,6 +25,8 @@ public class InputMediaVideo extends InputMediaCaptionAbove{
     }
 
     public void setThumbnailFile(File thumbnailFile) {
+        if(thumbnailFile == null)
+            return;
         this.thumbnailFile = thumbnailFile;
         thumbnail = "attach://" + thumbnailFile.getName();
     }
@@ -59,5 +61,10 @@ public class InputMediaVideo extends InputMediaCaptionAbove{
 
     public void setSupports_streaming(boolean supports_streaming) {
         this.supports_streaming = supports_streaming;
+    }
+
+    @Override
+    public boolean hasThumbnail() {
+        return thumbnail != null;
     }
 }

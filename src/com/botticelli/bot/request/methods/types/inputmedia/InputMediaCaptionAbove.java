@@ -23,7 +23,7 @@ public abstract class InputMediaCaptionAbove extends InputMedia{
         this.show_caption_above_media = show_caption_above_media;
     }
 
-    public boolean isHas_spoiler() {
+    public boolean hasSpoiler() {
         return has_spoiler;
     }
 

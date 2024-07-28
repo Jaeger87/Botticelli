@@ -28,6 +28,8 @@ public abstract class InputMedia {
         this.media = "attach://" + media.getName();
     }
 
+    public abstract boolean hasThumbnail();
+    public abstract File getThumbnailFile();
 
     public String getMedia() {
         return media;

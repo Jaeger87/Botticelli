@@ -46,6 +46,8 @@ public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend{
         {
             if(inputmedia.isInputMediaFile())
                 returnList.add(inputmedia.getMediaFile());
+            if(inputmedia.hasThumbnail())
+                returnList.add(inputmedia.getThumbnailFile());
         }
         return returnList;
     }

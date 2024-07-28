@@ -53,6 +53,7 @@ public class RequestMaker {
 	private String urlSendVoice;
 	private String urlSendVenue;
 	private String urlSendInvoice;
+	private String urlSendMediaGroup;
 	private String urlSendContact;
 	private String urlAnswerInlineQuery;
 	private String urlAnswerShippingQuery;
@@ -102,6 +103,7 @@ public class RequestMaker {
 	private Type chatResult;
 	private Type booleanResult;
 	private Type messageResult;
+	private Type listMessageResult;
 	private Type stringResult;
 	private Type userProfilePhotosResult;
 	private Type downlodableFileResult;
@@ -135,6 +137,7 @@ public class RequestMaker {
 		urlSendChatAction = Constants.APIURL + token + Constants.SENDCHATACTION;
 		urlGetUserProfilePhotos = Constants.APIURL + token + Constants.GETUSERPROFILEPHOTOS;
 		urlSendVenue = Constants.APIURL + token + Constants.SENDVENUE;
+		urlSendMediaGroup = Constants.APIURL + token + Constants.SENDMEDIAGROUP;
 		urlAnswerShippingQuery = Constants.APIURL + token + Constants.ANSWERSHIPPINGQUERY;
 		urlSendContact = Constants.APIURL + token + Constants.SENDCONTACT;
 		urlLeaveChat = Constants.APIURL + token + Constants.LEAVECHAT;
@@ -184,6 +187,8 @@ public class RequestMaker {
 		chatResult = new TypeToken<Result<Chat>>() {
 		}.getType();
 		messageResult = new TypeToken<Result<Message>>() {
+		}.getType();
+		listMessageResult = new TypeToken<Result<List<Message>>>() {
 		}.getType();
 		stringResult = new TypeToken<Result<String>>() {
 		}.getType(); 
@@ -271,7 +276,7 @@ public class RequestMaker {
 	 * @return
 	 */
 	public Message sendPhotoFile(PhotoFileToSend pfs) {
-		String json = makeRequestFile(urlSendPhoto, pfs);
+		String json = makeFileRequest(urlSendPhoto, pfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -299,7 +304,7 @@ public class RequestMaker {
 	 * @return
 	 */
 	public Message sendAudioFile(AudioFileToSend afs) {
-		String json = makeRequestFile(urlSendAudio, afs);
+		String json = makeFileRequest(urlSendAudio, afs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -337,7 +342,7 @@ public class RequestMaker {
 	 * @return
 	 */
 	public Message sendDocumentFile(DocumentFileToSend dfs) {
-		String json = makeRequestFile(urlSendDocument, dfs);
+		String json = makeFileRequest(urlSendDocument, dfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -361,7 +366,7 @@ public class RequestMaker {
 	 * @return
 	 */
 	public Message sendStickerFile(StickerFileToSend sfs) {
-		String json = makeRequestFile(urlSendSticker, sfs);
+		String json = makeFileRequest(urlSendSticker, sfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -423,7 +428,7 @@ public class RequestMaker {
 	
 	public boolean createNewStickerSetByFile(CreateNewStickerSetByFile cnf)
 	{
-		String json = makeRequestFile(urlCreateNewStickerSet, cnf);
+		String json = makeFileRequest(urlCreateNewStickerSet, cnf);
 		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
 	}
 
@@ -435,7 +440,7 @@ public class RequestMaker {
 	
 	public boolean addStickerToSetByFile(AddStickerToSetByFile asf)
 	{
-		String json = makeRequestFile(urlAddStickerToSet, asf);
+		String json = makeFileRequest(urlAddStickerToSet, asf);
 		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
 	}
 	
@@ -470,12 +475,12 @@ public class RequestMaker {
 	 * @return
 	 */
 	public Message sendVideoFile(VideoFileToSend vfs) {
-		String json = makeRequestFile(urlSendVideo, vfs);
+		String json = makeFileRequest(urlSendVideo, vfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
 	public Message sendVideoNoteFile(VideoNoteFileToSend vnf) {
-		String json = makeRequestFile(urlSendVideoNote, vnf);
+		String json = makeFileRequest(urlSendVideoNote, vnf);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 	/**
@@ -494,7 +499,7 @@ public class RequestMaker {
 	 * @return
 	 */
 	public Message sendVoiceFile(VoiceFileToSend vfs) {
-		String json = makeRequestFile(urlSendVoice, vfs);
+		String json = makeFileRequest(urlSendVoice, vfs);
 		return buildResult(json, messageResult, new Result<Message>()).getResult();
 	}
 
@@ -756,6 +761,12 @@ public class RequestMaker {
 		String json = makeRequest(urlDeleteChatPhoto, dcp);
 		return buildResult(json, booleanResult, new Result<Boolean>()).getResult();
 	}
+
+	public List<Message> sendMediaGroup(MediaGroupToSend<?> mediaGroupToSend)
+	{
+		String json = makeMediaGroupToSendRequest(urlSendMediaGroup, mediaGroupToSend);
+		return buildResult(json, messageResult, new Result<List<Message>>()).getResult();
+	}
 	/**
 	 * 
 	 * @param sct
@@ -890,7 +901,7 @@ public class RequestMaker {
 		return "";
 	}
 
-	private String makeRequestFile(String url, FileRequest fr) {
+	private String makeFileRequest(String url, FileRequest fr) {
 		okhttp3.Request request = new okhttp3.Request.Builder().url(url)
 				.post(getMultipartBodyBuilderFromRequest(fr).build()).build();
 		Response response;
@@ -899,6 +910,20 @@ public class RequestMaker {
 			return response.body().string();
 		} catch (IOException e) {
 			errorLogger.log(Level.SEVERE, fr.getClass().getName(), e);
+		}
+
+		return "";
+	}
+
+	private String makeMediaGroupToSendRequest(String url, MediaGroupToSend<?> mgts) {
+		okhttp3.Request request = new okhttp3.Request.Builder().url(url)
+				.post(getMultipartBodyBuilderFromRequest(mgts).build()).build();
+		Response response;
+		try {
+			response = client.newCall(request).execute();
+			return response.body().string();
+		} catch (IOException e) {
+			errorLogger.log(Level.SEVERE, mgts.getClass().getName(), e);
 		}
 
 		return "";
@@ -919,7 +944,7 @@ public class RequestMaker {
 		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
 		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-		requestBody.addFormDataPart(req.getTypeFile(), req.getFile().getName(),
+		requestBody.addFormDataPart(req.getParameterName(), req.getFile().getName(),
 				RequestBody.create(contentType, req.getFile()));
 
 		for (Entry<String, Object> e : req.getValuesMap().entrySet()) {
@@ -928,5 +953,25 @@ public class RequestMaker {
 		}
 		return requestBody;
 	}
+
+	private okhttp3.MultipartBody.Builder getMultipartBodyBuilderFromRequest(MediaGroupToSend<?> mgts) {
+		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
+		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+		List<File> inputMediaFiles = mgts.getMediaFiles();
+
+		for(File inputMediaFile : inputMediaFiles)
+		{
+			requestBody.addFormDataPart(inputMediaFile.getName(), inputMediaFile.getName(),
+					RequestBody.create(contentType, inputMediaFile));
+		}
+
+		for (Entry<String, Object> e : mgts.getValuesMap().entrySet()) {
+			if (e.getValue() != null && e.getKey() != null)
+				requestBody.addFormDataPart(e.getKey(), e.getValue().toString());
+		}
+		return requestBody;
+	}
+
 
 }

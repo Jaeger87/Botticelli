@@ -14,6 +14,15 @@ public class InputMediaDocument extends InputMedia{
         super("document", media);
     }
 
+    @Override
+    public boolean hasThumbnail() {
+        return false;
+    }
+
+    public File getThumbnailFile() {
+        return null;
+    }
+
     public boolean isDisable_content_type_detection() {
         return disable_content_type_detection;
     }

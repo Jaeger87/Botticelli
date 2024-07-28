@@ -18,7 +18,7 @@ public class CreateNewStickerSetByFile extends AbstractCreateNewStickerSet imple
 	}
 
 	@Override
-	public String getTypeFile() 
+	public String getParameterName()
 	{
 		return "png_sticker";
 	}

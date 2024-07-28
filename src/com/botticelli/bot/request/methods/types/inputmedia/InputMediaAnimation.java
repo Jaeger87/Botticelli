@@ -23,6 +23,8 @@ public class InputMediaAnimation extends InputMediaCaptionAbove{
     }
 
     public void setThumbnailFile(File thumbnailFile) {
+        if(thumbnailFile == null)
+            return;
         this.thumbnailFile = thumbnailFile;
         thumbnail = "attach://" + thumbnailFile.getName();
     }
@@ -49,5 +51,10 @@ public class InputMediaAnimation extends InputMediaCaptionAbove{
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    @Override
+    public boolean hasThumbnail() {
+        return thumbnail != null;
     }
 }

@@ -11,4 +11,13 @@ public class InputMediaPhoto extends InputMediaCaptionAbove{
     public InputMediaPhoto(File media) {
         super("photo", media);
     }
+
+    public File getThumbnailFile() {
+        return null;
+    }
+
+    @Override
+    public boolean hasThumbnail() {
+        return false;
+    }
 }

@@ -39,7 +39,7 @@ public class DocumentFileToSend extends AbstractCaption implements FileRequest{
 	}
 
 	@Override
-	public String getTypeFile() 
+	public String getParameterName()
 	{
 		return "document";
 	}
