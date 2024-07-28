@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public class VideoReferenceToSend extends AbstractCaption{
+public class VideoReferenceToSend extends AbstractVideoToSend{
 
 	private String video;
 	

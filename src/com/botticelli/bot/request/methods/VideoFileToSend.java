@@ -9,7 +9,7 @@ import java.io.File;
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public class VideoFileToSend extends AbstractCaption implements FileRequest{
+public class VideoFileToSend extends AbstractVideoToSend implements FileRequest{
 
 	private File video;
 	
