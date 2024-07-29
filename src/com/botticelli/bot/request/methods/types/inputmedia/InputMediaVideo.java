@@ -1,11 +1,14 @@
 package com.botticelli.bot.request.methods.types.inputmedia;
 
+import com.botticelli.bot.request.methods.types.Thumbnail;
+import com.google.gson.annotations.JsonAdapter;
+
 import java.io.File;
 
 public class InputMediaVideo extends InputMediaCaptionAbove{
 
-    private transient File thumbnailFile;
-    private String thumbnail;
+    //@JsonAdapter(DatiTypeAdapter.class)
+    private Thumbnail thumbnail;
     private Integer width;
     private Integer height;
     private Integer duration;
@@ -21,14 +24,12 @@ public class InputMediaVideo extends InputMediaCaptionAbove{
     }
 
     public File getThumbnailFile() {
-        return thumbnailFile;
+        return thumbnail.getFile();
     }
 
-    public void setThumbnailFile(File thumbnailFile) {
-        if(thumbnailFile == null)
-            return;
-        this.thumbnailFile = thumbnailFile;
-        thumbnail = "attach://" + thumbnailFile.getName();
+    public void setThumbnailFile(Thumbnail thumbnail) {
+        this.thumbnail = thumbnail;
+
     }
 
     public int getWidth() {
