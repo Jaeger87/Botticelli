@@ -944,9 +944,12 @@ public class RequestMaker {
 		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
 		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-		requestBody.addFormDataPart(req.getFormDataParameterName(), req.getFormDataPartsContainers()[0].getFile().getName(),
-				RequestBody.create(contentType, req.getFormDataPartsContainers()[0].getFile()));
-
+		FormDataFileContainer[] formDataFileContainers = req.getFormDataPartsContainers();
+		for(int i = 0; i < formDataFileContainers.length; i++ )
+		{
+			requestBody.addFormDataPart(req.getFormDataParameterName(), req.getFormDataPartsContainers()[i].getFile().getName(),
+					RequestBody.create(contentType, req.getFormDataPartsContainers()[i].getFile()));
+		}
 		for (Entry<String, Object> e : req.getValuesMap().entrySet()) {
 			if (e.getValue() != null && e.getKey() != null)
 				requestBody.addFormDataPart(e.getKey(), e.getValue().toString());
