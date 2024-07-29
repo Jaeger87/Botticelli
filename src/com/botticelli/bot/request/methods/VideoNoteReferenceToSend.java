@@ -11,13 +11,13 @@ public class VideoNoteReferenceToSend extends AbstractReplyManageToSend{
 	public VideoNoteReferenceToSend(long chat_id, String video_note) 
 	{
 		super(chat_id);
-		// TODO Auto-generated constructor stub
+		this.video_note = video_note;
 	}
 	
 	public VideoNoteReferenceToSend(String channelusername, String video_note) 
 	{
 		super(channelusername);
-		// TODO Auto-generated constructor stub
+		this.video_note = video_note;
 	}
 
 	@Override

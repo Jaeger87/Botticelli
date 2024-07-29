@@ -31,10 +31,9 @@ public class DocumentFileToSend extends AbstractCaption implements FileRequest{
 	{
 		return document;
 	}
-	
+
 	@Override
-	public File getFormDataPartsContainers()
-	{
+	public File getFile() {
 		return document;
 	}
 

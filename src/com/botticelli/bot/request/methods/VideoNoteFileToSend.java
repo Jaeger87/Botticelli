@@ -21,8 +21,7 @@ public class VideoNoteFileToSend extends AbstractReplyManageToSend implements Fi
 	}
 
 	@Override
-	public File getFormDataPartsContainers()
-	{
+	public File getFile() {
 		return video_note;
 	}
 

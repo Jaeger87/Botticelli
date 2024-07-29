@@ -392,7 +392,8 @@ public class RequestMaker {
 		String json = makeRequest(urlGetStickerSet, gss);
 		return buildResult(json, stickerSetResult, new Result<StickerSet>()).getResult();
 	}
-	
+
+	//TODO: Rivedere
 	/**
 	 * 
 	 * @param usf
@@ -403,7 +404,7 @@ public class RequestMaker {
 		okhttp3.Request request = new okhttp3.Request.Builder().url(urlUploadStickerFile)
 				.post(getMultipartBodyBuilderFromRequest(usf).build()).build();
 			try (Response response = client.newCall(request).execute()) {
-				File f = new File("(updated)" + usf.getFormDataPartsContainers().getName());
+				File f = new File("(updated)" + usf.getFormDataPartsContainers()[0].getFile().getName());
 				BufferedSink sink = Okio.buffer(Okio.sink(f));
 	            sink.writeAll(response.body().source());
 	            sink.close();
@@ -943,8 +944,8 @@ public class RequestMaker {
 		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
 		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-		requestBody.addFormDataPart(req.getFormDataParameterName(), req.getFormDataPartsContainers().getName(),
-				RequestBody.create(contentType, req.getFormDataPartsContainers()));
+		requestBody.addFormDataPart(req.getFormDataParameterName(), req.getFormDataPartsContainers()[0].getFile().getName(),
+				RequestBody.create(contentType, req.getFormDataPartsContainers()[0].getFile()));
 
 		for (Entry<String, Object> e : req.getValuesMap().entrySet()) {
 			if (e.getValue() != null && e.getKey() != null)

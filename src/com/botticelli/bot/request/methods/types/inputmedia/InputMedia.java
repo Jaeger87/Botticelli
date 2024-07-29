@@ -1,4 +1,4 @@
-package com.botticelli.bot.request.types.inputmedia;
+package com.botticelli.bot.request.methods.types.inputmedia;
 
 import com.botticelli.bot.request.types.MessageEntity;
 import com.botticelli.bot.request.types.ParseMode;

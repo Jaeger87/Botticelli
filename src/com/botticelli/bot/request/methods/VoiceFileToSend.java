@@ -23,10 +23,9 @@ public class VoiceFileToSend extends AudioVoiceToSend implements FileRequest
 		super(channelusername);
 		this.voice = voice;
 	}
-	
+
 	@Override
-	public File getFormDataPartsContainers()
-	{		
+	public File getFile() {
 		return voice;
 	}
 

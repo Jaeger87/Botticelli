@@ -1,4 +1,4 @@
-package com.botticelli.bot.request.types.inputmedia;
+package com.botticelli.bot.request.methods.types.inputmedia;
 
 import java.io.File;
 

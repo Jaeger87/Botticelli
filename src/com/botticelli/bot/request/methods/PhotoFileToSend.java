@@ -32,10 +32,9 @@ public class PhotoFileToSend extends PhotoToSend implements FileRequest{
 	{
 		return photo;
 	}
-	
+
 	@Override
-	public File getFormDataPartsContainers()
-	{
+	public File getFile() {
 		return photo;
 	}
 

@@ -33,10 +33,9 @@ public class VideoFileToSend extends AbstractVideoToSend implements FileRequest{
 	{
 		return video;
 	}
-	
+
 	@Override
-	public File getFormDataPartsContainers()
-	{
+	public File getFile() {
 		return video;
 	}
 

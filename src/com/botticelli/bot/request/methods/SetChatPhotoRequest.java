@@ -2,7 +2,7 @@ package com.botticelli.bot.request.methods;
 
 import java.io.File;
 
-public class SetChatPhotoRequest extends AbstractToSend implements FileRequest{
+public class SetChatPhotoRequest extends AbstractToSend implements FileRequest, FormDataFileContainer{
 
 	private File photo; 
 	
@@ -19,8 +19,13 @@ public class SetChatPhotoRequest extends AbstractToSend implements FileRequest{
 	}
 
 	@Override
-	public File getFormDataPartsContainers()
+	public FormDataFileContainer[] getFormDataPartsContainers()
 	{		
+		return new FormDataFileContainer[] {this};
+	}
+
+	@Override
+	public File getFile() {
 		return photo;
 	}
 

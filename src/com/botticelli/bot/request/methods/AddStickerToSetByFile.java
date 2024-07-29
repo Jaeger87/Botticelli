@@ -2,7 +2,7 @@ package com.botticelli.bot.request.methods;
 
 import java.io.File;
 
-public class AddStickerToSetByFile extends AbstractCreateNewStickerSet implements FileRequest, FormDataFileContainer{
+public class AddStickerToSetByFile extends AbstractCreateNewStickerSet implements FileRequest{
 
 	private File png_sticker; 
 	
@@ -10,12 +10,6 @@ public class AddStickerToSetByFile extends AbstractCreateNewStickerSet implement
 	{
 		super(user_id, name, title, emojis);
 		this.png_sticker = png_sticker;
-	}
-
-	@Override
-	public FormDataFileContainer[] getFormDataPartsContainers()
-	{
-		return new FormDataFileContainer[]{this};
 	}
 
 	@Override
