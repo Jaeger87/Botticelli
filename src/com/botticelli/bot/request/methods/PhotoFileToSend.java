@@ -34,7 +34,7 @@ public class PhotoFileToSend extends PhotoToSend implements FileRequest{
 	}
 	
 	@Override
-	public File getFile() 
+	public File getFormDataPartsContainers()
 	{
 		return photo;
 	}

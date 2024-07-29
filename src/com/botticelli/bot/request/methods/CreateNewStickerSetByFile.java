@@ -12,7 +12,7 @@ public class CreateNewStickerSetByFile extends AbstractCreateNewStickerSet imple
 	}
 
 	@Override
-	public File getFile() 
+	public File getFormDataPartsContainers()
 	{
 		return png_sticker;
 	}

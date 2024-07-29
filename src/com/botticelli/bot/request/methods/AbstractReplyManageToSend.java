@@ -2,7 +2,7 @@ package com.botticelli.bot.request.methods;
 
 import java.util.Map;
 
-import com.botticelli.bot.request.methods.types.Keyboard;
+import com.botticelli.bot.request.types.Keyboard;
 /**
  * Represent a common request with parameters to manage if your message is a reply to an other message
  * @author Andrea Rosati (@Jaeger87)

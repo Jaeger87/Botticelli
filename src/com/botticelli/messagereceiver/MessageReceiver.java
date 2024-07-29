@@ -10,7 +10,7 @@ import java.util.logging.Level;
 
 import com.botticelli.bot.Bot;
 import com.botticelli.bot.request.methods.UpdateRequest;
-import com.botticelli.bot.request.methods.types.Update;
+import com.botticelli.bot.request.types.Update;
 
 /**
  * This object download updates for your bot and for every message call the Bot class method manage message

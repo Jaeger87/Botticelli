@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.botticelli.bot.request.methods.types.GsonOwner;
-import com.botticelli.bot.request.methods.types.inlinequery.InlineQueryResult;
+import com.botticelli.bot.request.types.GsonOwner;
+import com.botticelli.bot.request.types.inlinequery.InlineQueryResult;
 
 public class AnswerInlineQueryRequest implements Request
 {

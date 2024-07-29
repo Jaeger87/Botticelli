@@ -3,7 +3,7 @@ package com.botticelli.bot.request.methods;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.botticelli.bot.request.methods.types.MaskPosition;
+import com.botticelli.bot.request.types.MaskPosition;
 
 public abstract class AbstractCreateNewStickerSet implements Request{
 

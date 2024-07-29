@@ -1,6 +1,6 @@
 package com.botticelli.bot.request.methods;
 
-import com.botticelli.bot.request.methods.types.ParseMode;
+import com.botticelli.bot.request.types.ParseMode;
 
 import java.util.Map;
 

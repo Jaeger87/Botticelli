@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 
 import com.botticelli.bot.request.RequestMaker;
 import com.botticelli.bot.request.methods.*;
-import com.botticelli.bot.request.methods.types.*;
-import com.botticelli.bot.request.methods.types.inlinequery.InlineQuery;
+import com.botticelli.bot.request.types.*;
+import com.botticelli.bot.request.types.inlinequery.InlineQuery;
 
 public abstract class Bot {
 

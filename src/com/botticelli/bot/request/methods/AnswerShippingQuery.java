@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.botticelli.bot.request.methods.types.ShippingOption;
+import com.botticelli.bot.request.types.ShippingOption;
 
 public class AnswerShippingQuery implements Request{
 

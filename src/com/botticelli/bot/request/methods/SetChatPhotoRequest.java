@@ -19,7 +19,7 @@ public class SetChatPhotoRequest extends AbstractToSend implements FileRequest{
 	}
 
 	@Override
-	public File getFile() 
+	public File getFormDataPartsContainers()
 	{		
 		return photo;
 	}

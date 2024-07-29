@@ -9,18 +9,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.botticelli.bot.request.methods.*;
-import com.botticelli.bot.request.methods.types.Chat;
-import com.botticelli.bot.request.methods.types.ChatMember;
-import com.botticelli.bot.request.methods.types.DownlodableFile;
-import com.botticelli.bot.request.methods.types.GameHighScore;
-import com.botticelli.bot.request.methods.types.GameScoreResult;
-import com.botticelli.bot.request.methods.types.GsonOwner;
-import com.botticelli.bot.request.methods.types.Message;
-import com.botticelli.bot.request.methods.types.Result;
-import com.botticelli.bot.request.methods.types.StickerSet;
-import com.botticelli.bot.request.methods.types.Update;
-import com.botticelli.bot.request.methods.types.UserProfilePhotos;
-import com.botticelli.bot.request.methods.types.WebhookInfo;
+import com.botticelli.bot.request.types.Chat;
+import com.botticelli.bot.request.types.ChatMember;
+import com.botticelli.bot.request.types.DownlodableFile;
+import com.botticelli.bot.request.types.GameHighScore;
+import com.botticelli.bot.request.types.GameScoreResult;
+import com.botticelli.bot.request.types.GsonOwner;
+import com.botticelli.bot.request.types.Message;
+import com.botticelli.bot.request.types.Result;
+import com.botticelli.bot.request.types.StickerSet;
+import com.botticelli.bot.request.types.Update;
+import com.botticelli.bot.request.types.UserProfilePhotos;
+import com.botticelli.bot.request.types.WebhookInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -403,7 +403,7 @@ public class RequestMaker {
 		okhttp3.Request request = new okhttp3.Request.Builder().url(urlUploadStickerFile)
 				.post(getMultipartBodyBuilderFromRequest(usf).build()).build();
 			try (Response response = client.newCall(request).execute()) {
-				File f = new File("(updated)" + usf.getFile().getName());
+				File f = new File("(updated)" + usf.getFormDataPartsContainers().getName());
 				BufferedSink sink = Okio.buffer(Okio.sink(f));
 	            sink.writeAll(response.body().source());
 	            sink.close();
@@ -943,8 +943,8 @@ public class RequestMaker {
 		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
 		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-		requestBody.addFormDataPart(req.getFormDataParameterName(), req.getFile().getName(),
-				RequestBody.create(contentType, req.getFile()));
+		requestBody.addFormDataPart(req.getFormDataParameterName(), req.getFormDataPartsContainers().getName(),
+				RequestBody.create(contentType, req.getFormDataPartsContainers()));
 
 		for (Entry<String, Object> e : req.getValuesMap().entrySet()) {
 			if (e.getValue() != null && e.getKey() != null)

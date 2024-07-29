@@ -1,7 +1,7 @@
 package com.botticelli.bot.request.methods;
 
-import com.botticelli.bot.request.methods.types.GsonOwner;
-import com.botticelli.bot.request.methods.types.inputmedia.InputMedia;
+import com.botticelli.bot.request.types.GsonOwner;
+import com.botticelli.bot.request.types.inputmedia.InputMedia;
 
 import java.io.File;
 import java.util.ArrayList;

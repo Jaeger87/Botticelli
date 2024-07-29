@@ -1,6 +1,6 @@
 package com.botticelli.bot.request.methods;
 
-import com.botticelli.bot.request.methods.types.RandomEmojis;
+import com.botticelli.bot.request.types.RandomEmojis;
 
 import java.util.Map;
 

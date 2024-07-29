@@ -2,7 +2,7 @@ package com.botticelli.bot.request.methods;
 
 import java.util.Map;
 
-import com.botticelli.bot.request.methods.types.ActionToSend;
+import com.botticelli.bot.request.types.ActionToSend;
 /**
  * This object clusters all the data need for the method sendChatAction
  * @author Andrea Rosati (@Jaeger87)

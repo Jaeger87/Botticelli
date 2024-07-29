@@ -26,7 +26,7 @@ public class UploadStickerFileRequest implements FileRequest{
 	}
 
 	@Override
-	public File getFile() 
+	public File getFormDataPartsContainers()
 	{
 		return png_sticker;
 	}

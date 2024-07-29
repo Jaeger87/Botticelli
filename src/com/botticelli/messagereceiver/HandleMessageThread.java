@@ -1,7 +1,7 @@
 package com.botticelli.messagereceiver;
 
 import com.botticelli.bot.Bot;
-import com.botticelli.bot.request.methods.types.Update;
+import com.botticelli.bot.request.types.Update;
 /**
  * This thread read the message values and passes them on to the appropriate method.
  * @author Andrea Rosati (@Jaeger87)

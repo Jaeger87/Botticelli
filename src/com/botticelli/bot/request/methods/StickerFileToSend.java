@@ -33,7 +33,7 @@ public class StickerFileToSend extends AbstractReplyManageToSend implements File
 	}
 	
 	@Override
-	public File getFile() 
+	public File getFormDataPartsContainers()
 	{
 		return sticker;
 	}

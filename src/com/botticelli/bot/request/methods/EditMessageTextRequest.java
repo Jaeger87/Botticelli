@@ -2,7 +2,7 @@ package com.botticelli.bot.request.methods;
 
 import java.util.Map;
 
-import com.botticelli.bot.request.methods.types.ParseMode;
+import com.botticelli.bot.request.types.ParseMode;
 
 public class EditMessageTextRequest extends EditMessageReplyMarkupRequest{
 

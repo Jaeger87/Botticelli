@@ -3,7 +3,7 @@ package com.botticelli.bot.request.methods;
 import java.util.List;
 import java.util.Map;
 
-import com.botticelli.bot.request.methods.types.LabeledPrice;
+import com.botticelli.bot.request.types.LabeledPrice;
 
 public class InvoiceToSend extends AbstractReplyManageToSend{
 

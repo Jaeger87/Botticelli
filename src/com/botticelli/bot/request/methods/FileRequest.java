@@ -8,7 +8,7 @@ public interface FileRequest extends Request{
 	 * Get the File
 	 * @return
 	 */
-	public File getFile();
+	public FormDataFileContainer[] getFormDataPartsContainers();
 
 	/**
 	 * It returns the type of the file (don't touch!!)

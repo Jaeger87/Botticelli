@@ -32,7 +32,7 @@ public class AudioFileToSend extends AudioToSend implements FileRequest{
 	}
 
 	@Override
-	public File getFile() 
+	public File getFormDataPartsContainers()
 	{
 		return audio;
 	}

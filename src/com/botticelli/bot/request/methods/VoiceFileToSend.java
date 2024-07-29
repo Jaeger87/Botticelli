@@ -25,7 +25,7 @@ public class VoiceFileToSend extends AudioVoiceToSend implements FileRequest
 	}
 	
 	@Override
-	public File getFile() 
+	public File getFormDataPartsContainers()
 	{		
 		return voice;
 	}
