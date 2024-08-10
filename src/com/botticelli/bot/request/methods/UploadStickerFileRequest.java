@@ -2,14 +2,16 @@ package com.botticelli.bot.request.methods;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
-public class UploadStickerFileRequest implements FileRequest{
+public class UploadStickerFileRequest implements FileRequest, FormDataFileContainer{
 
 	private long user_id;
 	private File png_sticker;
-	
-	
+	private int index = 0;
+	private final int filesToSend = 1;
+
 	
 	public UploadStickerFileRequest(long user_id, File png_sticker) 
 	{
@@ -34,5 +36,23 @@ public class UploadStickerFileRequest implements FileRequest{
 	public String getFormDataParameterName()
 	{
 		return "png_sticker";
+	}
+
+	@Override
+	public Iterator<FormDataFileContainer> iterator() {
+		index = 0;
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return index < filesToSend;
+	}
+
+	@Override
+	public FormDataFileContainer next() {
+		if(index == 0)
+			return this;
+		return null;
 	}
 }

@@ -404,7 +404,7 @@ public class RequestMaker {
 		okhttp3.Request request = new okhttp3.Request.Builder().url(urlUploadStickerFile)
 				.post(getMultipartBodyBuilderFromRequest(usf).build()).build();
 			try (Response response = client.newCall(request).execute()) {
-				File f = new File("(updated)" + usf.getFormDataPartsContainers()[0].getFile().getName());
+				File f = new File("(updated)" + usf.getFile().getName());
 				BufferedSink sink = Okio.buffer(Okio.sink(f));
 	            sink.writeAll(response.body().source());
 	            sink.close();
@@ -765,7 +765,7 @@ public class RequestMaker {
 
 	public List<Message> sendMediaGroup(MediaGroupToSend<?> mediaGroupToSend)
 	{
-		String json = makeMediaGroupToSendRequest(urlSendMediaGroup, mediaGroupToSend);
+		String json = makeFileRequest(urlSendMediaGroup, mediaGroupToSend);
 		return buildResult(json, listMessageResult, new Result<List<Message>>()).getResult();
 	}
 	/**
@@ -916,19 +916,6 @@ public class RequestMaker {
 		return "";
 	}
 
-	private String makeMediaGroupToSendRequest(String url, MediaGroupToSend<?> mgts) {
-		okhttp3.Request request = new okhttp3.Request.Builder().url(url)
-				.post(getMultipartBodyBuilderFromRequest(mgts).build()).build();
-		Response response;
-		try {
-			response = client.newCall(request).execute();
-			return response.body().string();
-		} catch (IOException e) {
-			errorLogger.log(Level.SEVERE, mgts.getClass().getName(), e);
-		}
-		return "";
-	}
-
 	private Builder getFormBodyBuilderFromRequest(Request req) {
 		Builder formBody = new FormBody.Builder();
 		if (req != null)
@@ -944,37 +931,16 @@ public class RequestMaker {
 		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
 		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-		FormDataFileContainer[] formDataFileContainers = req.getFormDataPartsContainers();
-		for(int i = 0; i < formDataFileContainers.length; i++ )
+		for(FormDataFileContainer formDataFileContainer : req)
 		{
-			requestBody.addFormDataPart(req.getFormDataParameterName(), req.getFormDataPartsContainers()[i].getFile().getName(),
-					RequestBody.create(contentType, req.getFormDataPartsContainers()[i].getFile()));
+			requestBody.addFormDataPart(formDataFileContainer.getFormDataParameterName(), formDataFileContainer.getFile().getName(),
+					RequestBody.create(contentType, formDataFileContainer.getFile()));
 		}
+
 		for (Entry<String, Object> e : req.getValuesMap().entrySet()) {
 			if (e.getValue() != null && e.getKey() != null)
 				requestBody.addFormDataPart(e.getKey(), e.getValue().toString());
 		}
 		return requestBody;
 	}
-
-	private okhttp3.MultipartBody.Builder getMultipartBodyBuilderFromRequest(MediaGroupToSend<?> mgts) {
-		MediaType contentType = MediaType.parse(Constants.URLDATACONTENTTYPE);
-		okhttp3.MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-
-		List<File> inputMediaFiles = mgts.getMediaFiles();
-
-		for(File inputMediaFile : inputMediaFiles)
-		{
-			requestBody.addFormDataPart(inputMediaFile.getName(), inputMediaFile.getName(),
-					RequestBody.create(contentType, inputMediaFile));
-		}
-
-		for (Entry<String, Object> e : mgts.getValuesMap().entrySet()) {
-			if (e.getValue() != null && e.getKey() != null)
-				requestBody.addFormDataPart(e.getKey(), e.getValue().toString());
-		}
-		return requestBody;
-	}
-
-
 }

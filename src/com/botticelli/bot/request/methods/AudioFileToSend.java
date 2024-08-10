@@ -1,15 +1,19 @@
 package com.botticelli.bot.request.methods;
 
 import java.io.File;
+import java.util.Iterator;
+
 /**
  * This object clusters all the data need to the method send Audio 
- * (in this case the Audio will be send by a .ogg File)
+ * (in this case the Audio will be sent by a .ogg File)
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public class AudioFileToSend extends AudioToSend implements FileRequest{
+public class AudioFileToSend extends AudioToSend implements FileRequest, FormDataFileContainer{
 
-	private File audio;
+	private final File audio;
+	private int index = 0;
+	private final int filesToSend = 1;
 	
 	public AudioFileToSend(long chat_id, File audio) {
 		super(chat_id);
@@ -42,4 +46,21 @@ public class AudioFileToSend extends AudioToSend implements FileRequest{
 		return "audio";
 	}
 
+	@Override
+	public Iterator<FormDataFileContainer> iterator() {
+		index = 0;
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return index < filesToSend;
+	}
+
+	@Override
+	public FormDataFileContainer next() {
+		if(index == 0)
+			return this;
+		return null;
+	}
 }

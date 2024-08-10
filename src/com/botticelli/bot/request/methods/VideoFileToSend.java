@@ -1,6 +1,8 @@
 package com.botticelli.bot.request.methods;
 
 import java.io.File;
+import java.util.Iterator;
+
 /**
  * This object clusters all the data need to the method sendVideo
  * (in this case the Sticker will be send by File)
@@ -9,9 +11,11 @@ import java.io.File;
  * @author Andrea Rosati (@Jaeger87)
  *
  */
-public class VideoFileToSend extends AbstractVideoToSend implements FileRequest{
+public class VideoFileToSend extends AbstractVideoToSend implements FileRequest, FormDataFileContainer{
 
 	private File video;
+	private int index = 0;
+	private final int filesToSend = 1;
 	
 	public VideoFileToSend(long chat_id, File video) 
 	{
@@ -43,6 +47,24 @@ public class VideoFileToSend extends AbstractVideoToSend implements FileRequest{
 	public String getFormDataParameterName()
 	{
 		return "video";
+	}
+
+	@Override
+	public Iterator<FormDataFileContainer> iterator() {
+		index = 0;
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return index < filesToSend;
+	}
+
+	@Override
+	public FormDataFileContainer next() {
+		if(index == 0)
+			return this;
+		return null;
 	}
 
 }

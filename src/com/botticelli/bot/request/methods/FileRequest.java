@@ -1,21 +1,10 @@
 package com.botticelli.bot.request.methods;
 
+import com.botticelli.bot.request.methods.types.inputmedia.InputMedia;
+
 import java.io.File;
+import java.util.Iterator;
 
-public interface FileRequest extends Request, FormDataFileContainer{
+public interface FileRequest extends Request, Iterable<FormDataFileContainer>, Iterator<FormDataFileContainer> {
 
-	/**
-	 * Get the File
-	 * @return
-	 */
-	public default FormDataFileContainer[] getFormDataPartsContainers()
-	{
-		return new FormDataFileContainer[]{this};
-	}
-
-	/**
-	 * It returns the type of the file (don't touch!!)
-	 * @return
-	 */
-	public String getFormDataParameterName();
 }

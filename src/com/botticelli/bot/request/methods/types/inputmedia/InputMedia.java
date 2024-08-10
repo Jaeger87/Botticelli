@@ -1,12 +1,13 @@
 package com.botticelli.bot.request.methods.types.inputmedia;
 
+import com.botticelli.bot.request.methods.FormDataFileContainer;
 import com.botticelli.bot.request.types.MessageEntity;
 import com.botticelli.bot.request.types.ParseMode;
 
 import java.io.File;
 import java.util.List;
 
-public abstract class InputMedia {
+public abstract class InputMedia implements FormDataFileContainer {
 
     private final String type;
 
@@ -45,7 +46,7 @@ public abstract class InputMedia {
         return mediaFile != null;
     }
 
-    public File getMediaFile()
+    public File getFile()
     {
         return mediaFile;
     }
@@ -88,4 +89,8 @@ public abstract class InputMedia {
         this.caption_entities = caption_entities;
     }
 
+    public String getFormDataParameterName()
+    {
+        return media;
+    }
 }

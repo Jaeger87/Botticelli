@@ -1,10 +1,13 @@
 package com.botticelli.bot.request.methods;
 
 import java.io.File;
+import java.util.Iterator;
 
 public class SetChatPhotoRequest extends AbstractToSend implements FileRequest, FormDataFileContainer{
 
-	private File photo; 
+	private File photo;
+	private int index = 0;
+	private final int filesToSend = 1;
 	
 	public SetChatPhotoRequest(long chat_id, File photo) 
 	{
@@ -19,12 +22,6 @@ public class SetChatPhotoRequest extends AbstractToSend implements FileRequest, 
 	}
 
 	@Override
-	public FormDataFileContainer[] getFormDataPartsContainers()
-	{		
-		return new FormDataFileContainer[] {this};
-	}
-
-	@Override
 	public File getFile() {
 		return photo;
 	}
@@ -33,5 +30,23 @@ public class SetChatPhotoRequest extends AbstractToSend implements FileRequest, 
 	public String getFormDataParameterName()
 	{
 		return "photo";
+	}
+
+	@Override
+	public Iterator<FormDataFileContainer> iterator() {
+		index = 0;
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return index < filesToSend;
+	}
+
+	@Override
+	public FormDataFileContainer next() {
+		if(index == 0)
+			return this;
+		return null;
 	}
 }

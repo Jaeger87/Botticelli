@@ -4,11 +4,9 @@ import com.botticelli.bot.request.types.GsonOwner;
 import com.botticelli.bot.request.methods.types.inputmedia.InputMedia;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend{
+public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend implements FileRequest{
 
     private String business_connection_id;
     private int message_thread_id;
@@ -16,6 +14,9 @@ public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend{
     private boolean disable_notification;
     private boolean protect_content;
     private String message_effect_id;
+
+    private int index = 0;
+    private int filesToSend = 0;
 
     public MediaGroupToSend(long chat_id, List<T> media) {
         super(chat_id);
@@ -43,12 +44,12 @@ public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend{
     public List<File> getMediaFiles()
     {
         List<File> returnList = new ArrayList<File>();
-        for (T inputmedia : media)
+        for (InputMedia inputMedia : media)
         {
-            if(inputmedia.isInputMediaFile())
-                returnList.add(inputmedia.getMediaFile());
-            if(inputmedia.hasThumbnail())
-                returnList.add(inputmedia.getThumbnailFile());
+            if(inputMedia.isInputMediaFile())
+                returnList.add(inputMedia.getFile());
+            if(inputMedia.hasThumbnail())
+                returnList.add(inputMedia.getThumbnailFile());
         }
         return returnList;
     }
@@ -91,5 +92,25 @@ public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend{
 
     public void setMessage_effect_id(String message_effect_id) {
         this.message_effect_id = message_effect_id;
+    }
+
+    @Override
+    public Iterator<FormDataFileContainer> iterator() {
+        index = 0;
+        filesToSend = media.stream().map(inputMedia -> inputMedia.isInputMediaFile() ? 1 : 0).reduce(0, Integer::sum);
+        return this;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return index < filesToSend;
+    }
+
+    @Override
+    public FormDataFileContainer next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        return media.get(index++);
     }
 }

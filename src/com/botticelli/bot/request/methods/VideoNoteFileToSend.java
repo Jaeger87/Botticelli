@@ -1,13 +1,16 @@
 package com.botticelli.bot.request.methods;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.Map;
 
-public class VideoNoteFileToSend extends AbstractReplyManageToSend implements FileRequest{
+public class VideoNoteFileToSend extends AbstractReplyManageToSend implements FileRequest, FormDataFileContainer{
 
 	private File video_note;
 	private int duration;
 	private int length;
+	private int index = 0;
+	private final int filesToSend = 1;
 	
 	public VideoNoteFileToSend(long chat_id, File video_note) 
 	{
@@ -38,5 +41,31 @@ public class VideoNoteFileToSend extends AbstractReplyManageToSend implements Fi
 		map.put("duration", duration);
 		map.put("length", length);
 		return map;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	@Override
+	public Iterator<FormDataFileContainer> iterator() {
+		index = 0;
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return index < filesToSend;
+	}
+
+	@Override
+	public FormDataFileContainer next() {
+		if(index == 0)
+			return this;
+		return null;
 	}
 }

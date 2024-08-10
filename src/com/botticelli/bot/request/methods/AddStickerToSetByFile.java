@@ -1,10 +1,13 @@
 package com.botticelli.bot.request.methods;
 
 import java.io.File;
+import java.util.Iterator;
 
-public class AddStickerToSetByFile extends AbstractCreateNewStickerSet implements FileRequest{
+public class AddStickerToSetByFile extends AbstractCreateNewStickerSet implements FileRequest, FormDataFileContainer{
 
-	private File png_sticker; 
+	private final File png_sticker;
+	private int index = 0;
+	private final int filesToSend = 1;
 	
 	public AddStickerToSetByFile(long user_id, String name, String title, String emojis, File png_sticker) 
 	{
@@ -23,4 +26,21 @@ public class AddStickerToSetByFile extends AbstractCreateNewStickerSet implement
 		return "png_sticker";
 	}
 
+	@Override
+	public Iterator<FormDataFileContainer> iterator() {
+		index = 0;
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return index < filesToSend;
+	}
+
+	@Override
+	public FormDataFileContainer next() {
+		if(index == 0)
+			return this;
+		return null;
+	}
 }
