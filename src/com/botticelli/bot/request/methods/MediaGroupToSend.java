@@ -41,6 +41,7 @@ public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend imple
         return map;
     }
 
+    /*
     public List<File> getMediaFiles()
     {
         List<File> returnList = new ArrayList<File>();
@@ -48,11 +49,13 @@ public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend imple
         {
             if(inputMedia.isInputMediaFile())
                 returnList.add(inputMedia.getFile());
-            if(inputMedia.hasThumbnail())
+            if(inputMedia.hasThumbnailFile())
                 returnList.add(inputMedia.getThumbnailFile());
         }
         return returnList;
     }
+    */
+
 
     public String getBusiness_connection_id() {
         return business_connection_id;
@@ -97,7 +100,7 @@ public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend imple
     @Override
     public Iterator<FormDataFileContainer> iterator() {
         index = 0;
-        filesToSend = media.stream().map(inputMedia -> inputMedia.isInputMediaFile() ? 1 : 0).reduce(0, Integer::sum);
+        filesToSend = media.stream().map(inputMedia -> inputMedia.isInputMediaFile() ? (inputMedia.hasThumbnailFile() ? 2 : 1) : 0).reduce(0, Integer::sum);
         return this;
     }
 
@@ -105,7 +108,7 @@ public class MediaGroupToSend<T extends InputMedia> extends AbstractToSend imple
     public boolean hasNext() {
         return index < filesToSend;
     }
-
+//TODO: While and manage thumbnails
     @Override
     public FormDataFileContainer next() {
         if (!hasNext()) {

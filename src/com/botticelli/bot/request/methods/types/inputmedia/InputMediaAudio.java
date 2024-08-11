@@ -19,8 +19,8 @@ public class InputMediaAudio extends InputMedia{
     }
 
     @Override
-    public boolean hasThumbnail() {
-        return thumbnail != null;
+    public boolean hasThumbnailFile() {
+        return thumbnailFile != null;
     }
 
     public File getThumbnailFile() {
@@ -32,6 +32,11 @@ public class InputMediaAudio extends InputMedia{
             return;
         this.thumbnailFile = thumbnailFile;
         thumbnail = "attach://" + thumbnailFile.getName();
+    }
+
+    public void setThumbnail(String thumbnailReference) {
+        thumbnailFile = null;
+        thumbnail = thumbnailReference;
     }
 
     public int getDuration() {

@@ -8,7 +8,9 @@ import java.io.File;
 public class InputMediaVideo extends InputMediaCaptionAbove{
 
     //@JsonAdapter(DatiTypeAdapter.class)
-    private Thumbnail thumbnail;
+    //private Thumbnail thumbnail;
+    private String thumbnail;
+    private transient File thumbnailFile;
     private Integer width;
     private Integer height;
     private Integer duration;
@@ -24,12 +26,19 @@ public class InputMediaVideo extends InputMediaCaptionAbove{
     }
 
     public File getThumbnailFile() {
-        return thumbnail.getFile();
+        return thumbnailFile;
     }
 
-    public void setThumbnailFile(Thumbnail thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setThumbnailFile(File thumbnailFile) {
+        if(thumbnailFile == null)
+            return;
+        this.thumbnailFile = thumbnailFile;
+        thumbnail = "attach://" + thumbnailFile.getName();
+    }
 
+    public void setThumbnail(String thumbnailReference) {
+        thumbnailFile = null;
+        thumbnail = thumbnailReference;
     }
 
     public int getWidth() {
@@ -65,7 +74,7 @@ public class InputMediaVideo extends InputMediaCaptionAbove{
     }
 
     @Override
-    public boolean hasThumbnail() {
+    public boolean hasThumbnailFile() {
         return thumbnail != null;
     }
 }

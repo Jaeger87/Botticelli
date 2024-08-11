@@ -15,7 +15,7 @@ public class InputMediaDocument extends InputMedia{
     }
 
     @Override
-    public boolean hasThumbnail() {
+    public boolean hasThumbnailFile() {
         return false;
     }
 

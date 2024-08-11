@@ -29,6 +29,11 @@ public class InputMediaAnimation extends InputMediaCaptionAbove{
         thumbnail = "attach://" + thumbnailFile.getName();
     }
 
+    public void setThumbnail(String thumbnailReference) {
+        thumbnailFile = null;
+        thumbnail = thumbnailReference;
+    }
+
     public int getWidth() {
         return width;
     }
@@ -54,7 +59,7 @@ public class InputMediaAnimation extends InputMediaCaptionAbove{
     }
 
     @Override
-    public boolean hasThumbnail() {
-        return thumbnail != null;
+    public boolean hasThumbnailFile() {
+        return thumbnailFile != null;
     }
 }

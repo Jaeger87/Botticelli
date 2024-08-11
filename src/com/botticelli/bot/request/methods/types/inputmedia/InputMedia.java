@@ -29,7 +29,7 @@ public abstract class InputMedia implements FormDataFileContainer {
         this.media = "attach://" + media.getName();
     }
 
-    public abstract boolean hasThumbnail();
+    public abstract boolean hasThumbnailFile();
     public abstract File getThumbnailFile();
 
     public String getMedia() {

@@ -17,7 +17,7 @@ public class InputMediaPhoto extends InputMediaCaptionAbove{
     }
 
     @Override
-    public boolean hasThumbnail() {
+    public boolean hasThumbnailFile() {
         return false;
     }
 }
